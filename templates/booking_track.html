@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Track Service Booking Status | DRTC Service{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 130px; min-height: 85vh;">
+  <div class="container" style="max-width: 720px;">
+    
+    <div class="section-header" style="margin-bottom: 2.5rem;">
+      <span class="section-tag">LIVE SERVICE TRACKER</span>
+      <h1 class="section-title">TRACK YOUR TANK CLEANING</h1>
+      <p class="section-subtitle">
+        Enter your Booking ID (e.g. <code>DRTC-9821</code>) or your registered 10-digit phone number.
+      </p>
+    </div>
+
+    <!-- Search Form -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem; margin-bottom: 2rem;">
+      <form method="GET" action="{% url 'booking_track' %}" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+        <input type="text" name="q" value="{{ query }}" class="form-control" style="flex: 1; min-width: 240px; font-size: 1rem;" placeholder="e.g. DRTC-9821 or 9835123456" required>
+        <button type="submit" class="btn btn-primary" style="padding: 0.75rem 1.75rem;">
+          Track Status
+        </button>
+      </form>
+    </div>
+
+    {% if booking %}
+    <!-- Booking Found Result -->
+    <div style="background: var(--bg-card); border: 1.5px solid var(--border-gold); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
+      
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.25rem; margin-bottom: 1.25rem;">
+        <div>
+          <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Booking Reference</span>
+          <div style="font-family: monospace; font-size: 1.4rem; font-weight: 800; color: var(--accent-gold-bright);">{{ booking.booking_id }}</div>
+        </div>
+
+        <div>
+          {% if booking.status == 'CONFIRMED' %}
+            <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
+              ● Confirmed &amp; Scheduled
+            </span>
+          {% elif booking.status == 'COMPLETED' %}
+            <span style="background: rgba(14, 165, 233, 0.15); color: var(--accent-cyan); border: 1px solid rgba(14, 165, 233, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
+              ● Service Completed
+            </span>
+          {% else %}
+            <span style="background: rgba(245, 158, 11, 0.15); color: var(--accent-gold-bright); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
+              ● {{ booking.get_status_display }}
+            </span>
+          {% endif %}
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Customer Name</div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: #ffffff;">{{ booking.customer_name }}</div>
+        </div>
+
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Phone Number</div>
+          <div style="font-size: 1.05rem; font-weight: 600; color: #ffffff;">{{ booking.customer_phone }}</div>
+        </div>
+
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Scheduled Service Date</div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-gold-bright);">{{ booking.preferred_date|date:"l, d M Y" }}</div>
+        </div>
+
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Assigned Slot</div>
+          <div style="font-size: 1.05rem; font-weight: 600; color: var(--accent-cyan);">{{ booking.preferred_time_slot }}</div>
+        </div>
+
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Tank Capacity</div>
+          <div style="font-size: 1rem; color: #ffffff;">{{ booking.display_capacity }}</div>
+        </div>
+
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Lead Operator</div>
+          <div style="font-size: 1rem; color: #ffffff;">{{ booking.assigned_technician }}</div>
+        </div>
+      </div>
+
+      <div style="background: rgba(5, 7, 12, 0.6); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin-bottom: 1.5rem;">
+        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 2px;">Service Address</div>
+        <div style="font-size: 0.9rem; color: #ffffff;">{{ booking.address }}, {{ booking.landmark }}, {{ booking.area_locality }}</div>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <a href="tel:7808611636" class="btn btn-outline" style="flex: 1;">Call Dinesh (Owner)</a>
+        <a href="tel:6352561343" class="btn btn-cyan" style="flex: 1;">Call Rakesh (Operator)</a>
+      </div>
+    </div>
+    {% elif not_found %}
+    <!-- Not Found State -->
+    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.5rem; text-align: center;">
+      <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔍</div>
+      <h3 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">No Booking Found</h3>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1.5rem auto;">
+        We could not find any active booking matching "<strong>{{ query }}</strong>". Please double check your booking reference or call Dinesh directly.
+      </p>
+      <a href="tel:7808611636" class="btn btn-primary">Call 7808611636 for Assistance</a>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+{% endblock %}

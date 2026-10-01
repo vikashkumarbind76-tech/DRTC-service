@@ -1,0 +1,638 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- =================================================================
+     HERO SECTION
+     ================================================================= -->
+<section class="hero-section" id="home">
+  <!-- Interactive Floating Water Droplets & Bubbles Canvas -->
+  <canvas id="heroBubbleCanvas"></canvas>
+
+  <!-- Oversized background typography within viewport boundary -->
+  <div class="hero-watermark">DRTC SERVICE</div>
+
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-badge">
+        <span class="badge-pulse"></span>
+        <span>OPERATING DAILY IN GAMHARIA &amp; JAMSHEDPUR</span>
+      </div>
+
+      <h1 class="hero-headline">
+        CLEANER TANKS.<br>
+        <span class="bg-gold-gradient">SAFER TOMORROW.</span>
+      </h1>
+
+      <p class="hero-subhead">
+        Gamharia’s premier certified mechanized water tank cleaning and UV germicidal sterilization service. Eradicate toxic algae, heavy sludge, and bacterial pathogens with non-toxic food-grade hygiene.
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-lg open-booking-modal-btn" data-capacity="1000 L">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>Book Cleaning @ ₹250+</span>
+        </button>
+
+        <a href="#calculator" class="btn btn-outline btn-lg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+          <span>Calculate Price</span>
+        </a>
+
+        <a href="tel:7808611636" class="btn btn-cyan btn-lg" title="Call Dinesh">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span>Call Owner: 7808611636</span>
+        </a>
+      </div>
+
+      <div class="hero-guarantees">
+        <div class="guarantee-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>6-Stage Deep Scrub</span>
+        </div>
+        <div class="guarantee-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>UV Pathogen Elimination</span>
+        </div>
+        <div class="guarantee-item">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>Pay After Full Satisfaction</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured 3D Tank Showcase -->
+    <div class="hero-visual-wrap">
+      <div class="hero-image-card">
+        <!-- Concentric Pulsing Water Ripple Ring Behind Tank -->
+        <div class="water-ripple-aura">
+          <span class="water-ripple-ring"></span>
+          <span class="water-ripple-ring"></span>
+          <span class="water-ripple-ring"></span>
+        </div>
+
+        <img src="{% static 'images/tank_feature_cutout.png' %}" alt="DRTC High-Tech Mechanized Water Tank Cleaning" class="hero-tank-img">
+
+        <!-- Specular Glare Layer -->
+        <div class="card-specular-flare"></div>
+
+        <!-- Floating Badge Top Right -->
+        <div class="floating-badge floating-badge-1">
+          <div class="floating-badge-icon" style="color: var(--accent-gold-bright);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <div>
+            <div class="badge-label">1000L Most Popular</div>
+            <div class="badge-val">Only ₹400</div>
+          </div>
+        </div>
+
+        <!-- Floating Badge Bottom Left -->
+        <div class="floating-badge floating-badge-2">
+          <div class="floating-badge-icon" style="color: var(--accent-cyan);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div>
+            <div class="badge-label">UV Sterilized</div>
+            <div class="badge-val">100% Germ-Free</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     TRUST METRIC STRIP WITH ANIMATED COUNTERS
+     ================================================================= -->
+<section class="trust-strip">
+  <div class="container trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+      </div>
+      <div>
+        <div class="trust-number counter-value" data-target="1250" data-suffix="+">1,250+</div>
+        <div class="trust-label">Clean Tanks Delivered</div>
+      </div>
+    </div>
+
+    <div class="trust-item">
+      <div class="trust-icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      </div>
+      <div>
+        <div class="trust-number counter-value" data-target="100" data-suffix="%">100%</div>
+        <div class="trust-label">Germ-Free &amp; Odorless</div>
+      </div>
+    </div>
+
+    <div class="trust-item">
+      <div class="trust-icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+      </div>
+      <div>
+        <div class="trust-number counter-value" data-target="4.98" data-decimals="2" data-suffix=" / 5">4.98 / 5</div>
+        <div class="trust-label">Gamharia Customer Rating</div>
+      </div>
+    </div>
+
+    <div class="trust-item">
+      <div class="trust-icon-box">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+      </div>
+      <div>
+        <div class="trust-number counter-value" data-target="250" data-prefix="₹">₹250</div>
+        <div class="trust-label">Starting Price • No Hidden Fee</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     CORE VALUE PILLARS (From Official Visiting Card)
+     ================================================================= -->
+<section class="section" style="padding-top: 4.5rem; padding-bottom: 2.5rem;">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
+      {% for prop in business.value_props %}
+      <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; text-align: center; transition: all var(--transition-smooth);" onmouseenter="this.style.borderColor='var(--accent-gold)'" onmouseleave="this.style.borderColor='var(--border-subtle)'">
+        <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(245, 158, 11, 0.12); border: 1.5px solid var(--accent-gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; color: var(--accent-gold-bright);">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+        </div>
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.4rem;">{{ prop.title }}</h3>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">{{ prop.desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     PRICING & CAPACITY CARDS GRID (From Official Media Board)
+     ================================================================= -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">OFFICIAL CAPACITY &amp; PRICE MATRIX</span>
+      <h2 class="section-title">TRANSPARENT TANK CLEANING PACKAGES</h2>
+      <p class="section-subtitle">
+        Official rates from Dinesh &amp; Rakesh. No hidden travel fees or sudden surcharges in Gamharia.
+      </p>
+    </div>
+
+    <div class="packages-grid">
+      {% for pkg in packages %}
+      <div class="package-card {% if pkg.is_popular %}popular{% endif %}">
+        {% if pkg.is_popular %}
+          <div class="popular-badge">MOST POPULAR</div>
+        {% elif pkg.badge_text %}
+          <div class="popular-badge" style="background: rgba(14, 165, 233, 0.85);">{{ pkg.badge_text }}</div>
+        {% endif %}
+
+        <div>
+          <div class="package-capacity-header">
+            <div class="package-icon-wrap">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+            </div>
+            <div class="package-capacity-title">{{ pkg.capacity }}</div>
+            <div class="package-ideal-for">{{ pkg.ideal_for }}</div>
+          </div>
+
+          <div class="package-pricing-row">
+            <div class="package-price">₹{{ pkg.price|floatformat:0 }}</div>
+            {% if pkg.original_mrp %}
+              <div class="package-mrp">₹{{ pkg.original_mrp|floatformat:0 }}</div>
+            {% endif %}
+          </div>
+
+          {% if pkg.discount_percent %}
+            <div class="package-discount-badge">SAVE ₹{{ pkg.savings }} ({{ pkg.discount_percent }}% OFF)</div>
+          {% endif %}
+
+          <div class="package-duration">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span>Approx. {{ pkg.duration_mins }} Minutes</span>
+          </div>
+
+          <ul class="package-features">
+            {% for feat in pkg.get_features %}
+            <li class="package-feature-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>{{ feat }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <button class="btn {% if pkg.is_popular %}btn-primary{% else %}btn-outline{% endif %} package-cta-btn open-booking-modal-btn" 
+                data-capacity="{{ pkg.capacity }}" 
+                data-package-id="{{ pkg.id }}">
+          Book {{ pkg.capacity }}
+        </button>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- =================================================================
+         INTERACTIVE DYNAMIC CALCULATOR
+         ================================================================= -->
+    <div class="calculator-box" id="calculator">
+      <div class="calc-grid">
+        <div>
+          <span class="section-tag" style="margin-bottom: 0.5rem;">INSTANT ESTIMATOR</span>
+          <h3 class="calc-title">MULTI-TANK ESTIMATOR &amp; QUOTE CALCULATOR</h3>
+          <p class="calc-subtitle">
+            Need multiple plastic tanks or custom capacity cleaned? Pick your specifications for an instant guaranteed rate.
+          </p>
+
+          <div class="calc-control-group">
+            <label class="calc-label">1. Select Tank Capacity (Liters)</label>
+            <div class="capacity-pills-row">
+              <button type="button" class="capacity-pill" data-liters="500">500 Liter</button>
+              <button type="button" class="capacity-pill active" data-liters="1000">1000 L</button>
+              <button type="button" class="capacity-pill" data-liters="2000">2000 L</button>
+              <button type="button" class="capacity-pill" data-liters="3000">3000 L</button>
+              <button type="button" class="capacity-pill" data-liters="5000">5000 L</button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+            <div class="calc-control-group" style="margin-bottom: 0;">
+              <label class="calc-label" for="calc-type">2. Tank Placement / Type</label>
+              <select id="calc-type" class="calc-type-select">
+                <option value="OVERHEAD_PVC">Overhead Plastic / Sintex Tank</option>
+                <option value="GROUND_PVC">Ground-Level Plastic Tank</option>
+                <option value="LOFT_TANK">Loft / Indoor Tank</option>
+              </select>
+            </div>
+
+            <div class="calc-control-group" style="margin-bottom: 0;">
+              <label class="calc-label" for="calc-count">3. Number of Tanks</label>
+              <select id="calc-count" class="calc-count-select">
+                <option value="1">1 Tank</option>
+                <option value="2">2 Tanks (Combo)</option>
+                <option value="3">3 Tanks</option>
+                <option value="4">4 Tanks</option>
+                <option value="5">5+ Tanks (Society)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Calculator Result Card -->
+        <div class="calc-result-card">
+          <div class="calc-result-header">Estimated Total Package Price</div>
+          <div class="calc-result-total" id="calc-total-display">₹400</div>
+          <div class="calc-result-mrp">Regular Market Price: <span id="calc-mrp-display">₹600</span></div>
+          <div class="calc-result-savings" id="calc-savings-display">You Save ₹200 (33% OFF)</div>
+
+          <div class="calc-details-grid">
+            <div>
+              <div class="calc-detail-label">Service Duration:</div>
+              <div class="calc-detail-val" id="calc-duration-display">60 Minutes</div>
+            </div>
+            <div>
+              <div class="calc-detail-label">Per Tank Rate:</div>
+              <div class="calc-detail-val" id="calc-per-tank-display">₹400 / tank</div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            <button class="btn btn-primary open-booking-modal-btn" id="calc-book-btn" data-capacity="1000 L" data-count="1">
+              Lock This Rate &amp; Schedule
+            </button>
+            <a href="https://wa.me/917808611636?text=Hello%20DRTC%20Service%2C%20I%20want%20a%20quote." target="_blank" class="btn btn-outline btn-sm" id="calc-whatsapp-btn" style="border-color: rgba(37, 211, 102, 0.4); color: #25d366;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.541 1.956.818 2.801.819 3.178 0 5.767-2.587 5.767-5.766.002-3.181-2.584-5.766-5.772-5.766zm9.969 5.768c0 5.485-4.467 9.953-9.969 9.953-1.748 0-3.376-.452-4.79-1.242l-5.241 1.373 1.4-5.109c-.89-1.488-1.398-3.235-1.398-5.093 0-5.486 4.469-9.953 9.969-9.953 5.486 0 10.029 4.467 10.029 9.953z"/></svg>
+              Get Instant WhatsApp Quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     6-STAGE SCIENTIFIC CLEANING PROCESS
+     ================================================================= -->
+<section class="section" id="process" style="background: #070b14;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">SCIENTIFIC PROCEDURE</span>
+      <h2 class="section-title">OUR 6-STAGE DISINFECTION PROCESS</h2>
+      <p class="section-subtitle">
+        We do not just wipe tanks with a dirty mop. We follow an advanced 6-step mechanical hygiene protocol ensuring 100% germ-free water.
+      </p>
+    </div>
+
+    <div class="stages-grid">
+      {% for stage in business.cleaning_stages %}
+      <div class="stage-card">
+        <div class="stage-header">
+          <div class="stage-number">{{ stage.step }}</div>
+          <span class="stage-tag">{{ stage.tag }}</span>
+        </div>
+        <h3 class="stage-title">{{ stage.title }}</h3>
+        <p class="stage-desc">{{ stage.desc }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     AUTHENTIC MEDIA PROOF SECTION (From User's Provided Media)
+     ================================================================= -->
+<section class="section proof-section" id="proof">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">VERIFIED CREDENTIALS</span>
+      <h2 class="section-title">OFFICIAL VISITING CARD &amp; PRICE BOARD</h2>
+      <p class="section-subtitle">
+        Click on any board below to inspect our official business credentials, registered numbers, and guaranteed rate chart.
+      </p>
+    </div>
+
+    <div class="proof-grid">
+      <!-- Visiting Card Proof -->
+      <div class="proof-card">
+        <div class="proof-image-container" title="Click to view full image in high resolution">
+          <img src="{% static 'images/drtc_visiting_card.png' %}" alt="DRTC Official Visiting Card - Dinesh Rakesh Tank Cleaning" class="proof-img">
+          <div class="proof-zoom-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+            <span>Click to Inspect High-Res</span>
+          </div>
+        </div>
+        <div class="proof-content">
+          <h3 class="proof-title">Official DRTC Service Visiting Card</h3>
+          <p class="proof-desc">
+            Direct numbers for Dinesh (Owner: 7808611636) &amp; Rakesh (Operator: 6352561343), located at Shantinagar, Gamharia near Jhanda Chowk.
+          </p>
+        </div>
+      </div>
+
+      <!-- Price Chart Proof -->
+      <div class="proof-card">
+        <div class="proof-image-container" title="Click to view full image in high resolution">
+          <img src="{% static 'images/drtc_price_chart.png' %}" alt="DRTC Capacity & Price Chart" class="proof-img">
+          <div class="proof-zoom-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+            <span>Click to Inspect High-Res</span>
+          </div>
+        </div>
+        <div class="proof-content">
+          <h3 class="proof-title">Official Capacity &amp; Price Board</h3>
+          <p class="proof-desc">
+            500L (₹250), 1000L (₹400), 2000L (₹650), 3000L (₹900), 5000L (₹1100). Guaranteed fixed pricing policy.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     BEFORE & AFTER COMPARISON
+     ================================================================= -->
+<section class="section" style="background: #05070c;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">REAL RESULTS</span>
+      <h2 class="section-title">WHY DRTC SERVICE MAKES THE DIFFERENCE</h2>
+      <p class="section-subtitle">
+        What you drink and bathe with affects your family's health every single day.
+      </p>
+    </div>
+
+    <!-- Comparative Breakdown Cards -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+      <div style="background: rgba(239, 68, 68, 0.05); border: 1.5px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-md); padding: 2rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-red-bright); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+          <span>UNSERVICED TANK (OVER 6 MONTHS)</span>
+        </div>
+        <ul style="list-style: none; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;">
+          <li>⚠️ Toxic silt &amp; brown sludge settled at tank bottom</li>
+          <li>⚠️ Green algae sticking to corrugated walls</li>
+          <li>⚠️ Microscopic bacterial biofilm generating bad odor &amp; taste</li>
+          <li>⚠️ Risk of Typhoid, Jaundice, Diarrhea, and severe hairfall</li>
+          <li>⚠️ Corroded internal pipes &amp; clogged plumbing fixtures</li>
+        </ul>
+      </div>
+
+      <div style="background: rgba(16, 185, 129, 0.05); border: 1.5px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md); padding: 2rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; color: #34d399; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>AFTER DRTC 6-STAGE DISINFECTION</span>
+        </div>
+        <ul style="list-style: none; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;">
+          <li>✅ 100% sludge extracted with high-pressure suction pumps</li>
+          <li>✅ Spotless walls descaled with 150-bar rotary jets</li>
+          <li>✅ Food-grade non-toxic antibacterial sanitization</li>
+          <li>✅ UV radiation eradicates 99.9% viruses &amp; bacteria</li>
+          <li>✅ Crystal-pure, odorless, healthy water for cooking &amp; drinking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     CUSTOMER REVIEWS & LOCAL TESTIMONIALS
+     ================================================================= -->
+<section class="section" id="reviews" style="background: #080c16;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">CUSTOMER SATISFACTION</span>
+      <h2 class="section-title">WHAT GAMHARIA RESIDENTS SAY</h2>
+      <p class="section-subtitle">
+        Real feedback from homeowners, apartments, and factories across Gamharia &amp; Jamshedpur.
+      </p>
+    </div>
+
+    <div class="reviews-grid">
+      {% for rev in reviews %}
+      <div class="review-card">
+        <div>
+          <div class="review-stars">
+            {% for i in "12345" %}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            {% endfor %}
+          </div>
+          <h4 class="review-title">{{ rev.review_title }}</h4>
+          <p class="review-text">"{{ rev.comment }}"</p>
+        </div>
+
+        <div class="review-author">
+          <div class="review-avatar">{{ rev.customer_name|slice:":1" }}</div>
+          <div>
+            <div class="author-name">{{ rev.customer_name }}</div>
+            <div class="author-loc">{{ rev.locality }} • {{ rev.tank_capacity }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     FREQUENTLY ASKED QUESTIONS (FAQ)
+     ================================================================= -->
+<section class="section" style="background: #05070c;">
+  <div class="container" style="max-width: 900px;">
+    <div class="section-header">
+      <span class="section-tag">COMMON INQUIRIES</span>
+      <h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+      <details style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; color: #ffffff; font-size: 1.05rem;">How frequently should I get my water tank cleaned?</summary>
+        <p style="color: var(--text-secondary); margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6;">
+          According to health standards, residential water storage tanks should be cleaned every 4 to 6 months to prevent the accumulation of mud, algae, and hazardous bacterial colonies.
+        </p>
+      </details>
+
+      <details style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; color: #ffffff; font-size: 1.05rem;">Do I need to empty the tank before the DRTC team arrives?</summary>
+        <p style="color: var(--text-secondary); margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6;">
+          No! Our technicians bring high-flow submersible dewatering drainage pumps. It is helpful if water levels are low, but we handle the complete dewatering and sludge removal on-site.
+        </p>
+      </details>
+
+      <details style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; color: #ffffff; font-size: 1.05rem;">Are the antibacterial chemicals safe for drinking water?</summary>
+        <p style="color: var(--text-secondary); margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6;">
+          Yes, 100%! We strictly use certified food-grade, chlorine-free and eco-friendly disinfectants followed by UV germicidal radiation that leave zero chemical residue, color, or toxic aftertaste.
+        </p>
+      </details>
+
+      <details style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; color: #ffffff; font-size: 1.05rem;">How long does the 6-stage cleaning take?</summary>
+        <p style="color: var(--text-secondary); margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6;">
+          A standard 1000L plastic tank takes approximately 45–60 minutes. Larger 3000L or 5000L tanks take between 90 to 120 minutes.
+        </p>
+      </details>
+
+      <details style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; cursor: pointer;">
+        <summary style="font-weight: 700; color: #ffffff; font-size: 1.05rem;">When and how do I make payment?</summary>
+        <p style="color: var(--text-secondary); margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6;">
+          You only pay AFTER you inspect the cleaned tank and are 100% satisfied. You can pay via Cash, PhonePe, Google Pay, or Paytm directly to Dinesh or Rakesh.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- =================================================================
+     CONTACT & DIRECT ACTION SECTION
+     ================================================================= -->
+<section class="section" id="contact" style="background: #080c16;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">GET IN TOUCH</span>
+      <h2 class="section-title">SCHEDULE SERVICE OR CALL DIRECTLY</h2>
+      <p class="section-subtitle">
+        Have a question or urgent tank cleaning emergency? Connect with Dinesh and Rakesh today.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Contact Information Card -->
+      <div class="contact-info-card">
+        <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 1.5rem;">DRTC DIRECT CONTACTS</h3>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          </div>
+          <div>
+            <div class="contact-label">Owner (Dinesh)</div>
+            <div class="contact-val"><a href="tel:7808611636">+91 7808611636</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7.5" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+          </div>
+          <div>
+            <div class="contact-label">Operator (Rakesh)</div>
+            <div class="contact-val"><a href="tel:6352561343">+91 6352561343</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          </div>
+          <div>
+            <div class="contact-label">Operational Hub Address</div>
+            <div class="contact-val" style="font-size: 0.95rem; font-weight: 500;">
+              SHANTINAGAR, GAMHARIA,<br>NEAR BY JHANDA CHOWK, 832108
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          </div>
+          <div>
+            <div class="contact-label">Email Inquiries</div>
+            <div class="contact-val"><a href="mailto:arjunraja20022@gmail.com">arjunraja20022@gmail.com</a></div>
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+          <a href="https://wa.me/917808611636?text=Hello%20DRTC%20Service%2C%20I%20want%20to%20book%20a%20tank%20cleaning%20slot." target="_blank" class="btn btn-primary" style="background:#25d366; color:#fff; border-color:#25d366; flex: 1;">
+            Chat on WhatsApp
+          </a>
+          <button class="btn btn-red open-booking-modal-btn" data-capacity="1000 L" style="flex: 1;">
+            Schedule Slot
+          </button>
+        </div>
+      </div>
+
+      <!-- Quick Inquiry Message Form -->
+      <div class="contact-form">
+        <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 0.5rem;">SEND DIRECT MESSAGE</h3>
+        <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 1.5rem;">
+          Fill out this form and our operations lead will call or message you back within 15 minutes.
+        </p>
+
+        <form id="contactForm">
+          {% csrf_token %}
+          <div class="form-group">
+            <label class="form-label" for="inq-name">Your Name *</label>
+            <input type="text" id="inq-name" name="name" class="form-control" placeholder="e.g. Anand Sen" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="inq-phone">Phone Number *</label>
+              <input type="tel" id="inq-phone" name="phone" class="form-control" placeholder="10-digit mobile" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inq-email">Email (Optional)</label>
+              <input type="email" id="inq-email" name="email" class="form-control" placeholder="your@email.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="inq-msg">Requirement / Message *</label>
+            <textarea id="inq-msg" name="message" class="form-control" placeholder="Tell us about your tank capacity, location in Gamharia/Jamshedpur, or any special requirements..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem;">
+            Submit Inquiry to Dinesh &amp; Rakesh
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

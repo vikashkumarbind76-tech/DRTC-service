@@ -1,0 +1,315 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}DRTC SERVICE | Dinesh Rakesh Tank Cleaning Service | Gamharia, Jamshedpur{% endblock %}</title>
+  
+  <meta name="description" content="Official website of DRTC Tank Cleaning Service (Dinesh & Rakesh). Certified 6-stage mechanized water tank cleaning, sludge extraction & UV sterilization in Gamharia, Jhanda Chowk, Shantinagar & Jamshedpur. Starting at ₹250.">
+  <meta name="keywords" content="DRTC Service, Tank Cleaning Gamharia, Dinesh Rakesh Tank Cleaning, water tank cleaning Jamshedpur, Sintex tank cleaning, underground sump cleaning Jhanda Chowk, water tank cleaner Shantinagar">
+  <meta name="author" content="DRTC Service">
+  
+  <!-- OpenGraph / Social Meta -->
+  <meta property="og:title" content="DRTC SERVICE - Cleaner Tanks, Safer Tomorrow">
+  <meta property="og:description" content="Certified 6-stage mechanized water tank cleaning starting at ₹250. Safe, hygienic, affordable. Gamharia & Jamshedpur.">
+  <meta property="og:image" content="{% static 'images/drtc_visiting_card.png' %}">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Anton & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+  <!-- Ambient Ambient Lighting Effects -->
+  <div class="ambient-glow-container" style="position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;">
+    <div class="ambient-glow ambient-cyan"></div>
+    <div class="ambient-glow ambient-gold"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="mainNavbar">
+    <div class="container nav-inner">
+      <!-- Two-Tone Wordmark Brand Identity -->
+      <a href="{% url 'home' %}" class="brand-wordmark" title="DRTC Service Home">
+        <img src="{% static 'images/logo_badge.png' %}" alt="DRTC Logo" class="brand-logo-img">
+        <div class="brand-text-block">
+          <div class="brand-title">
+            <span class="brand-drtc">DRTC</span>
+            <span class="brand-service">SERVICE</span>
+          </div>
+          <span class="brand-subtext">Dinesh Rakesh Tank Cleaning</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <ul class="nav-links">
+        <li><a href="{% url 'home' %}#home" class="nav-link active">Home</a></li>
+        <li><a href="{% url 'home' %}#pricing" class="nav-link">Pricing</a></li>
+        <li><a href="{% url 'home' %}#reviews" class="nav-link">Reviews</a></li>
+        <li><a href="{% url 'booking_track' %}" class="nav-link">Track</a></li>
+        <li><a href="{% url 'home' %}#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- Action CTAs -->
+      <div class="nav-actions">
+        <button class="btn btn-primary btn-sm open-booking-modal-btn" data-capacity="1000 L">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>Book Service</span>
+        </button>
+        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Universal Booking Modal -->
+  <div class="modal-overlay" id="bookingModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">SCHEDULE TANK CLEANING</h3>
+        <button class="modal-close-btn" id="closeBookingModal" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="bookingForm" method="POST" action="{% url 'api_create_booking' %}">
+          {% csrf_token %}
+          <input type="hidden" id="modal-package-id" name="package_id" value="">
+
+          <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); padding: 0.85rem 1rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between;">
+            <div>
+              <div style="font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase;">Selected Capacity</div>
+              <div style="font-family: var(--font-display); font-size: 1.25rem; color: var(--accent-gold-bright);" id="modal-cap-display">
+                <input type="text" id="modal-package-cap" name="custom_capacity" value="1000 L" style="background: transparent; border: none; font-family: inherit; font-size: inherit; color: inherit; width: 140px; font-weight: bold;" readonly>
+              </div>
+            </div>
+            <div style="font-size: 0.82rem; color: #10b981; font-weight: 700; text-align: right;">
+              <div>6-Stage Cleaning</div>
+              <div style="font-size: 0.7rem; color: var(--text-secondary);">UV Sanitized</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="cust-name">Full Name *</label>
+            <input type="text" id="cust-name" name="customer_name" class="form-control" placeholder="e.g. Ramesh Kumar" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="cust-phone">Mobile Phone (WhatsApp) *</label>
+              <input type="tel" id="cust-phone" name="customer_phone" class="form-control" placeholder="10-digit number" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="modal-tank-type">Tank Type</label>
+              <select id="modal-tank-type" name="tank_type" class="form-control">
+                <option value="OVERHEAD_PVC">Overhead Plastic / Sintex</option>
+                <option value="GROUND_PVC">Ground-Level Plastic Tank</option>
+                <option value="LOFT_TANK">Loft / Indoor Tank</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="pref-date">Preferred Date *</label>
+              <input type="date" id="pref-date" name="preferred_date" class="form-control" value="{{ today|date:'Y-m-d' }}" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pref-slot">Preferred Slot</label>
+              <select id="pref-slot" name="preferred_time_slot" class="form-control">
+                <option value="08:00 AM - 11:00 AM">Morning (8 AM - 11 AM)</option>
+                <option value="11:00 AM - 02:00 PM">Noon (11 AM - 2 PM)</option>
+                <option value="02:00 PM - 05:00 PM">Afternoon (2 PM - 5 PM)</option>
+                <option value="05:00 PM - 07:00 PM">Evening (5 PM - 7 PM)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="service-addr">Address / House No / Colony *</label>
+            <textarea id="service-addr" name="address" class="form-control" rows="2" placeholder="e.g. House No. 24, Near Kali Mandir Road" required></textarea>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="cust-landmark">Landmark</label>
+              <input type="text" id="cust-landmark" name="landmark" class="form-control" placeholder="e.g. Near Jhanda Chowk / Lal Building">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cust-area">Locality</label>
+              <input type="text" id="cust-area" name="area_locality" class="form-control" value="Gamharia">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Payment Choice</label>
+            <div style="display: flex; gap: 1rem; font-size: 0.88rem; margin-top: 0.25rem;">
+              <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
+                <input type="radio" name="payment_method" value="PAY_ON_SERVICE" checked> Pay After Service (Cash/UPI)
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1.05rem; margin-top: 0.5rem;">
+            Confirm & Schedule Appointment
+          </button>
+          
+          <div style="text-align: center; margin-top: 0.85rem; font-size: 0.75rem; color: var(--text-muted);">
+            Zero advance required • Cancel or reschedule anytime • Free on-site inspection
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Success Modal -->
+  <div class="modal-overlay" id="bookingSuccessModal">
+    <div class="modal-dialog" style="max-width: 520px; text-align: center;">
+      <div class="modal-body" style="padding: 2.5rem 2rem;">
+        <div style="width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 2px solid #10b981; display: inline-flex; align-items: center; justify-content: center; color: #10b981; margin-bottom: 1.25rem;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        
+        <h3 style="font-family: var(--font-display); font-size: 1.9rem; margin-bottom: 0.4rem;">BOOKING CONFIRMED!</h3>
+        <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 1.75rem;">
+          Thank you, <span id="success-customer-name" style="color: #ffffff; font-weight: 700;">Customer</span>! Your appointment has been registered with DRTC Service.
+        </p>
+
+        <div style="background: rgba(255, 255, 255, 0.04); border: 1px dashed var(--border-gold); padding: 1.25rem; border-radius: var(--radius-sm); margin-bottom: 1.75rem; text-align: left;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.82rem; color: var(--text-muted);">Booking Reference ID:</span>
+            <span id="success-booking-id" style="font-family: monospace; font-weight: 700; color: var(--accent-gold-bright); font-size: 1.05rem;">DRTC-XXXX</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+            <span style="font-size: 0.82rem; color: var(--text-muted);">Total Estimated Amount:</span>
+            <span id="success-total-amount" style="font-weight: 700; color: #ffffff;">₹0</span>
+          </div>
+          <div style="display: flex; justify-content: space-between;">
+            <span style="font-size: 0.82rem; color: var(--text-muted);">Payment:</span>
+            <span style="font-size: 0.82rem; color: #34d399; font-weight: 600;">Pay After Cleaning (Cash / UPI)</span>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <a href="#" id="success-whatsapp-btn" target="_blank" class="btn btn-primary" style="background: #25d366; color: #ffffff; border-color: #25d366; font-size: 1rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.541 1.956.818 2.801.819 3.178 0 5.767-2.587 5.767-5.766.002-3.181-2.584-5.766-5.772-5.766zm9.969 5.768c0 5.485-4.467 9.953-9.969 9.953-1.748 0-3.376-.452-4.79-1.242l-5.241 1.373 1.4-5.109c-.89-1.488-1.398-3.235-1.398-5.093 0-5.486 4.469-9.953 9.969-9.953 5.486 0 10.029 4.467 10.029 9.953z"/></svg>
+            Send Confirmation to Dinesh on WhatsApp
+          </a>
+          <button class="btn btn-outline" id="closeSuccessModal">Close & Continue Browsing</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Official Media Image Lightbox Modal -->
+  <div class="modal-overlay" id="imageLightboxModal">
+    <div class="lightbox-dialog">
+      <img src="" alt="DRTC Official Proof" class="lightbox-img" id="lightbox-preview-img">
+    </div>
+    <button class="modal-close-btn" id="closeLightboxModal" style="position: absolute; top: 25px; right: 30px; font-size: 2.2rem; color: #ffffff;">&times;</button>
+  </div>
+
+  <!-- Sticky Mobile Quick Action Bar -->
+  <div class="mobile-bottom-bar">
+    <a href="tel:7808611636" class="btn btn-outline" style="border-color: rgba(245,158,11,0.4); color: var(--accent-gold-bright);">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      Call Now
+    </a>
+    <a href="https://wa.me/917808611636?text=Hello%20DRTC%20Service%2C%20I%20need%20tank%20cleaning%20service%20in%20Gamharia." target="_blank" class="btn btn-primary" style="background:#25d366; color:#fff; border-color:#25d366;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.541 1.956.818 2.801.819 3.178 0 5.767-2.587 5.767-5.766.002-3.181-2.584-5.766-5.772-5.766zm9.969 5.768c0 5.485-4.467 9.953-9.969 9.953-1.748 0-3.376-.452-4.79-1.242l-5.241 1.373 1.4-5.109c-.89-1.488-1.398-3.235-1.398-5.093 0-5.486 4.469-9.953 9.969-9.953 5.486 0 10.029 4.467 10.029 9.953z"/></svg>
+      WhatsApp
+    </a>
+    <button class="btn btn-red open-booking-modal-btn" data-capacity="1000 L">
+      Book @ ₹250+
+    </button>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <div class="brand-title" style="margin-bottom: 0.75rem;">
+          <span class="brand-drtc">DRTC</span>
+          <span class="brand-service">SERVICE</span>
+        </div>
+        <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem;">
+          DINESH RAKESH TANK CLEANING SERVICE.<br>
+          <strong style="color: var(--accent-gold-bright);">CLEANER TANKS, SAFER TOMORROW.</strong><br>
+          Gamharia & Jamshedpur’s certified mechanized water tank disinfection team.
+        </p>
+        <div style="display: flex; gap: 0.75rem;">
+          <span style="font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 0.3rem 0.65rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">Non-Toxic</span>
+          <span style="font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 0.3rem 0.65rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">UV Sterilized</span>
+          <span style="font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 0.3rem 0.65rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">Since 2018</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Official Capacity & Rates</div>
+        <ul class="footer-links">
+          <li><a href="#pricing">500 Liter Tank - ₹250</a></li>
+          <li><a href="#pricing">1000 L Tank - ₹400 (Popular)</a></li>
+          <li><a href="#pricing">2000 L Tank - ₹650</a></li>
+          <li><a href="#pricing">3000 L Tank - ₹900</a></li>
+          <li><a href="#pricing">5000 L Tank - ₹1100</a></li>
+          <li><a href="#calculator">Multi-Tank & Sump Calculator</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Quick Navigation</div>
+        <ul class="footer-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#process">6-Stage Scientific Cleaning</a></li>
+          <li><a href="#proof">Official Visiting Card & Board</a></li>
+          <li><a href="#reviews">Customer Feedback</a></li>
+          <li><a href="{% url 'booking_track' %}">Check Booking Status</a></li>
+          <li><a href="/admin/">Admin Portal</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Direct Contacts</div>
+        <ul class="footer-links" style="font-size: 0.88rem;">
+          <li style="color: #ffffff;">
+            <strong>Dinesh (Owner):</strong><br>
+            <a href="tel:7808611636" style="color: var(--accent-gold-bright);">+91 7808611636</a>
+          </li>
+          <li style="color: #ffffff; margin-top: 0.5rem;">
+            <strong>Rakesh (Operator):</strong><br>
+            <a href="tel:6352561343" style="color: var(--accent-gold-bright);">+91 6352561343</a>
+          </li>
+          <li style="margin-top: 0.5rem;">
+            <strong>Address:</strong><br>
+            Shantinagar, Gamharia,<br>Near by Jhanda Chowk, 832108
+          </li>
+          <li style="margin-top: 0.5rem;">
+            <strong>Email:</strong><br>
+            <a href="mailto:arjunraja20022@gmail.com">arjunraja20022@gmail.com</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>&copy; 2026 DRTC SERVICE. All Rights Reserved. Clean Tanks, Safe Tomorrow.</div>
+      <div>Designed for Dinesh Rakesh Tank Cleaning Service | Gamharia, Jamshedpur</div>
+    </div>
+  </footer>
+
+  <!-- Core JavaScript -->
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>
