@@ -1,0 +1,335 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static log %}
+
+{% block extrastyle %}
+  {{ block.super }}
+{% endblock %}
+
+{% block coltype %}colM{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block content %}
+<div id="content-main" style="width: 100%; max-width: 100%; box-sizing: border-box;">
+
+  <!-- Executive Hero Header -->
+  <div class="drtc-dashboard-hero">
+    <div style="flex: 1; min-width: 280px;">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;">
+        <span class="drtc-badge emerald">
+          <span class="drtc-dot"></span> Live Operations Active
+        </span>
+        <span style="color: var(--drtc-text-muted); font-size: 0.8rem; font-weight: 500;">
+          {{ kpi.today_str }}
+        </span>
+      </div>
+      <h1 class="drtc-hero-title">
+        COMMAND &amp; DISPATCH CENTER
+      </h1>
+      <p class="drtc-hero-desc">
+        Real-time tracking of tank cleaning appointments, field technician dispatch, customer inquiries, and commercial revenue for Gamharia &amp; Jamshedpur.
+      </p>
+    </div>
+
+    <div class="drtc-hero-actions">
+      <a href="{% url 'admin:drtc_app_booking_add' %}" class="drtc-btn-action" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #070a13; font-size: 0.84rem; padding: 9px 16px; border-radius: 8px; font-weight: 700; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4); text-decoration: none;">
+        <span>➕</span> Book New Slot
+      </a>
+      <a href="https://wa.me/917808611636?text=DRTC%20Admin%20System%20Check" target="_blank" class="drtc-btn-action wa" style="font-size: 0.84rem; padding: 9px 14px; border-radius: 8px; text-decoration: none;">
+        <span>💬</span> WhatsApp Dinesh
+      </a>
+      <a href="https://wa.me/916352561343?text=DRTC%20Field%20Operations%20Update" target="_blank" class="drtc-btn-action wa" style="font-size: 0.84rem; padding: 9px 14px; border-radius: 8px; text-decoration: none;">
+        <span>💬</span> WhatsApp Rakesh
+      </a>
+    </div>
+  </div>
+
+  <!-- KPI Metric Grid (Responsive 6 -> 3 -> 2 -> 1) -->
+  <div class="drtc-kpi-grid">
+    <div class="drtc-kpi-card gold">
+      <div class="drtc-kpi-header">
+        <span class="drtc-kpi-label">Today's Schedule</span>
+        <div class="drtc-kpi-icon gold">📅</div>
+      </div>
+      <div class="drtc-kpi-val">{{ kpi.today_bookings }}</div>
+      <span class="drtc-kpi-sub">Bookings slated for today</span>
+    </div>
+
+    <div class="drtc-kpi-card cyan">
+      <div class="drtc-kpi-header">
+        <span class="drtc-kpi-label">Pending Confirmation</span>
+        <div class="drtc-kpi-icon cyan">⏳</div>
+      </div>
+      <div class="drtc-kpi-val">{{ kpi.pending_bookings }}</div>
+      <span class="drtc-kpi-sub">Requires verification call</span>
+    </div>
+
+    <div class="drtc-kpi-card purple">
+      <div class="drtc-kpi-header">
+        <span class="drtc-kpi-label">Active Cleaning Jobs</span>
+        <div class="drtc-kpi-icon purple">⚡</div>
+      </div>
+      <div class="drtc-kpi-val">{{ kpi.active_jobs }}</div>
+      <span class="drtc-kpi-sub">Scheduled / In-progress</span>
+    </div>
+
+    <div class="drtc-kpi-card emerald">
+      <div class="drtc-kpi-header">
+        <span class="drtc-kpi-label">Completed Jobs</span>
+        <div class="drtc-kpi-icon emerald">🏆</div>
+      </div>
+      <div class="drtc-kpi-val">{{ kpi.completed_jobs }}</div>
+      <span class="drtc-kpi-sub">Successfully cleaned tanks</span>
+    </div>
+
+    <div class="drtc-kpi-card indigo">
+      <div class="drtc-kpi-header">
+        <span class="drtc-kpi-label">Service Revenue</span>
+        <div class="drtc-kpi-icon indigo">💰</div>
+      </div>
+      <div class="drtc-kpi-val">₹{{ kpi.total_revenue }}</div>
+      <span class="drtc-kpi-sub">From completed appointments</span>
+    </div>
+
+    <div class="drtc-kpi-card rose">
+      <div class="drtc-kpi-header">
+        <span class="drtc-kpi-label">New Inquiries</span>
+        <div class="drtc-kpi-icon rose">📩</div>
+      </div>
+      <div class="drtc-kpi-val">{{ kpi.unresolved_inquiries }}</div>
+      <span class="drtc-kpi-sub">Unresolved customer leads</span>
+    </div>
+  </div>
+
+  <!-- Recent Bookings Dispatch Stream -->
+  <div class="drtc-recent-box">
+    <div class="drtc-box-header">
+      <div class="drtc-box-title">
+        <span>📋</span> Recent Bookings &amp; Field Dispatch Stream
+      </div>
+      <div>
+        <a href="{% url 'admin:drtc_app_booking_changelist' %}" class="drtc-pill-link gold" style="font-size: 0.76rem; padding: 4px 10px;">
+          View All Bookings ({{ kpi.total_bookings }}) →
+        </a>
+      </div>
+    </div>
+
+    {% if kpi.recent_bookings %}
+    <div class="drtc-table-responsive">
+      <table class="drtc-dashboard-table">
+        <thead>
+          <tr>
+            <th style="width: 120px;">Booking ID</th>
+            <th style="min-width: 150px;">Customer</th>
+            <th style="min-width: 100px;">Capacity</th>
+            <th style="min-width: 130px;">Scheduled For</th>
+            <th style="width: 90px;">Amount</th>
+            <th style="width: 110px;">Status</th>
+            <th style="width: 85px;">Payment</th>
+            <th style="min-width: 220px; text-align: right;">Quick Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for b in kpi.recent_bookings %}
+          <tr>
+            <td>
+              <a href="{% url 'admin:drtc_app_booking_change' b.id %}" style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #fbbf24; text-decoration: none; white-space: nowrap;">
+                {{ b.booking_id }}
+              </a>
+            </td>
+            <td>
+              <strong style="color: #ffffff; display: block; font-size: 0.88rem;">{{ b.customer_name }}</strong>
+              <small style="color: var(--drtc-text-muted); font-size: 0.74rem;">📍 {{ b.landmark|default:b.area_locality }}</small>
+            </td>
+            <td>
+              <span style="font-weight: 600; color: #38bdf8; font-size: 0.88rem;">{{ b.display_capacity }}</span>
+            </td>
+            <td>
+              <div style="font-weight: 500; font-size: 0.84rem; white-space: nowrap;">{{ b.preferred_date|date:"d M Y" }}</div>
+              <small style="color: var(--drtc-text-muted); font-size: 0.74rem; white-space: nowrap;">{{ b.preferred_time_slot }}</small>
+            </td>
+            <td>
+              <strong style="font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-size: 0.92rem; white-space: nowrap;">₹{{ b.total_amount }}</strong>
+            </td>
+            <td>
+              {% if b.status == 'COMPLETED' %}
+                <span class="drtc-badge emerald" style="white-space: nowrap;"><span class="drtc-dot"></span> Completed</span>
+              {% elif b.status == 'PENDING' %}
+                <span class="drtc-badge amber" style="white-space: nowrap;"><span class="drtc-dot"></span> Pending</span>
+              {% elif b.status == 'CONFIRMED' %}
+                <span class="drtc-badge cyan" style="white-space: nowrap;"><span class="drtc-dot"></span> Confirmed</span>
+              {% elif b.status == 'IN_PROGRESS' %}
+                <span class="drtc-badge purple" style="white-space: nowrap;"><span class="drtc-dot"></span> In Progress</span>
+              {% elif b.status == 'CANCELLED' %}
+                <span class="drtc-badge rose" style="white-space: nowrap;"><span class="drtc-dot"></span> Cancelled</span>
+              {% else %}
+                <span class="drtc-badge cyan" style="white-space: nowrap;">{{ b.get_status_display }}</span>
+              {% endif %}
+            </td>
+            <td>
+              {% if b.payment_status == 'PAID' %}
+                <span style="color: #34d399; font-weight: 700; font-size: 0.74rem; white-space: nowrap;">✓ PAID</span>
+              {% else %}
+                <span style="color: #f59e0b; font-weight: 600; font-size: 0.74rem; white-space: nowrap;">⏳ UNPAID</span>
+              {% endif %}
+            </td>
+            <td style="text-align: right; white-space: nowrap;">
+              <div style="display: inline-flex; gap: 5px; align-items: center;">
+                <a href="https://wa.me/91{{ b.customer_phone }}?text=Hello%20{{ b.customer_name|urlencode }},%20this%20is%20DRTC%20Tank%20Cleaning%20regarding%20your%20booking%20{{ b.booking_id }}." target="_blank" class="drtc-btn-action wa" title="Chat on WhatsApp">
+                  <span>💬</span> WhatsApp
+                </a>
+                <a href="tel:{{ b.customer_phone }}" class="drtc-btn-action call" title="Direct Phone Call">
+                  <span>📞</span> Call
+                </a>
+                <a href="{% url 'admin:drtc_app_booking_change' b.id %}" class="drtc-btn-action" style="background: rgba(255,255,255,0.06); border: 1px solid var(--drtc-border); color: #f1f5f9;">
+                  Edit
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 2.5rem; color: var(--drtc-text-muted);">
+      <p style="margin-bottom: 1rem; font-size: 0.95rem;">No bookings registered yet.</p>
+      <a href="{% url 'admin:drtc_app_booking_add' %}" class="drtc-btn-action" style="background: var(--drtc-gold); color: #070a13; font-weight: 700; padding: 8px 16px;">
+        Create First Booking Slot
+      </a>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Standard Django Applications Grid -->
+  <div style="margin-bottom: 2rem;">
+    <h2 style="font-family: 'Anton', sans-serif; font-size: 1.35rem; letter-spacing: 0.5px; color: #ffffff; margin-bottom: 0.8rem; display: flex; align-items: center; gap: 8px;">
+      <span>🗄️</span> SYSTEM REGISTRIES &amp; CATALOGS
+    </h2>
+
+    {% if app_list %}
+      {% for app in app_list %}
+        <div class="app-{{ app.app_label }} module" style="margin-bottom: 1.25rem;">
+          <table style="width: 100%;">
+            <caption>
+              <a href="{{ app.app_url }}" class="section" title="{% blocktranslate with name=app.name %}Models in the {{ name }} application{% endblocktranslate %}">
+                {% if app.app_label == 'drtc_app' %}
+                  💧 DRTC TANK CLEANING CORE ({{ app.models|length }} MODELS)
+                {% elif app.app_label == 'auth' %}
+                  🔐 ACCESS CONTROL &amp; ADMINISTRATORS ({{ app.models|length }} MODELS)
+                {% else %}
+                  {{ app.name|upper }}
+                {% endif %}
+              </a>
+            </caption>
+            <tbody>
+              {% for model in app.models %}
+                <tr class="model-{{ model.object_name|lower }}">
+                  <th scope="row" style="width: 50%; min-width: 160px;">
+                    <a href="{{ model.admin_url }}" style="font-size: 0.92rem; display: flex; align-items: center; gap: 8px;">
+                      {% if model.object_name == 'Booking' %}
+                        <span>📋</span>
+                      {% elif model.object_name == 'ServicePackage' %}
+                        <span>🏷️</span>
+                      {% elif model.object_name == 'ContactInquiry' %}
+                        <span>💬</span>
+                      {% elif model.object_name == 'CustomerReview' %}
+                        <span>⭐</span>
+                      {% elif model.object_name == 'User' %}
+                        <span>👤</span>
+                      {% elif model.object_name == 'Group' %}
+                        <span>👥</span>
+                      {% else %}
+                        <span>📄</span>
+                      {% endif %}
+                      {{ model.name }}
+                    </a>
+                  </th>
+                  <td style="text-align: right; white-space: nowrap;">
+                    <div style="display: inline-flex; gap: 6px; align-items: center;">
+                      {% if model.add_url %}
+                        <a href="{{ model.add_url }}" class="addlink" style="margin: 0;">
+                          + Add {{ model.name }}
+                        </a>
+                      {% endif %}
+                      {% if model.admin_url %}
+                        <a href="{{ model.admin_url }}" class="changelink" style="margin: 0;">
+                          View Records
+                        </a>
+                      {% endif %}
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>{% translate "You don’t have permission to view or edit anything." %}</p>
+    {% endif %}
+  </div>
+
+  <!-- Operational Grid (Hubs + SOP + Recent Activity unified in 3 responsive columns) -->
+  <div class="drtc-bottom-grid">
+    <!-- Key Operational Hubs -->
+    <div class="drtc-card-panel">
+      <h3 style="font-size: 0.95rem; font-weight: 700; color: #fbbf24; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;">
+        <span>📍</span> Key Operational Hubs
+      </h3>
+      <ul style="padding-left: 18px; color: var(--drtc-text-muted); font-size: 0.82rem; line-height: 1.7; margin: 0;">
+        <li><strong>HQ:</strong> Shantinagar, Near Jhanda Chowk, Gamharia</li>
+        <li><strong>Primary:</strong> Gamharia, Adityapur, Kandra</li>
+        <li><strong>Extended:</strong> Bistupur, Kadma, Sonari, Sakchi</li>
+        <li><strong>Hours:</strong> 7:00 AM - 8:00 PM (Everyday)</li>
+      </ul>
+    </div>
+
+    <!-- Mechanized Standard Cleaning SOP -->
+    <div class="drtc-card-panel">
+      <h3 style="font-size: 0.95rem; font-weight: 700; color: #22d3ee; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;">
+        <span>💧</span> Mechanized Cleaning SOP
+      </h3>
+      <ol style="padding-left: 18px; color: var(--drtc-text-muted); font-size: 0.82rem; line-height: 1.7; margin: 0;">
+        <li><strong>Dewatering:</strong> Submersible extraction pump</li>
+        <li><strong>Sludge Removal:</strong> Complete base slurry extraction</li>
+        <li><strong>Rotary Jet Wash:</strong> 150-Bar wall scrub</li>
+        <li><strong>Vacuum Suction:</strong> Wet sludge extraction</li>
+        <li><strong>Anti-Bacterial:</strong> Food-grade safe sterilization</li>
+        <li><strong>UV Disinfection:</strong> Germicidal UV treatment</li>
+      </ol>
+    </div>
+
+    <!-- Recent System Activity Integrated Cleanly -->
+    <div class="drtc-card-panel">
+      <h3 style="font-size: 0.95rem; font-weight: 700; color: #a855f7; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;">
+        <span>🕒</span> Recent System Activity
+      </h3>
+      {% get_admin_log 6 as admin_log for_user user %}
+      {% if not admin_log %}
+        <p style="color: var(--drtc-text-muted); font-size: 0.82rem; margin: 0;">No recent activity recorded.</p>
+      {% else %}
+        <ul style="padding-left: 0; list-style: none; margin: 0;">
+        {% for entry in admin_log %}
+          <li style="padding: 6px 0; border-bottom: 1px solid var(--drtc-border-subtle); font-size: 0.8rem;">
+            <span style="color: #ffffff; font-weight: 600;">{{ entry.object_repr }}</span>
+            <br>
+            <span style="color: var(--drtc-text-muted); font-size: 0.74rem;">
+              {% if entry.content_type %}{{ entry.content_type.name|capfirst }}{% else %}Object{% endif %}
+            </span>
+            <span style="color: var(--drtc-text-dim); font-size: 0.72rem;">— {{ entry.action_time|timesince }} ago</span>
+          </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block sidebar %}{# Cleanly integrated into drtc-bottom-grid above #}{% endblock %}

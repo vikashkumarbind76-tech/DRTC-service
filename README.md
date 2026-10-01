@@ -14,7 +14,7 @@ A premium, responsive full-stack Django web application and interactive booking 
   - **Dinesh (Owner):** +91 7808611636
   - **Rakesh (Operator):** +91 6352561343
   - **Address:** Shantinagar, Gamharia, Near By Jhanda Chowk, 832108
-  - **Email:** arjunraja20022@gmail.com
+  - **Email:** drtcservice@gmail.com
 
 ---
 

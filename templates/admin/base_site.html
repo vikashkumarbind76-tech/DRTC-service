@@ -1,0 +1,67 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }} | DRTC Operations Hub{% endblock %}
+
+{% block extrastyle %}
+  {{ block.super }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/admin_custom.css' %}?v=2.2">
+{% endblock %}
+
+{% block branding %}
+<div id="branding">
+  <a href="{% url 'admin:index' %}" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+    <div style="width: 36px; height: 36px; border-radius: 9px; background: linear-gradient(135deg, #f59e0b 0%, #06b6d4 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 14px rgba(245, 158, 11, 0.4); color: #070a13; font-weight: 900; font-size: 1.15rem; flex-shrink: 0;">
+      💧
+    </div>
+    <div>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <span class="drtc-header-badge">DRTC SERVICE</span>
+        <span style="font-size: 0.92rem; font-weight: 700; color: #f8fafc; letter-spacing: 0.3px;">OPERATIONS HUB</span>
+      </div>
+      <span class="drtc-header-subtitle">Dinesh Rakesh Tank Cleaning • Gamharia &amp; Jamshedpur</span>
+    </div>
+  </a>
+</div>
+{% endblock %}
+
+{# Keep header clean: nav-global is empty so user-tools and branding align perfectly #}
+{% block nav-global %}{% endblock %}
+
+{# Place dedicated full-width operations ribbon cleanly below header #}
+{% block nav-breadcrumbs %}
+  {% if user.is_authenticated and user.is_staff %}
+  <div class="drtc-nav-ribbon">
+    <div class="drtc-quick-links">
+      <a href="/" target="_blank" class="drtc-pill-link gold">
+        <span>🌐</span> Live Website
+      </a>
+      <a href="{% url 'booking_track' %}" target="_blank" class="drtc-pill-link">
+        <span>🔍</span> Tracker
+      </a>
+      <a href="{% url 'admin:drtc_app_booking_changelist' %}" class="drtc-pill-link">
+        <span>📋</span> Bookings
+      </a>
+      <a href="{% url 'admin:drtc_app_servicepackage_changelist' %}" class="drtc-pill-link">
+        <span>🏷️</span> Packages
+      </a>
+      <a href="{% url 'admin:drtc_app_contactinquiry_changelist' %}" class="drtc-pill-link">
+        <span>💬</span> Inquiries
+      </a>
+    </div>
+
+    <div class="drtc-contact-links">
+      <a href="https://wa.me/917808611636" target="_blank" class="drtc-pill-link whatsapp">
+        <span>💬</span> Dinesh: 7808611636
+      </a>
+      <a href="tel:+916352561343" class="drtc-pill-link">
+        <span>📞</span> Rakesh: 6352561343
+      </a>
+    </div>
+  </div>
+  {% endif %}
+  {{ block.super }}
+{% endblock %}

@@ -12,7 +12,7 @@
   
   <!-- OpenGraph / Social Meta -->
   <meta property="og:title" content="DRTC SERVICE - Cleaner Tanks, Safer Tomorrow">
-  <meta property="og:description" content="Certified 6-stage mechanized water tank cleaning starting at ₹250. Safe, hygienic, affordable. Gamharia & Jamshedpur.">
+  <meta property="og:description" content="Professional mechanized water tank cleaning starting at ₹250. Safe, hygienic, affordable. Gamharia & Jamshedpur.">
   <meta property="og:image" content="{% static 'images/drtc_visiting_card.png' %}">
   <meta property="og:type" content="website">
 
@@ -21,8 +21,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
 
-  <!-- CSS Stylesheet -->
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <!-- CSS Stylesheet with Cache-Busting Version -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=4.0">
   {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -87,86 +87,85 @@
           {% csrf_token %}
           <input type="hidden" id="modal-package-id" name="package_id" value="">
 
-          <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); padding: 0.85rem 1rem; border-radius: var(--radius-sm); margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between;">
-            <div>
-              <div style="font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase;">Selected Capacity</div>
-              <div style="font-family: var(--font-display); font-size: 1.25rem; color: var(--accent-gold-bright);" id="modal-cap-display">
-                <input type="text" id="modal-package-cap" name="custom_capacity" value="1000 L" style="background: transparent; border: none; font-family: inherit; font-size: inherit; color: inherit; width: 140px; font-weight: bold;" readonly>
+          <div class="booking-modal-grid">
+            <!-- Left Column: Service & Customer Info -->
+            <div class="booking-modal-col">
+              <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.28); padding: 0.85rem 1rem; border-radius: var(--radius-md); margin-bottom: 1.1rem; display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                  <div style="font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">Selected Capacity</div>
+                  <div style="font-family: var(--font-display); font-size: 1.35rem; color: var(--accent-gold-bright);" id="modal-cap-display">
+                    <input type="text" id="modal-package-cap" name="custom_capacity" value="1000 L" style="background: transparent; border: none; font-family: inherit; font-size: inherit; color: inherit; width: 140px; font-weight: bold;" readonly>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <div style="font-size: 0.82rem; color: #10b981; font-weight: 700;">Safe Disinfection</div>
+                  <div style="font-size: 0.72rem; color: #fbbf24;">₹0 Advance Required</div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cust-name">Full Name *</label>
+                <input type="text" id="cust-name" name="customer_name" class="form-control" placeholder="e.g. Ramesh Kumar" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="cust-phone">Mobile Phone (WhatsApp) *</label>
+                <input type="tel" id="cust-phone" name="customer_phone" class="form-control" placeholder="10-digit number" required>
+              </div>
+
+              <input type="hidden" id="modal-tank-type" name="tank_type" value="OVERHEAD_PVC">
+            </div>
+
+            <!-- Right Column: Date, Address & Confirmation CTA -->
+            <div class="booking-modal-col">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
+                <div class="form-group">
+                  <label class="form-label" for="pref-date">Preferred Date *</label>
+                  <input type="date" id="pref-date" name="preferred_date" class="form-control" value="{{ today|date:'Y-m-d' }}" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="pref-slot">Preferred Slot</label>
+                  <select id="pref-slot" name="preferred_time_slot" class="form-control">
+                    <option value="08:00 AM - 11:00 AM">Morning (8 AM - 11 AM)</option>
+                    <option value="11:00 AM - 02:00 PM">Noon (11 AM - 2 PM)</option>
+                    <option value="02:00 PM - 05:00 PM">Afternoon (2 PM - 5 PM)</option>
+                    <option value="05:00 PM - 07:00 PM">Evening (5 PM - 7 PM)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="service-addr">Address / House No / Colony *</label>
+                <textarea id="service-addr" name="address" class="form-control" rows="2" placeholder="e.g. House No. 24, Near Kali Mandir Road" required style="resize: none;"></textarea>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 0.85rem;">
+                <div class="form-group">
+                  <label class="form-label" for="cust-landmark">Landmark</label>
+                  <input type="text" id="cust-landmark" name="landmark" class="form-control" placeholder="e.g. Near Jhanda Chowk">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="cust-area">Locality</label>
+                  <input type="text" id="cust-area" name="area_locality" class="form-control" value="Gamharia">
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0.85rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); padding: 0.5rem 0.8rem; border-radius: var(--radius-sm);">
+                  <span style="color: var(--text-secondary);">Payment:</span>
+                  <strong style="color: #34d399;">Pay After Service (Cash / UPI)</strong>
+                  <input type="hidden" name="payment_method" value="PAY_ON_SERVICE">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1.05rem; font-weight: 700;">
+                Confirm &amp; Schedule Appointment
+              </button>
+
+              <div style="text-align: center; margin-top: 0.5rem; font-size: 0.74rem; color: var(--text-muted);">
+                Zero advance required • Cancel or reschedule anytime
               </div>
             </div>
-            <div style="font-size: 0.82rem; color: #10b981; font-weight: 700; text-align: right;">
-              <div>6-Stage Cleaning</div>
-              <div style="font-size: 0.7rem; color: var(--text-secondary);">UV Sanitized</div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="cust-name">Full Name *</label>
-            <input type="text" id="cust-name" name="customer_name" class="form-control" placeholder="e.g. Ramesh Kumar" required>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label class="form-label" for="cust-phone">Mobile Phone (WhatsApp) *</label>
-              <input type="tel" id="cust-phone" name="customer_phone" class="form-control" placeholder="10-digit number" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="modal-tank-type">Tank Type</label>
-              <select id="modal-tank-type" name="tank_type" class="form-control">
-                <option value="OVERHEAD_PVC">Overhead Plastic / Sintex</option>
-                <option value="GROUND_PVC">Ground-Level Plastic Tank</option>
-                <option value="LOFT_TANK">Loft / Indoor Tank</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-            <div class="form-group">
-              <label class="form-label" for="pref-date">Preferred Date *</label>
-              <input type="date" id="pref-date" name="preferred_date" class="form-control" value="{{ today|date:'Y-m-d' }}" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="pref-slot">Preferred Slot</label>
-              <select id="pref-slot" name="preferred_time_slot" class="form-control">
-                <option value="08:00 AM - 11:00 AM">Morning (8 AM - 11 AM)</option>
-                <option value="11:00 AM - 02:00 PM">Noon (11 AM - 2 PM)</option>
-                <option value="02:00 PM - 05:00 PM">Afternoon (2 PM - 5 PM)</option>
-                <option value="05:00 PM - 07:00 PM">Evening (5 PM - 7 PM)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="service-addr">Address / House No / Colony *</label>
-            <textarea id="service-addr" name="address" class="form-control" rows="2" placeholder="e.g. House No. 24, Near Kali Mandir Road" required></textarea>
-          </div>
-
-          <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1rem;">
-            <div class="form-group">
-              <label class="form-label" for="cust-landmark">Landmark</label>
-              <input type="text" id="cust-landmark" name="landmark" class="form-control" placeholder="e.g. Near Jhanda Chowk / Lal Building">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="cust-area">Locality</label>
-              <input type="text" id="cust-area" name="area_locality" class="form-control" value="Gamharia">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">Payment Choice</label>
-            <div style="display: flex; gap: 1rem; font-size: 0.88rem; margin-top: 0.25rem;">
-              <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer;">
-                <input type="radio" name="payment_method" value="PAY_ON_SERVICE" checked> Pay After Service (Cash/UPI)
-              </label>
-            </div>
-          </div>
-
-          <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem; font-size: 1.05rem; margin-top: 0.5rem;">
-            Confirm & Schedule Appointment
-          </button>
-          
-          <div style="text-align: center; margin-top: 0.85rem; font-size: 0.75rem; color: var(--text-muted);">
-            Zero advance required • Cancel or reschedule anytime • Free on-site inspection
           </div>
         </form>
       </div>
@@ -271,8 +270,7 @@
         <div class="footer-col-title">Quick Navigation</div>
         <ul class="footer-links">
           <li><a href="#home">Home</a></li>
-          <li><a href="#process">6-Stage Scientific Cleaning</a></li>
-          <li><a href="#proof">Official Visiting Card & Board</a></li>
+          <li><a href="#pricing">Capacity &amp; Pricing Matrix</a></li>
           <li><a href="#reviews">Customer Feedback</a></li>
           <li><a href="{% url 'booking_track' %}">Check Booking Status</a></li>
           <li><a href="/admin/">Admin Portal</a></li>
@@ -296,7 +294,7 @@
           </li>
           <li style="margin-top: 0.5rem;">
             <strong>Email:</strong><br>
-            <a href="mailto:arjunraja20022@gmail.com">arjunraja20022@gmail.com</a>
+            <a href="mailto:drtcservice@gmail.com">drtcservice@gmail.com</a>
           </li>
         </ul>
       </div>
@@ -309,7 +307,7 @@
   </footer>
 
   <!-- Core JavaScript -->
-  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/main.js' %}?v=4.0"></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>

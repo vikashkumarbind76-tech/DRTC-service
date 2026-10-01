@@ -44,21 +44,6 @@
           <span>Call Owner: 7808611636</span>
         </a>
       </div>
-
-      <div class="hero-guarantees">
-        <div class="guarantee-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>6-Stage Deep Scrub</span>
-        </div>
-        <div class="guarantee-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>UV Pathogen Elimination</span>
-        </div>
-        <div class="guarantee-item">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span>Pay After Full Satisfaction</span>
-        </div>
-      </div>
     </div>
 
     <!-- Featured 3D Tank Showcase -->
@@ -102,68 +87,48 @@
   </div>
 </section>
 
-<!-- =================================================================
-     TRUST METRIC STRIP WITH ANIMATED COUNTERS
-     ================================================================= -->
-<section class="trust-strip">
-  <div class="container trust-grid">
-    <div class="trust-item">
-      <div class="trust-icon-box">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-      </div>
-      <div>
-        <div class="trust-number counter-value" data-target="1250" data-suffix="+">1,250+</div>
-        <div class="trust-label">Clean Tanks Delivered</div>
-      </div>
-    </div>
-
-    <div class="trust-item">
-      <div class="trust-icon-box">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-      </div>
-      <div>
-        <div class="trust-number counter-value" data-target="100" data-suffix="%">100%</div>
-        <div class="trust-label">Germ-Free &amp; Odorless</div>
-      </div>
-    </div>
-
-    <div class="trust-item">
-      <div class="trust-icon-box">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-      </div>
-      <div>
-        <div class="trust-number counter-value" data-target="4.98" data-decimals="2" data-suffix=" / 5">4.98 / 5</div>
-        <div class="trust-label">Gamharia Customer Rating</div>
-      </div>
-    </div>
-
-    <div class="trust-item">
-      <div class="trust-icon-box">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-      </div>
-      <div>
-        <div class="trust-number counter-value" data-target="250" data-prefix="₹">₹250</div>
-        <div class="trust-label">Starting Price • No Hidden Fee</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- =================================================================
      CORE VALUE PILLARS (From Official Visiting Card)
      ================================================================= -->
-<section class="section" style="padding-top: 4.5rem; padding-bottom: 2.5rem;">
+<section class="section" style="padding-top: 4rem; padding-bottom: 2.5rem;">
   <div class="container">
-    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;">
-      {% for prop in business.value_props %}
-      <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem; text-align: center; transition: all var(--transition-smooth);" onmouseenter="this.style.borderColor='var(--accent-gold)'" onmouseleave="this.style.borderColor='var(--border-subtle)'">
-        <div style="width: 52px; height: 52px; border-radius: 50%; background: rgba(245, 158, 11, 0.12); border: 1.5px solid var(--accent-gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; color: var(--accent-gold-bright);">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+    <div class="value-props-grid">
+      <!-- 1. Safe Cleaning -->
+      <div class="value-prop-card prop-safe">
+        <div class="value-prop-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
         </div>
-        <h3 style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 0.4rem;">{{ prop.title }}</h3>
-        <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5;">{{ prop.desc }}</p>
+        <h3 class="value-prop-title">Safe Cleaning</h3>
+        <p class="value-prop-desc">Scientific mechanized cleaning with food-grade safe disinfectants.</p>
       </div>
-      {% endfor %}
+
+      <!-- 2. Hygienic Water -->
+      <div class="value-prop-card prop-hygienic">
+        <div class="value-prop-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+        </div>
+        <h3 class="value-prop-title">Hygienic Water</h3>
+        <p class="value-prop-desc">Germ-free, odor-free, pure drinking water for your loved ones.</p>
+      </div>
+
+      <!-- 3. Professional Service -->
+      <div class="value-prop-card prop-pro">
+        <div class="value-prop-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path><polyline points="16 11 18 13 22 9"></polyline></svg>
+        </div>
+        <h3 class="value-prop-title">Professional Service</h3>
+        <p class="value-prop-desc">Trained &amp; certified technicians with heavy-duty safety gear.</p>
+      </div>
+
+      <!-- 4. Reliable & Affordable -->
+      <div class="value-prop-card prop-affordable">
+        <div class="value-prop-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 3h12M6 8h12M6 13l7 8M6 13h3a4 4 0 0 0 0-8"></path></svg>
+        </div>
+        <h3 class="value-prop-title">Reliable &amp; Affordable</h3>
+        <p class="value-prop-desc">Starting at just ₹250. Transparent pricing with zero hidden fees.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -190,14 +155,9 @@
           <div class="popular-badge" style="background: rgba(14, 165, 233, 0.85);">{{ pkg.badge_text }}</div>
         {% endif %}
 
-        <div>
-          <div class="package-capacity-header">
-            <div class="package-icon-wrap">
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
-            </div>
-            <div class="package-capacity-title">{{ pkg.capacity }}</div>
-            <div class="package-ideal-for">{{ pkg.ideal_for }}</div>
-          </div>
+        <div class="package-card-top">
+          <div class="package-capacity-title">{{ pkg.capacity }}</div>
+          <div class="package-ideal-for">{{ pkg.ideal_for }}</div>
 
           <div class="package-pricing-row">
             <div class="package-price">₹{{ pkg.price|floatformat:0 }}</div>
@@ -206,23 +166,12 @@
             {% endif %}
           </div>
 
-          {% if pkg.discount_percent %}
-            <div class="package-discount-badge">SAVE ₹{{ pkg.savings }} ({{ pkg.discount_percent }}% OFF)</div>
-          {% endif %}
-
-          <div class="package-duration">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-            <span>Approx. {{ pkg.duration_mins }} Minutes</span>
+          <div class="package-meta-row">
+            {% if pkg.discount_percent %}
+              <span class="package-discount-badge">{{ pkg.discount_percent }}% OFF</span>
+            {% endif %}
+            <span class="package-duration">⏱️ ~{{ pkg.duration_mins }} Mins</span>
           </div>
-
-          <ul class="package-features">
-            {% for feat in pkg.get_features %}
-            <li class="package-feature-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span>{{ feat }}</span>
-            </li>
-            {% endfor %}
-          </ul>
         </div>
 
         <button class="btn {% if pkg.is_popular %}btn-primary{% else %}btn-outline{% endif %} package-cta-btn open-booking-modal-btn" 
@@ -257,26 +206,15 @@
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
-            <div class="calc-control-group" style="margin-bottom: 0;">
-              <label class="calc-label" for="calc-type">2. Tank Placement / Type</label>
-              <select id="calc-type" class="calc-type-select">
-                <option value="OVERHEAD_PVC">Overhead Plastic / Sintex Tank</option>
-                <option value="GROUND_PVC">Ground-Level Plastic Tank</option>
-                <option value="LOFT_TANK">Loft / Indoor Tank</option>
-              </select>
-            </div>
-
-            <div class="calc-control-group" style="margin-bottom: 0;">
-              <label class="calc-label" for="calc-count">3. Number of Tanks</label>
-              <select id="calc-count" class="calc-count-select">
-                <option value="1">1 Tank</option>
-                <option value="2">2 Tanks (Combo)</option>
-                <option value="3">3 Tanks</option>
-                <option value="4">4 Tanks</option>
-                <option value="5">5+ Tanks (Society)</option>
-              </select>
-            </div>
+          <div class="calc-control-group" style="margin-bottom: 1.5rem;">
+            <label class="calc-label" for="calc-count">2. Number of Tanks</label>
+            <select id="calc-count" class="calc-count-select" style="max-width: 320px;">
+              <option value="1">1 Tank</option>
+              <option value="2">2 Tanks (Combo)</option>
+              <option value="3">3 Tanks</option>
+              <option value="4">4 Tanks</option>
+              <option value="5">5+ Tanks (Society)</option>
+            </select>
           </div>
         </div>
 
@@ -307,85 +245,6 @@
               Get Instant WhatsApp Quote
             </a>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- =================================================================
-     6-STAGE SCIENTIFIC CLEANING PROCESS
-     ================================================================= -->
-<section class="section" id="process" style="background: #070b14;">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">SCIENTIFIC PROCEDURE</span>
-      <h2 class="section-title">OUR 6-STAGE DISINFECTION PROCESS</h2>
-      <p class="section-subtitle">
-        We do not just wipe tanks with a dirty mop. We follow an advanced 6-step mechanical hygiene protocol ensuring 100% germ-free water.
-      </p>
-    </div>
-
-    <div class="stages-grid">
-      {% for stage in business.cleaning_stages %}
-      <div class="stage-card">
-        <div class="stage-header">
-          <div class="stage-number">{{ stage.step }}</div>
-          <span class="stage-tag">{{ stage.tag }}</span>
-        </div>
-        <h3 class="stage-title">{{ stage.title }}</h3>
-        <p class="stage-desc">{{ stage.desc }}</p>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
-<!-- =================================================================
-     AUTHENTIC MEDIA PROOF SECTION (From User's Provided Media)
-     ================================================================= -->
-<section class="section proof-section" id="proof">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-tag">VERIFIED CREDENTIALS</span>
-      <h2 class="section-title">OFFICIAL VISITING CARD &amp; PRICE BOARD</h2>
-      <p class="section-subtitle">
-        Click on any board below to inspect our official business credentials, registered numbers, and guaranteed rate chart.
-      </p>
-    </div>
-
-    <div class="proof-grid">
-      <!-- Visiting Card Proof -->
-      <div class="proof-card">
-        <div class="proof-image-container" title="Click to view full image in high resolution">
-          <img src="{% static 'images/drtc_visiting_card.png' %}" alt="DRTC Official Visiting Card - Dinesh Rakesh Tank Cleaning" class="proof-img">
-          <div class="proof-zoom-hint">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-            <span>Click to Inspect High-Res</span>
-          </div>
-        </div>
-        <div class="proof-content">
-          <h3 class="proof-title">Official DRTC Service Visiting Card</h3>
-          <p class="proof-desc">
-            Direct numbers for Dinesh (Owner: 7808611636) &amp; Rakesh (Operator: 6352561343), located at Shantinagar, Gamharia near Jhanda Chowk.
-          </p>
-        </div>
-      </div>
-
-      <!-- Price Chart Proof -->
-      <div class="proof-card">
-        <div class="proof-image-container" title="Click to view full image in high resolution">
-          <img src="{% static 'images/drtc_price_chart.png' %}" alt="DRTC Capacity & Price Chart" class="proof-img">
-          <div class="proof-zoom-hint">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-            <span>Click to Inspect High-Res</span>
-          </div>
-        </div>
-        <div class="proof-content">
-          <h3 class="proof-title">Official Capacity &amp; Price Board</h3>
-          <p class="proof-desc">
-            500L (₹250), 1000L (₹400), 2000L (₹650), 3000L (₹900), 5000L (₹1100). Guaranteed fixed pricing policy.
-          </p>
         </div>
       </div>
     </div>
@@ -582,7 +441,7 @@
           </div>
           <div>
             <div class="contact-label">Email Inquiries</div>
-            <div class="contact-val"><a href="mailto:arjunraja20022@gmail.com">arjunraja20022@gmail.com</a></div>
+            <div class="contact-val"><a href="mailto:drtcservice@gmail.com">drtcservice@gmail.com</a></div>
           </div>
         </div>
 

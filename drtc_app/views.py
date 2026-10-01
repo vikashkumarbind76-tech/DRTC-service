@@ -10,65 +10,34 @@ from .models import ServicePackage, Booking, CustomerReview, ContactInquiry
 
 
 def home_view(request):
-    """Main presentation storefront for DRTC Tank Cleaning Service."""
+    """Main presentation storefront for DRTC Tank Cleaning Service with live metrics."""
     packages = ServicePackage.objects.all().order_by('order')
     reviews = CustomerReview.objects.all().order_by('-date_added')
     
-    # Context data reflecting the media provided by user
+    total_bookings = Booking.objects.count()
+    clean_tanks_delivered = 1250 + total_bookings
+    today = timezone.localdate()
+    today_bookings = Booking.objects.filter(preferred_date=today).count()
+    active_bookings = Booking.objects.filter(status__in=['PENDING', 'CONFIRMED', 'IN_PROGRESS']).count()
+    cheapest = packages.first()
+    starting_price = int(cheapest.price) if cheapest else 250
+
     business_info = {
         'brand_name': 'DRTC SERVICE',
         'sub_brand': 'DINESH RAKESH TANK CLEANING SERVICE',
         'tagline': 'CLEANER TANKS, SAFER TOMORROW',
         'dinesh_phone': '7808611636',
         'rakesh_phone': '6352561343',
-        'email': 'arjunraja20022@gmail.com',
+        'email': 'drtcservice@gmail.com',
         'address': 'SHANTINAGAR, GAMHARIA, NEAR BY JHANDA CHOWK',
         'city': 'Gamharia, Jamshedpur',
         'pincode': '832108',
         'value_props': [
-            {'icon': 'shield-check', 'title': 'Safe Cleaning', 'desc': 'Scientific 6-stage mechanized cleaning with food-grade disinfectants.'},
+            {'icon': 'shield-check', 'title': 'Safe Cleaning', 'desc': 'Scientific mechanized cleaning with food-grade disinfectants.'},
             {'icon': 'droplet-check', 'title': 'Hygienic Water', 'desc': 'Germ-free, odor-free, pure drinking water for your loved ones.'},
             {'icon': 'cog-outline', 'title': 'Professional Service', 'desc': 'Trained & certified technicians with heavy-duty safety gear.'},
             {'icon': 'currency-inr', 'title': 'Reliable & Affordable', 'desc': 'Starting at just ₹250. Transparent pricing with zero hidden fees.'},
         ],
-        'cleaning_stages': [
-            {
-                'step': '01',
-                'title': 'Mechanized Dewatering',
-                'desc': 'Emptying stale contaminated water using high-capacity submersible drainage pumps without damaging internal plumbing.',
-                'tag': 'Rapid Drainage'
-            },
-            {
-                'step': '02',
-                'title': 'Sludge & Silt Extraction',
-                'desc': 'High-pressure slurry pumps extract thick settling mud, algae, sand, and decomposing organic sediment from the base.',
-                'tag': 'Heavy Mud Removal'
-            },
-            {
-                'step': '03',
-                'title': 'High Pressure Rotary Jet Scrub',
-                'desc': 'Industrial rotary jet nozzles blast the tank ceiling, vertical corrugated walls, and joints at 150+ bar pressure.',
-                'tag': 'Deep Wall Descaling'
-            },
-            {
-                'step': '04',
-                'title': 'Industrial Slurry Vacuuming',
-                'desc': 'Heavy-duty wet industrial vacuum suction extracts all remaining suspended particles and microscopic residue.',
-                'tag': 'Zero Residue'
-            },
-            {
-                'step': '05',
-                'title': 'Food-Grade Anti-Bacterial Spray',
-                'desc': 'Specialized non-toxic, odorless, food-safe antibacterial solution sterilizes surfaces against fungi, spores, and biofilm.',
-                'tag': 'Eco-Friendly Disinfection'
-            },
-            {
-                'step': '06',
-                'title': 'UV Germicidal Radiation Treatment',
-                'desc': 'Medical-grade Ultraviolet (UV) germicidal radiator is exposed to eliminate dormant bacteria, viruses, and microbial pathogens.',
-                'tag': '100% Germ-Free Safe'
-            },
-        ]
     }
 
     context = {
@@ -76,8 +45,66 @@ def home_view(request):
         'reviews': reviews,
         'business': business_info,
         'today': timezone.now().date(),
+        'total_bookings': total_bookings,
+        'clean_tanks_delivered': clean_tanks_delivered,
+        'today_bookings': today_bookings,
+        'active_bookings': active_bookings,
+        'starting_price': starting_price,
     }
     return render(request, 'index.html', context)
+
+
+def api_live_stats(request):
+    """Return live real-time booking statistics for dynamic website updates."""
+    total_bookings = Booking.objects.count()
+    clean_tanks_delivered = 1250 + total_bookings
+    today = timezone.localdate()
+    today_bookings = Booking.objects.filter(preferred_date=today).count()
+    active_bookings = Booking.objects.filter(status__in=['PENDING', 'CONFIRMED', 'IN_PROGRESS']).count()
+
+    latest_booking = Booking.objects.order_by('-created_at').first()
+    latest_data = None
+    if latest_booking:
+        parts = latest_booking.customer_name.strip().split()
+        masked_name = f"{parts[0]} {parts[-1][0]}." if len(parts) > 1 else (parts[0] if parts else "Customer")
+        latest_data = {
+            'booking_id': latest_booking.booking_id,
+            'customer_name': masked_name,
+            'capacity': latest_booking.display_capacity,
+            'locality': latest_booking.area_locality or "Gamharia",
+            'status': latest_booking.status,
+            'status_display': latest_booking.get_status_display(),
+            'total_amount': float(latest_booking.total_amount),
+        }
+
+    return JsonResponse({
+        'status': 'success',
+        'total_bookings': total_bookings,
+        'clean_tanks_delivered': clean_tanks_delivered,
+        'today_bookings': today_bookings,
+        'active_bookings': active_bookings,
+        'rating': 4.98,
+        'starting_price': 250,
+        'latest_booking': latest_data,
+        'timestamp': timezone.now().isoformat(),
+    })
+
+
+def api_booking_status(request, booking_id):
+    """Real-time status endpoint for a specific booking."""
+    booking = Booking.objects.filter(booking_id__iexact=booking_id).first()
+    if not booking:
+        return JsonResponse({'found': False}, status=404)
+    return JsonResponse({
+        'found': True,
+        'booking_id': booking.booking_id,
+        'status': booking.status,
+        'status_display': booking.get_status_display(),
+        'assigned_technician': booking.assigned_technician,
+        'preferred_date': str(booking.preferred_date),
+        'preferred_time_slot': booking.preferred_time_slot,
+        'total_amount': float(booking.total_amount),
+    })
 
 
 @csrf_exempt

@@ -35,17 +35,17 @@
           <div style="font-family: monospace; font-size: 1.4rem; font-weight: 800; color: var(--accent-gold-bright);">{{ booking.booking_id }}</div>
         </div>
 
-        <div>
+        <div id="trackStatusContainer">
           {% if booking.status == 'CONFIRMED' %}
-            <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
+            <span id="trackStatusBadge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
               ● Confirmed &amp; Scheduled
             </span>
           {% elif booking.status == 'COMPLETED' %}
-            <span style="background: rgba(14, 165, 233, 0.15); color: var(--accent-cyan); border: 1px solid rgba(14, 165, 233, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
+            <span id="trackStatusBadge" style="background: rgba(14, 165, 233, 0.15); color: var(--accent-cyan); border: 1px solid rgba(14, 165, 233, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
               ● Service Completed
             </span>
           {% else %}
-            <span style="background: rgba(245, 158, 11, 0.15); color: var(--accent-gold-bright); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
+            <span id="trackStatusBadge" style="background: rgba(245, 158, 11, 0.15); color: var(--accent-gold-bright); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
               ● {{ booking.get_status_display }}
             </span>
           {% endif %}
@@ -108,4 +108,36 @@
 
   </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+{% if booking %}
+<script>
+  (function() {
+    const bookingId = "{{ booking.booking_id }}";
+    const statusEl = document.getElementById('trackStatusBadge');
+    let currentStatus = "{{ booking.status }}";
+
+    function pollStatus() {
+      fetch(`/api/booking/status/${bookingId}/`, {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.found && data.status !== currentStatus) {
+          currentStatus = data.status;
+          if (statusEl) {
+            statusEl.textContent = `● ${data.status_display}`;
+            statusEl.classList.add('stat-updated');
+            setTimeout(() => statusEl.classList.remove('stat-updated'), 1500);
+          }
+        }
+      })
+      .catch(() => {});
+    }
+
+    setInterval(pollStatus, 4000);
+  })();
+</script>
+{% endif %}
 {% endblock %}

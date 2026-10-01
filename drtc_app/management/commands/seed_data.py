@@ -14,7 +14,7 @@ class Command(BaseCommand):
 
         # 1. Superuser
         if not User.objects.filter(username="admin").exists():
-            User.objects.create_superuser("admin", "admin@drtcservice.com", "admin123")
+            User.objects.create_superuser("admin", "drtcservice@gmail.com", "admin123")
             self.stdout.write(self.style.SUCCESS("Superuser 'admin' created (password: admin123)"))
 
         # 2. Official Packages (from DRTC price chart)

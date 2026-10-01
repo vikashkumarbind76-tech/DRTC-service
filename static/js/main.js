@@ -71,7 +71,6 @@ function initNavbarScroll() {
 function initCalculator() {
   const pills = document.querySelectorAll('.capacity-pill');
   const countSelect = document.getElementById('calc-count');
-  const typeSelect = document.getElementById('calc-type');
   
   const totalDisplay = document.getElementById('calc-total-display');
   const mrpDisplay = document.getElementById('calc-mrp-display');
@@ -85,7 +84,7 @@ function initCalculator() {
 
   function updateCalculator() {
     const count = parseInt(countSelect?.value || '1', 10);
-    const tankType = typeSelect?.value || 'OVERHEAD_PVC';
+    const tankType = 'OVERHEAD_PVC';
 
     // Official DRTC rates:
     // 500L: 250, 1000L: 400, 2000L: 650, 3000L: 900, 5000L: 1100
@@ -146,7 +145,6 @@ function initCalculator() {
   });
 
   countSelect?.addEventListener('change', updateCalculator);
-  typeSelect?.addEventListener('change', updateCalculator);
 
   // Initial calculation
   updateCalculator();
@@ -572,56 +570,180 @@ function initBeforeAfterSlider() {
 }
 
 /* ----------------------------------------------------
-   12. Animated Numerical Counters (Trust Strip)
+   12. Animated Numerical Counters & Real-Time Booking Sync
    ---------------------------------------------------- */
+function animateCounterNumber(el, start, end, duration = 1200, prefix = '', suffix = '', decimals = 0) {
+  if (!el) return;
+  const startTime = performance.now();
+  const diff = end - start;
+
+  function step(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+    const currentVal = start + diff * ease;
+
+    const formatted = decimals > 0 
+      ? currentVal.toFixed(decimals) 
+      : Math.round(currentVal).toLocaleString();
+
+    el.textContent = `${prefix}${formatted}${suffix}`;
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      const finalFormatted = decimals > 0 ? end.toFixed(decimals) : end.toLocaleString();
+      el.textContent = `${prefix}${finalFormatted}${suffix}`;
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
+function showLiveToast(message) {
+  let container = document.querySelector('.live-toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'live-toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'live-toast';
+  toast.innerHTML = `
+    <div class="live-toast-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+    </div>
+    <div>
+      <div style="font-weight: 700; color: #34d399; font-size: 0.74rem; letter-spacing: 0.5px; text-transform: uppercase;">Real-Time Booking Update</div>
+      <div style="font-size: 0.82rem; color: #ffffff;">${message}</div>
+    </div>
+  `;
+
+  container.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('show'));
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 400);
+  }, 5000);
+}
+
 function initCounters() {
   const counters = document.querySelectorAll('.counter-value');
   if (!counters.length) return;
 
+  const observed = new Set();
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !observed.has(entry.target)) {
+          observed.add(entry.target);
           const el = entry.target;
           const target = parseFloat(el.getAttribute('data-target') || '0');
           const prefix = el.getAttribute('data-prefix') || '';
           const suffix = el.getAttribute('data-suffix') || '';
           const decimals = parseInt(el.getAttribute('data-decimals') || '0', 10);
-          const duration = 1800; // ms
-          const startTime = performance.now();
-
-          function step(currentTime) {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            // Ease-out expo
-            const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
-            const currentVal = target * ease;
-
-            const formatted = decimals > 0 
-              ? currentVal.toFixed(decimals) 
-              : Math.round(currentVal).toLocaleString();
-
-            el.textContent = `${prefix}${formatted}${suffix}`;
-
-            if (progress < 1) {
-              requestAnimationFrame(step);
-            } else {
-              const finalFormatted = decimals > 0 
-                ? target.toFixed(decimals) 
-                : target.toLocaleString();
-              el.textContent = `${prefix}${finalFormatted}${suffix}`;
-            }
-          }
-
-          requestAnimationFrame(step);
-          obs.unobserve(el);
+          animateCounterNumber(el, 0, target, 1600, prefix, suffix, decimals);
         }
       });
     },
-    { threshold: 0.3 }
+    { threshold: 0.2 }
   );
 
   counters.forEach((c) => observer.observe(c));
+
+  // Initialize live background sync with server
+  initRealtimeBookingSync();
+}
+
+function initRealtimeBookingSync() {
+  let lastTotalBookings = null;
+  let lastDeliveredTanks = null;
+  let broadcastChannel = null;
+
+  try {
+    broadcastChannel = new BroadcastChannel('drtc_booking_sync');
+    broadcastChannel.onmessage = (event) => {
+      if (event.data && event.data.type === 'BOOKING_CREATED') {
+        fetchLiveStats(true);
+      }
+    };
+  } catch (e) {
+    // Graceful fallback for older browsers
+  }
+
+  async function fetchLiveStats(isManualTrigger = false) {
+    try {
+      const res = await fetch('/api/live-stats/', {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data.status !== 'success') return;
+
+      const currentTotal = data.total_bookings;
+      const currentDelivered = data.clean_tanks_delivered;
+
+      const totalBookingsEl = document.getElementById('stat-live-bookings');
+      const deliveredEl = document.getElementById('stat-clean-tanks');
+      const heroCountEl = document.getElementById('heroLiveBookings');
+
+      if (lastTotalBookings !== null && currentTotal > lastTotalBookings) {
+        // Real-time booking increment detected!
+        if (totalBookingsEl) {
+          totalBookingsEl.classList.add('stat-updated');
+          animateCounterNumber(totalBookingsEl, lastTotalBookings, currentTotal, 900, '', '');
+          setTimeout(() => totalBookingsEl.classList.remove('stat-updated'), 1200);
+        }
+        if (deliveredEl) {
+          deliveredEl.classList.add('stat-updated');
+          animateCounterNumber(deliveredEl, lastDeliveredTanks, currentDelivered, 900, '', '+');
+          setTimeout(() => deliveredEl.classList.remove('stat-updated'), 1200);
+        }
+        if (heroCountEl) {
+          heroCountEl.textContent = currentTotal;
+          heroCountEl.classList.add('stat-updated');
+          setTimeout(() => heroCountEl.classList.remove('stat-updated'), 1200);
+        }
+
+        const latest = data.latest_booking;
+        if (latest) {
+          showLiveToast(`New Booking #${latest.booking_id} for ${latest.capacity} in ${latest.locality}!`);
+        } else {
+          showLiveToast(`A new tank cleaning appointment was scheduled live!`);
+        }
+      } else if (lastTotalBookings === null) {
+        // Initial populate if not yet animated
+        if (totalBookingsEl && !totalBookingsEl.textContent.trim()) {
+          totalBookingsEl.textContent = currentTotal;
+        }
+        if (deliveredEl && !deliveredEl.textContent.trim()) {
+          deliveredEl.textContent = `${currentDelivered}+`;
+        }
+        if (heroCountEl) {
+          heroCountEl.textContent = currentTotal;
+        }
+      }
+
+      lastTotalBookings = currentTotal;
+      lastDeliveredTanks = currentDelivered;
+    } catch (err) {
+      // Quiet background polling catch
+    }
+  }
+
+  // Poll live every 4 seconds
+  setInterval(() => fetchLiveStats(false), 4000);
+  fetchLiveStats(false);
+
+  // Broadcast when user books locally
+  window.addEventListener('drtc:booking_created', () => {
+    fetchLiveStats(true);
+    if (broadcastChannel) {
+      broadcastChannel.postMessage({ type: 'BOOKING_CREATED', timestamp: Date.now() });
+    }
+  });
 }
 
 /* ----------------------------------------------------
