@@ -85,6 +85,32 @@ class ServicePackageAdmin(admin.ModelAdmin):
     popularity_display.short_description = "Badge"
 
 
+class OperationalStatusFilter(admin.SimpleListFilter):
+    """Instant filter for critical daily operational buckets."""
+    title = 'Operational Status'
+    parameter_name = 'operational_status'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('today', "📅 Today's Schedule"),
+            ('pending', "⏳ Pending Confirmation"),
+            ('active', "⚡ Active Jobs (Confirmed / In-Progress)"),
+            ('completed', "🏆 Completed Jobs"),
+        )
+
+    def queryset(self, request, queryset):
+        val = self.value()
+        if val == 'today':
+            return queryset.filter(preferred_date=timezone.localdate())
+        elif val == 'pending':
+            return queryset.filter(status='PENDING')
+        elif val == 'active':
+            return queryset.filter(status__in=['CONFIRMED', 'TECHNICIAN_ASSIGNED', 'IN_PROGRESS'])
+        elif val == 'completed':
+            return queryset.filter(status='COMPLETED')
+        return queryset
+
+
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
     list_display = (
@@ -99,6 +125,7 @@ class BookingAdmin(admin.ModelAdmin):
         'created_at_display',
     )
     list_filter = (
+        OperationalStatusFilter,
         'status',
         'payment_status',
         'tank_type',
@@ -189,8 +216,8 @@ class BookingAdmin(admin.ModelAdmin):
         wa_text = urllib.parse.quote(
             f"Hello {obj.customer_name}, this is DRTC Tank Cleaning regarding your booking #{obj.booking_id} scheduled for {obj.preferred_date}."
         )
-        wa_url = f"https://wa.me/91{obj.customer_phone}?text={wa_text}"
-        call_url = f"tel:{obj.customer_phone}"
+        wa_url = f"https://wa.me/{obj.clean_customer_phone}?text={wa_text}"
+        call_url = f"tel:{obj.clean_customer_tel}"
 
         return format_html(
             '<div style="display:flex; gap:6px; align-items:center;">'

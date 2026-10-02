@@ -128,12 +128,7 @@ body {
 
 /* Background Atmosphere Glows */
 .ambient-glow {
-  position: absolute;
-  pointer-events: none;
-  border-radius: 50%;
-  filter: blur(120px);
-  z-index: 0;
-  opacity: 0.22;
+  display: none;
 }
 
 .ambient-cyan {
@@ -190,13 +185,17 @@ body {
 }
 
 .brand-logo-img {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1.5px solid var(--accent-gold);
-  object-fit: cover;
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+  height: 48px;
+  width: auto;
+  max-width: 72px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 210, 255, 0.35));
   flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.brand-wordmark:hover .brand-logo-img {
+  transform: scale(1.05);
 }
 
 .brand-text-block {
@@ -244,6 +243,12 @@ body {
   margin: 0;
   padding: 0;
   flex-shrink: 1;
+  position: relative;
+}
+
+/* Section Anchor Scroll Margin */
+section[id], .hero-section[id], #calculator {
+  scroll-margin-top: 85px;
 }
 
 .nav-link {
@@ -267,13 +272,42 @@ body {
   bottom: -4px;
   left: 0;
   width: 0;
-  height: 2px;
+  height: 2.5px;
   background: var(--accent-gold-bright);
-  transition: width var(--transition-fast);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+  transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-link:hover::after, .nav-link.active::after {
   width: 100%;
+}
+
+/* Dynamic sliding active indicator for desktop navbar */
+.nav-indicator {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  height: 2.5px;
+  background: var(--accent-gold-bright);
+  border-radius: var(--radius-full);
+  box-shadow: 0 0 10px rgba(251, 191, 36, 0.7), 0 0 4px rgba(251, 191, 36, 0.95);
+  transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1), width 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+  display: none;
+}
+
+@media (min-width: 901px) {
+  .nav-indicator {
+    display: block;
+  }
+
+  /* Suppress default static ::after on links when dynamic indicator is enabled */
+  .nav-links.has-indicator .nav-link::after {
+    display: none !important;
+  }
 }
 
 .nav-actions {
@@ -452,8 +486,8 @@ body {
   padding-top: 110px;
   padding-bottom: 60px;
   overflow: hidden;
-  background: radial-gradient(circle at 75% 30%, rgba(2, 132, 199, 0.12) 0%, transparent 60%),
-              radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
+  background: radial-gradient(circle at 75% 35%, rgba(0, 210, 255, 0.18) 0%, transparent 65%),
+              radial-gradient(circle at 25% 75%, rgba(2, 132, 199, 0.15) 0%, transparent 55%),
               var(--bg-main);
 }
 
@@ -756,10 +790,10 @@ body {
   0% {
     transform: scale(0.65);
     opacity: 0.9;
-    border-color: rgba(0, 210, 255, 0.6);
+    border-color: rgba(0, 210, 255, 0.7);
   }
   50% {
-    border-color: rgba(245, 158, 11, 0.4);
+    border-color: rgba(2, 132, 199, 0.5);
   }
   100% {
     transform: scale(1.4);
@@ -775,13 +809,13 @@ body {
   height: auto;
   max-height: 440px;
   object-fit: contain;
-  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(2, 132, 199, 0.3));
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(0, 210, 255, 0.35));
   transition: transform var(--transition-smooth), filter var(--transition-smooth);
 }
 
 .hero-image-card:hover .hero-tank-img {
-  transform: scale(1.05) translateY(-6px);
-  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 50px rgba(245, 158, 11, 0.45));
+  transform: scale(1.04) translateY(-4px);
+  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 50px rgba(0, 210, 255, 0.6));
 }
 
 /* Card Specular Light Flare */
@@ -968,6 +1002,51 @@ body {
   background: rgba(16, 185, 129, 0.85);
   color: #ffffff;
   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Comparative Breakdown Cards (Before & After Lists) */
+.comparison-breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 868px) {
+  .comparison-breakdown-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comparison-card {
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 1. Unserviced Tank Card (Red Theme Glow on Hover) */
+.comparison-card.card-unserviced {
+  background: rgba(239, 68, 68, 0.04);
+  border: 1.5px solid rgba(239, 68, 68, 0.25);
+}
+
+.comparison-card.card-unserviced:hover {
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.09) 0%, rgba(20, 8, 12, 0.85) 100%);
+  border-color: rgba(239, 68, 68, 0.7);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(239, 68, 68, 0.35);
+}
+
+/* 2. After DRTC Mechanized Disinfection Card (Green Theme Glow on Hover) */
+.comparison-card.card-serviced {
+  background: rgba(16, 185, 129, 0.04);
+  border: 1.5px solid rgba(16, 185, 129, 0.25);
+}
+
+.comparison-card.card-serviced:hover {
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.09) 0%, rgba(8, 20, 15, 0.85) 100%);
+  border-color: rgba(16, 185, 129, 0.7);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.35);
 }
 
 /* Scroll Reveal Fade-Up Animations */
@@ -1159,8 +1238,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all var(--transition-smooth);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
   overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .package-card::before {
@@ -1175,24 +1256,13 @@ body {
 }
 
 .package-card:hover {
-  transform: translateY(-8px);
-  background: var(--bg-card-hover);
-  border-color: var(--border-gold);
-  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.6), var(--shadow-gold);
+  background: linear-gradient(180deg, #091a33 0%, #040c1a 100%);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(0, 210, 255, 0.4);
 }
 
 .package-card:hover::before {
-  background: var(--accent-gold-gradient);
-}
-
-.package-card.popular {
-  border-color: var(--accent-gold);
-  background: linear-gradient(180deg, #162035 0%, #0c1220 100%);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.2);
-}
-
-.package-card.popular::before {
-  background: var(--accent-gold-gradient);
+  background: var(--accent-cyan-gradient);
 }
 
 .popular-badge {
@@ -1224,12 +1294,13 @@ body {
   justify-content: center;
   margin-bottom: 0.85rem;
   color: var(--accent-cyan);
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
 }
 
-.package-card.popular .package-icon-wrap {
-  background: rgba(245, 158, 11, 0.15);
-  border-color: rgba(245, 158, 11, 0.35);
-  color: var(--accent-gold-bright);
+.package-card:hover .package-icon-wrap {
+  background: rgba(0, 210, 255, 0.15);
+  border-color: rgba(0, 210, 255, 0.4);
+  color: var(--accent-cyan);
 }
 
 .package-capacity-title {
@@ -1261,10 +1332,11 @@ body {
   font-size: 2.5rem;
   color: #ffffff;
   line-height: 1;
+  transition: color var(--transition-fast);
 }
 
-.package-card.popular .package-price {
-  color: var(--accent-gold-bright);
+.package-card:hover .package-price {
+  color: var(--accent-cyan);
 }
 
 .package-mrp {
@@ -1306,16 +1378,55 @@ body {
   padding: 0.85rem 1rem;
   font-size: 0.92rem;
   font-weight: 700;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.package-card:hover .package-cta-btn {
+  background: var(--accent-cyan-gradient);
+  color: #05070c;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(0, 210, 255, 0.4);
+}
+
+.package-card:hover .package-cta-btn:hover {
+  background: #38bdf8;
+  box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6);
 }
 
 /* Interactive Dynamic Calculator */
 .calculator-box {
   background: linear-gradient(135deg, #0e1628 0%, #090e1a 100%);
-  border: 1px solid var(--border-gold);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: 2.75rem;
-  box-shadow: var(--shadow-lg), 0 0 35px rgba(245, 158, 11, 0.12);
+  box-shadow: var(--shadow-lg);
   margin-top: 4rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.calculator-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.calculator-box:hover {
+  background: linear-gradient(135deg, #0a182f 0%, #050e1c 100%);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 18px rgba(0, 210, 255, 0.35);
+}
+
+.calculator-box:hover::before {
+  background: var(--accent-cyan-gradient);
 }
 
 .calc-grid {
@@ -1378,7 +1489,7 @@ body {
 
 .capacity-pill:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: var(--accent-gold);
+  border-color: var(--accent-cyan);
 }
 
 .capacity-pill.active {
@@ -1402,18 +1513,21 @@ body {
 }
 
 .calc-type-select:focus, .calc-count-select:focus {
-  border-color: var(--accent-gold);
+  border-color: var(--accent-cyan);
 }
 
 /* Calculator Result Card */
 .calc-result-card {
+  position: relative;
   background: rgba(5, 7, 12, 0.9);
-  border: 1px solid var(--border-highlight);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 2rem;
   text-align: center;
-  position: relative;
   overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .calc-result-card::before {
@@ -1422,8 +1536,19 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
-  background: var(--accent-gold-gradient);
+  height: 3px;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.calc-result-card:hover {
+  background: linear-gradient(180deg, #091a33 0%, #040c1a 100%);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(0, 210, 255, 0.45);
+}
+
+.calc-result-card:hover::before {
+  background: var(--accent-cyan-gradient);
 }
 
 .calc-result-header {
@@ -1440,6 +1565,11 @@ body {
   color: var(--accent-gold-bright);
   line-height: 1;
   margin-bottom: 0.25rem;
+  transition: color var(--transition-fast);
+}
+
+.calc-result-card:hover .calc-result-total {
+  color: var(--accent-cyan);
 }
 
 .calc-result-mrp {
@@ -1484,6 +1614,22 @@ body {
   font-size: 0.92rem;
   font-weight: 700;
   color: #ffffff;
+}
+
+.calc-result-card #calc-book-btn {
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.calc-result-card:hover #calc-book-btn {
+  background: var(--accent-cyan-gradient);
+  color: #05070c;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(0, 210, 255, 0.4);
+}
+
+.calc-result-card:hover #calc-book-btn:hover {
+  background: #38bdf8;
+  box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6);
 }
 
 /* 6-Stage Process Section */
@@ -1677,6 +1823,14 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: all var(--transition-smooth);
+}
+
+.review-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent-gold);
+  background: linear-gradient(180deg, #162035 0%, #0c1220 100%);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.25);
 }
 
 .review-stars {
@@ -1733,6 +1887,75 @@ body {
   color: var(--text-muted);
 }
 
+/* FAQ Section */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-item {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.faq-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.faq-item:hover {
+  background: linear-gradient(180deg, #091a33 0%, #040c1a 100%);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.6), 0 0 16px rgba(0, 210, 255, 0.35);
+}
+
+.faq-item:hover::before {
+  background: var(--accent-cyan-gradient);
+}
+
+.faq-summary {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 1.05rem;
+  cursor: pointer;
+  outline: none;
+  transition: color var(--transition-fast);
+}
+
+.faq-item:hover .faq-summary {
+  color: var(--accent-cyan);
+}
+
+.faq-summary::marker {
+  color: var(--accent-cyan);
+}
+
+.faq-item[open] {
+  border-color: rgba(0, 210, 255, 0.35);
+}
+
+.faq-answer {
+  color: var(--text-secondary);
+  margin-top: 0.85rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
 /* Contact & Info Cards Section */
 .contact-grid {
   display: grid;
@@ -1746,11 +1969,41 @@ body {
   }
 }
 
-.contact-info-card {
+.contact-info-card,
+.contact-form {
+  position: relative;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-lg);
   padding: 2.25rem;
+  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.contact-info-card::before,
+.contact-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: transparent;
+  transition: background var(--transition-fast);
+}
+
+.contact-info-card:hover,
+.contact-form:hover {
+  background: linear-gradient(180deg, #091a33 0%, #040c1a 100%);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 18px rgba(0, 210, 255, 0.35);
+}
+
+.contact-info-card:hover::before,
+.contact-form:hover::before {
+  background: var(--accent-cyan-gradient);
 }
 
 .contact-item {
@@ -1764,13 +2017,20 @@ body {
   width: 44px;
   height: 44px;
   border-radius: var(--radius-sm);
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: rgba(0, 210, 255, 0.08);
+  border: 1px solid rgba(0, 210, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-gold-bright);
+  color: var(--accent-cyan);
   flex-shrink: 0;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.contact-info-card:hover .contact-icon {
+  background: rgba(0, 210, 255, 0.18);
+  border-color: rgba(0, 210, 255, 0.45);
+  color: var(--accent-cyan);
 }
 
 .contact-label {
@@ -1794,15 +2054,23 @@ body {
 }
 
 .contact-val a:hover {
-  color: var(--accent-gold-bright);
+  color: var(--accent-cyan);
 }
 
-/* Contact Form */
-.contact-form {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 2.25rem;
+.contact-form .btn-primary {
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.contact-form:hover .btn-primary {
+  background: var(--accent-cyan-gradient);
+  color: #05070c;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(0, 210, 255, 0.4);
+}
+
+.contact-form:hover .btn-primary:hover {
+  background: #38bdf8;
+  box-shadow: 0 6px 20px rgba(0, 210, 255, 0.6);
 }
 
 .form-group {
@@ -1831,7 +2099,7 @@ body {
 }
 
 .form-control:focus {
-  border-color: var(--accent-gold);
+  border-color: var(--accent-cyan);
 }
 
 textarea.form-control {

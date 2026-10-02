@@ -1,168 +1,523 @@
-{% extends "admin/base_site.html" %}
-{% load i18n static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DRTC Operations Hub | Operations Login</title>
+  {% load static %}
 
-{% block title %}DRTC Operations Login{% endblock %}
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'images/drtc_icon.png' %}">
 
-{% block breadcrumbs %}{% endblock %}
-{% block nav-global %}{% endblock %}
-{% block nav-sidebar %}{% endblock %}
-{% block usertools %}{% endblock %}
-{% block header %}{% endblock %}
+  <!-- Google Fonts: Anton & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-{% block extrastyle %}
-  {{ block.super }}
-  <link rel="stylesheet" href="{% static 'css/admin_custom.css' %}">
   <style>
-    body.login {
-      background: radial-gradient(circle at 50% 30%, #0d1a33 0%, #060913 80%) !important;
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
       min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 1.5rem 1rem;
+      background: #040711;
+      background-image: 
+        radial-gradient(circle at 50% 12%, rgba(6, 182, 212, 0.16) 0%, transparent 55%),
+        radial-gradient(circle at 85% 85%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 15% 90%, rgba(16, 185, 129, 0.08) 0%, transparent 45%);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #f1f5f9;
+      position: relative;
+      overflow-x: hidden;
     }
-    #container {
-      background: #0f172a !important;
-      border: 1px solid rgba(245, 158, 11, 0.35) !important;
-      border-radius: 18px !important;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 158, 11, 0.15) !important;
-      max-width: 420px !important;
-      width: 100% !important;
-      padding: 2.5rem 2.2rem !important;
+
+    /* Ambient Subtle Grid Pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 38px 38px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .login-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 440px;
+      margin: auto;
+    }
+
+    /* Main Glassmorphic Card */
+    .login-card {
+      background: #090e1c;
+      background: linear-gradient(180deg, rgba(13, 21, 39, 0.95) 0%, rgba(7, 11, 22, 0.98) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 20px;
+      padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+      box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.85),
+        0 0 35px rgba(6, 182, 212, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       position: relative;
       overflow: hidden;
     }
-    #container::before {
+
+    /* Tri-color Top Accent Line */
+    .login-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(90deg, #f59e0b, #06b6d4, #10b981);
+      background: linear-gradient(90deg, #f59e0b 0%, #06b6d4 50%, #10b981 100%);
+      box-shadow: 0 0 12px rgba(6, 182, 212, 0.5);
     }
-    .drtc-login-logo {
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #f59e0b 0%, #06b6d4 100%);
+
+    /* Header & Branding */
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .logo-img-wrapper {
+      margin-bottom: 0.85rem;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-img-wrapper:hover {
+      transform: scale(1.05);
+    }
+
+    .login-logo {
+      height: 64px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 14px rgba(6, 182, 212, 0.4));
+    }
+
+    .login-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.85rem;
+      letter-spacing: 1.2px;
+      color: #ffffff;
+      margin-bottom: 0.4rem;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .login-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #fbbf24;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .login-subtitle {
+      font-size: 0.76rem;
+      color: #64748b;
+      margin: 0;
+    }
+
+    /* Error Banners */
+    .error-banner {
+      background: rgba(244, 63, 94, 0.12);
+      border: 1px solid rgba(244, 63, 94, 0.35);
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      color: #fecdd3;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      margin-bottom: 1.3rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .error-banner svg {
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Form Layout */
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      text-align: left;
+    }
+
+    .form-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      color: #64748b;
+      pointer-events: none;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      margin: 0 auto 1rem auto;
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+      transition: color 0.2s ease;
     }
-    .login .form-row {
-      padding: 10px 0 !important;
-      border: none !important;
+
+    .form-control {
+      width: 100%;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 0 14px 0 44px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: #ffffff;
+      box-sizing: border-box;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .login .form-row label {
-      color: #94a3b8 !important;
-      font-size: 0.82rem !important;
-      font-weight: 600 !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.6px !important;
-      margin-bottom: 6px !important;
-      display: block !important;
+
+    .form-control::placeholder {
+      color: #475569;
     }
-    .login .form-row input {
-      width: 100% !important;
-      box-sizing: border-box !important;
-      background: #17223b !important;
-      border: 1px solid rgba(255, 255, 255, 0.12) !important;
-      color: #ffffff !important;
-      padding: 12px 14px !important;
-      border-radius: 8px !important;
-      font-size: 0.95rem !important;
+
+    .form-control:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.06);
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.22), 0 0 15px rgba(245, 158, 11, 0.15);
     }
-    .login .form-row input:focus {
-      border-color: #f59e0b !important;
-      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25) !important;
-      outline: none !important;
+
+    .input-wrapper:focus-within .input-icon {
+      color: #f59e0b;
     }
-    .login .submit-row {
-      margin-top: 1.5rem !important;
-      padding: 0 !important;
-      background: transparent !important;
-      border: none !important;
+
+    /* Password Toggle Button */
+    .pwd-toggle-btn {
+      position: absolute;
+      right: 12px;
+      background: transparent;
+      border: none;
+      color: #64748b;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s ease;
     }
-    .login .submit-row input[type="submit"] {
-      width: 100% !important;
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
-      color: #070a13 !important;
-      font-family: 'Inter', sans-serif !important;
-      font-size: 0.95rem !important;
-      font-weight: 800 !important;
-      padding: 12px !important;
-      border-radius: 8px !important;
-      border: none !important;
-      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4) !important;
-      cursor: pointer !important;
-      transition: all 0.2s ease !important;
+
+    .pwd-toggle-btn:hover {
+      color: #f59e0b;
     }
-    .login .submit-row input[type="submit"]:hover {
-      background: #fbbf24 !important;
-      transform: translateY(-2px) !important;
-      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6) !important;
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      height: 48px;
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #070a13;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      margin-top: 0.35rem;
+    }
+
+    .submit-btn:hover {
+      background: #fbbf24;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.55);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Footer & Contacts */
+    .login-footer {
+      margin-top: 2rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      text-align: center;
+    }
+
+    .support-title {
+      font-size: 0.72rem;
+      color: #64748b;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      margin-bottom: 0.85rem;
+    }
+
+    .support-contacts {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.2s ease;
+    }
+
+    .contact-link.owner {
+      color: #fbbf24;
+    }
+
+    .contact-link.owner:hover {
+      background: rgba(245, 158, 11, 0.12);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    .contact-link.operator {
+      color: #22d3ee;
+    }
+
+    .contact-link.operator:hover {
+      background: rgba(6, 182, 212, 0.12);
+      border-color: rgba(6, 182, 212, 0.3);
+    }
+
+    /* Back Link to Public Website */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: #ffffff;
+      transform: translateX(-3px);
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 2rem 1.4rem;
+        border-radius: 16px;
+      }
+      .login-title {
+        font-size: 1.6rem;
+      }
+      .support-contacts {
+        flex-direction: column;
+        gap: 8px;
+      }
     }
   </style>
-{% endblock %}
+</head>
+<body>
 
-{% block content %}
-<div style="text-align: center; margin-bottom: 1.8rem;">
-  <div class="drtc-login-logo">💧</div>
-  <h1 style="font-family: 'Anton', sans-serif; font-size: 1.8rem; letter-spacing: 1px; color: #ffffff; margin: 0 0 4px 0;">
-    DRTC SERVICE
-  </h1>
-  <p style="color: #f59e0b; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; margin: 0 0 4px 0;">
-    Operations Command Hub
-  </p>
-  <span style="color: #64748b; font-size: 0.75rem;">Gamharia &amp; Jamshedpur Tank Cleaning System</span>
-</div>
+  <div class="login-container">
+    <div class="login-card">
 
-{% if form.errors and not form.non_field_errors %}
-<p class="errornote" style="background: rgba(244, 63, 94, 0.15); border: 1px solid #f43f5e; color: #fb7185; border-radius: 8px; padding: 10px; font-size: 0.82rem; margin-bottom: 1rem;">
-  {% blocktranslate count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktranslate %}
-</p>
-{% endif %}
+      <!-- Header Section -->
+      <div class="login-header">
+        <a href="/" class="logo-img-wrapper" title="Return to DRTC Home">
+          <img src="{% static 'images/drtc_logo.png' %}" alt="DRTC SERVICE Logo" class="login-logo">
+        </a>
+        <h1 class="login-title">DRTC SERVICE</h1>
+        <div class="login-badge">
+          <span class="pulse-dot"></span>
+          <span>OPERATIONS COMMAND HUB</span>
+        </div>
+        <p class="login-subtitle">Gamharia &amp; Jamshedpur Tank Cleaning System</p>
+      </div>
 
-{% if form.non_field_errors %}
-{% for error in form.non_field_errors %}
-<p class="errornote" style="background: rgba(244, 63, 94, 0.15); border: 1px solid #f43f5e; color: #fb7185; border-radius: 8px; padding: 10px; font-size: 0.82rem; margin-bottom: 1rem;">
-  {{ error }}
-</p>
-{% endfor %}
-{% endif %}
+      <!-- Error Alerts -->
+      {% if form.errors and not form.non_field_errors %}
+      <div class="error-banner">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <span>Please correct the errors in the fields below.</span>
+      </div>
+      {% endif %}
 
-<form action="{{ app_path }}" method="post" id="login-form">
-  {% csrf_token %}
-  <div class="form-row">
-    {{ form.username.errors }}
-    <label for="id_username">Operator / Admin Username</label>
-    {{ form.username }}
+      {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+      <div class="error-banner">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+        <span>{{ error }}</span>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+      <!-- Login Form -->
+      <form action="{{ app_path }}" method="post" id="login-form" class="login-form">
+        {% csrf_token %}
+
+        <!-- Username Field -->
+        <div class="form-group">
+          <label class="form-label" for="id_username">Operator Username</label>
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            </span>
+            <input 
+              type="text" 
+              name="username" 
+              id="id_username" 
+              class="form-control" 
+              value="{{ form.username.value|default:'' }}" 
+              autofocus 
+              autocapitalize="none" 
+              autocomplete="username" 
+              maxlength="150" 
+              placeholder="e.g. operator" 
+              required
+            >
+          </div>
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+          <label class="form-label" for="id_password">Access Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </span>
+            <input 
+              type="password" 
+              name="password" 
+              id="id_password" 
+              class="form-control" 
+              autocomplete="current-password" 
+              placeholder="••••••••••••" 
+              required
+            >
+            <button type="button" class="pwd-toggle-btn" id="togglePasswordBtn" title="Toggle password visibility" aria-label="Toggle password visibility">
+              <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+          </div>
+          <input type="hidden" name="next" value="{{ next }}">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">
+          <span>Sign In to Operations Hub</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+      </form>
+
+      <!-- Footer & Contacts -->
+      <div class="login-footer">
+        <div class="support-title">Official Support &amp; Technical Dispatch</div>
+        <div class="support-contacts">
+          <a href="tel:+917808611636" class="contact-link owner">
+            <span>📞</span> Dinesh (Owner)
+          </a>
+          <a href="tel:+916352561343" class="contact-link operator">
+            <span>🔧</span> Rakesh (Operator)
+          </a>
+        </div>
+        <div class="back-link-wrapper">
+          <a href="/" class="back-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Return to Public Website</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-  <div class="form-row">
-    {{ form.password.errors }}
-    <label for="id_password">Access Password</label>
-    {{ form.password }}
-    <input type="hidden" name="next" value="{{ next }}">
-  </div>
+  <script>
+    // Password visibility toggle
+    const pwdInput = document.getElementById('id_password');
+    const toggleBtn = document.getElementById('togglePasswordBtn');
+    const eyeIcon = document.getElementById('eyeIcon');
 
-  <div class="submit-row">
-    <input type="submit" value="Sign In to Operations Hub →">
-  </div>
-</form>
-
-<div style="margin-top: 1.8rem; padding-top: 1.2rem; border-top: 1px solid rgba(255, 255, 255, 0.08); text-align: center;">
-  <span style="color: #64748b; font-size: 0.74rem; display: block; margin-bottom: 6px;">
-    Official Support &amp; Technical Dispatch
-  </span>
-  <div style="display: flex; justify-content: center; gap: 12px; font-size: 0.78rem;">
-    <a href="tel:+917808611636" style="color: #fbbf24; text-decoration: none;">📞 Dinesh (Owner)</a>
-    <span style="color: #334155;">•</span>
-    <a href="tel:+916352561343" style="color: #22d3ee; text-decoration: none;">🔧 Rakesh (Operator)</a>
-  </div>
-</div>
-{% endblock %}
+    if (toggleBtn && pwdInput) {
+      toggleBtn.addEventListener('click', () => {
+        const isPassword = pwdInput.type === 'password';
+        pwdInput.type = isPassword ? 'text' : 'password';
+        eyeIcon.innerHTML = isPassword 
+          ? `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>`
+          : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>`;
+      });
+    }
+  </script>
+</body>
+</html>

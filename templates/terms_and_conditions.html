@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Terms &amp; Conditions | DRTC Tank Cleaning Service Gamharia{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px; padding-top: 100px; padding-bottom: 60px;">
+  <!-- Breadcrumb -->
+  <div style="margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--text-muted);">
+    <a href="{% url 'home' %}" style="color: var(--accent-gold); text-decoration: none;">Home</a>
+    <span style="margin: 0 8px; color: var(--text-muted);">&gt;</span>
+    <span style="color: var(--text-primary);">Terms &amp; Conditions</span>
+  </div>
+
+  <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.5rem 2rem; box-shadow: var(--shadow-md);">
+    <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.5rem; margin-bottom: 2rem;">
+      <span class="section-tag" style="margin-bottom: 0.75rem;">SERVICE AGREEMENT</span>
+      <h1 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; margin-bottom: 0.5rem; letter-spacing: -0.5px;">Terms &amp; Conditions</h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">
+        Last Updated: {{ last_updated }} • Governs Service Bookings with DRTC Service
+      </p>
+    </div>
+
+    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8; display: flex; flex-direction: column; gap: 1.75rem;">
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">1. Service Agreement</h2>
+        <p>
+          By booking a tank cleaning service through our website, phone line, or WhatsApp, you agree to these operational terms with DRTC Service (Dinesh Rakesh Tank Cleaning Service, Gamharia).
+        </p>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">2. Booking &amp; Slot Confirmation</h2>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li>All online bookings receive a unique Tracking ID (e.g., DRTC-XXXXX).</li>
+          <li>Our operations lead will contact you via phone or WhatsApp 1 to 2 hours before the scheduled time slot to verify accessibility.</li>
+          <li>Customers may reschedule or cancel their appointment up to 2 hours before technician dispatch with zero penalty.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">3. Customer Site Requirements</h2>
+        <p>To enable safe and complete mechanized cleaning, the customer agrees to ensure:</p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><strong>Water Level:</strong> Water levels in the tank should ideally be reduced prior to arrival to minimize water waste.</li>
+          <li><strong>Electricity &amp; Water Connection:</strong> Standard 220V electrical socket access within reach of our heavy-duty extension cables for operating pumps and high-pressure jetters.</li>
+          <li><strong>Safe Physical Access:</strong> A stable ladder or safe rooftop stairway access to overhead and underground tanks.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">4. Transparent Pricing &amp; Payment Policy</h2>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><strong>Pay After Service:</strong> We never ask for advance payments. Payment is due strictly upon completion of the service and after your physical inspection of the clean tank.</li>
+          <li><strong>Accepted Payment Methods:</strong> Cash, Google Pay, PhonePe, Paytm, or direct UPI transfer on-site.</li>
+          <li><strong>No Hidden Surcharges:</strong> Published rates (₹250 for 500L, ₹400 for 1000L, etc.) are fixed and include dewatering, sludge extraction, jetting, and antibacterial sanitization.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">5. 48-Hour Satisfaction Guarantee</h2>
+        <p>
+          We stand behind the quality of our mechanized cleaning. If you observe any residual algae, dirt, or sediment within 48 hours of service completion, contact Dinesh or Rakesh immediately. Our team will return and perform a complimentary re-cleaning at zero additional charge.
+        </p>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">6. Safety &amp; Non-Toxic Commitment</h2>
+        <p>
+          Our cleaning procedure uses certified non-toxic, food-grade antibacterial disinfectants. No harmful industrial bleaches or toxic acids are used in domestic drinking water tanks.
+        </p>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">7. Governing Law &amp; Jurisdiction</h2>
+        <p>
+          These terms are governed by the laws of India and the jurisdiction of courts in Seraikela-Kharsawan and Jamshedpur, Jharkhand.
+        </p>
+      </section>
+    </div>
+
+    <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; gap: 1rem; flex-wrap: wrap;">
+      <a href="{% url 'privacy_policy' %}" class="btn btn-outline btn-sm">Read Privacy Policy</a>
+      <a href="{% url 'home' %}" class="btn btn-primary btn-sm">Return to Homepage</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

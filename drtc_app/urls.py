@@ -10,4 +10,8 @@ urlpatterns = [
     path('api/booking/status/<str:booking_id>/', views.api_booking_status, name='api_booking_status'),
     path('booking/success/<str:booking_id>/', views.booking_success_view, name='booking_success'),
     path('booking/track/', views.booking_track_view, name='booking_track'),
+    path('privacy-policy/', views.privacy_policy_view, name='privacy_policy'),
+    path('privacy/', views.privacy_policy_view, name='privacy_alias'),
+    path('terms-and-conditions/', views.terms_view, name='terms_and_conditions'),
+    path('terms/', views.terms_view, name='terms_alias'),
 ]

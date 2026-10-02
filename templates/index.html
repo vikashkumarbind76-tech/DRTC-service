@@ -25,7 +25,7 @@
       </h1>
 
       <p class="hero-subhead">
-        Gamharia’s premier certified mechanized water tank cleaning and UV germicidal sterilization service. Eradicate toxic algae, heavy sludge, and bacterial pathogens with non-toxic food-grade hygiene.
+        Professional mechanized water tank cleaning in Gamharia &amp; Jamshedpur. High-pressure descaling, sludge extraction, and food-grade antibacterial disinfection for overhead and underground tanks.
       </p>
 
       <div class="hero-actions">
@@ -148,7 +148,7 @@
 
     <div class="packages-grid">
       {% for pkg in packages %}
-      <div class="package-card {% if pkg.is_popular %}popular{% endif %}">
+      <div class="package-card">
         {% if pkg.is_popular %}
           <div class="popular-badge">MOST POPULAR</div>
         {% elif pkg.badge_text %}
@@ -174,7 +174,7 @@
           </div>
         </div>
 
-        <button class="btn {% if pkg.is_popular %}btn-primary{% else %}btn-outline{% endif %} package-cta-btn open-booking-modal-btn" 
+        <button class="btn btn-outline package-cta-btn open-booking-modal-btn" 
                 data-capacity="{{ pkg.capacity }}" 
                 data-package-id="{{ pkg.id }}">
           Book {{ pkg.capacity }}
@@ -196,7 +196,7 @@
           </p>
 
           <div class="calc-control-group">
-            <label class="calc-label">1. Select Tank Capacity (Liters)</label>
+            <div class="calc-label">1. Select Tank Capacity (Liters)</div>
             <div class="capacity-pills-row">
               <button type="button" class="capacity-pill" data-liters="500">500 Liter</button>
               <button type="button" class="capacity-pill active" data-liters="1000">1000 L</button>
@@ -265,32 +265,32 @@
     </div>
 
     <!-- Comparative Breakdown Cards -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-      <div style="background: rgba(239, 68, 68, 0.05); border: 1.5px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-md); padding: 2rem;">
+    <div class="comparison-breakdown-grid">
+      <div class="comparison-card card-unserviced">
         <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-red-bright); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1rem;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
           <span>UNSERVICED TANK (OVER 6 MONTHS)</span>
         </div>
-        <ul style="list-style: none; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;">
-          <li>⚠️ Toxic silt &amp; brown sludge settled at tank bottom</li>
-          <li>⚠️ Green algae sticking to corrugated walls</li>
-          <li>⚠️ Microscopic bacterial biofilm generating bad odor &amp; taste</li>
-          <li>⚠️ Risk of Typhoid, Jaundice, Diarrhea, and severe hairfall</li>
-          <li>⚠️ Corroded internal pipes &amp; clogged plumbing fixtures</li>
+        <ul style="list-style: none; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; display: flex; flex-direction: column; gap: 0.5rem; padding: 0;">
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span>Toxic silt &amp; brown sludge settled at tank bottom</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span>Green algae sticking to corrugated walls</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span>Microscopic bacterial biofilm generating bad odor &amp; taste</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span>Risk of waterborne infections and foul odors</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span>Corroded internal pipes &amp; clogged plumbing fixtures</span></li>
         </ul>
       </div>
 
-      <div style="background: rgba(16, 185, 129, 0.05); border: 1.5px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md); padding: 2rem;">
+      <div class="comparison-card card-serviced">
         <div style="display: flex; align-items: center; gap: 0.5rem; color: #34d399; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1rem;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-          <span>AFTER DRTC 6-STAGE DISINFECTION</span>
+          <span>AFTER DRTC MECHANIZED DISINFECTION</span>
         </div>
-        <ul style="list-style: none; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8;">
-          <li>✅ 100% sludge extracted with high-pressure suction pumps</li>
-          <li>✅ Spotless walls descaled with 150-bar rotary jets</li>
-          <li>✅ Food-grade non-toxic antibacterial sanitization</li>
-          <li>✅ UV radiation eradicates 99.9% viruses &amp; bacteria</li>
-          <li>✅ Crystal-pure, odorless, healthy water for cooking &amp; drinking</li>
+        <ul style="list-style: none; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; display: flex; flex-direction: column; gap: 0.5rem; padding: 0;">
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><span>100% sludge extracted with high-pressure suction pumps</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Spotless walls descaled with 150-bar rotary jets</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Food-grade non-toxic antibacterial sanitization</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><span>UV radiation eradicates 99.9% viruses &amp; bacteria</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Crystal-pure, odorless, healthy water for cooking &amp; drinking</span></li>
         </ul>
       </div>
     </div>
@@ -346,38 +346,38 @@
       <h2 class="section-title">FREQUENTLY ASKED QUESTIONS</h2>
     </div>
 
-    <div style="display: flex; flex-direction: column; gap: 1rem;">
-      <details style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; cursor: pointer;">
-        <summary style="font-weight: 700; color: #ffffff; font-size: 1.05rem;">How frequently should I get my water tank cleaned?</summary>
-        <p style="color: var(--text-secondary); margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6;">
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary class="faq-summary">How frequently should I get my water tank cleaned?</summary>
+        <p class="faq-answer">
           According to health standards, residential water storage tanks should be cleaned every 4 to 6 months to prevent the accumulation of mud, algae, and hazardous bacterial colonies.
         </p>
       </details>
 
-      <details style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; cursor: pointer;">
-        <summary style="font-weight: 700; color: #ffffff; font-size: 1.05rem;">Do I need to empty the tank before the DRTC team arrives?</summary>
-        <p style="color: var(--text-secondary); margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6;">
+      <details class="faq-item">
+        <summary class="faq-summary">Do I need to empty the tank before the DRTC team arrives?</summary>
+        <p class="faq-answer">
           No! Our technicians bring high-flow submersible dewatering drainage pumps. It is helpful if water levels are low, but we handle the complete dewatering and sludge removal on-site.
         </p>
       </details>
 
-      <details style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; cursor: pointer;">
-        <summary style="font-weight: 700; color: #ffffff; font-size: 1.05rem;">Are the antibacterial chemicals safe for drinking water?</summary>
-        <p style="color: var(--text-secondary); margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6;">
+      <details class="faq-item">
+        <summary class="faq-summary">Are the antibacterial chemicals safe for drinking water?</summary>
+        <p class="faq-answer">
           Yes, 100%! We strictly use certified food-grade, chlorine-free and eco-friendly disinfectants followed by UV germicidal radiation that leave zero chemical residue, color, or toxic aftertaste.
         </p>
       </details>
 
-      <details style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; cursor: pointer;">
-        <summary style="font-weight: 700; color: #ffffff; font-size: 1.05rem;">How long does the 6-stage cleaning take?</summary>
-        <p style="color: var(--text-secondary); margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6;">
+      <details class="faq-item">
+        <summary class="faq-summary">How long does the 6-stage cleaning take?</summary>
+        <p class="faq-answer">
           A standard 1000L plastic tank takes approximately 45–60 minutes. Larger 3000L or 5000L tanks take between 90 to 120 minutes.
         </p>
       </details>
 
-      <details style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; cursor: pointer;">
-        <summary style="font-weight: 700; color: #ffffff; font-size: 1.05rem;">When and how do I make payment?</summary>
-        <p style="color: var(--text-secondary); margin-top: 0.75rem; font-size: 0.9rem; line-height: 1.6;">
+      <details class="faq-item">
+        <summary class="faq-summary">When and how do I make payment?</summary>
+        <p class="faq-answer">
           You only pay AFTER you inspect the cleaned tank and are 100% satisfied. You can pay via Cash, PhonePe, Google Pay, or Paytm directly to Dinesh or Rakesh.
         </p>
       </details>
@@ -466,17 +466,17 @@
           {% csrf_token %}
           <div class="form-group">
             <label class="form-label" for="inq-name">Your Name *</label>
-            <input type="text" id="inq-name" name="name" class="form-control" placeholder="e.g. Anand Sen" required>
+            <input type="text" id="inq-name" name="name" class="form-control" placeholder="e.g. Anand Sen" autocomplete="name" required>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div class="contact-form-inline-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div class="form-group">
               <label class="form-label" for="inq-phone">Phone Number *</label>
-              <input type="tel" id="inq-phone" name="phone" class="form-control" placeholder="10-digit mobile" required>
+              <input type="tel" id="inq-phone" name="phone" class="form-control" placeholder="10-digit mobile" autocomplete="tel" required>
             </div>
             <div class="form-group">
               <label class="form-label" for="inq-email">Email (Optional)</label>
-              <input type="email" id="inq-email" name="email" class="form-control" placeholder="your@email.com">
+              <input type="email" id="inq-email" name="email" class="form-control" placeholder="your@email.com" autocomplete="email">
             </div>
           </div>
 

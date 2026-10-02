@@ -42,6 +42,7 @@ def drtc_admin_index(request, extra_context=None):
         'packages_count': packages_count,
         'reviews_count': reviews_count,
         'today_str': timezone.now().strftime("%A, %d %B %Y"),
+        'today_iso': today.isoformat(),
     }
     context = extra_context or {}
     context['kpi'] = kpi

@@ -52,7 +52,7 @@
         </div>
       </div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
+      <div class="booking-result-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
         <div>
           <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Customer Name</div>
           <div style="font-size: 1.05rem; font-weight: 700; color: #ffffff;">{{ booking.customer_name }}</div>
@@ -96,8 +96,9 @@
     </div>
     {% elif not_found %}
     <!-- Not Found State -->
-    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.5rem; text-align: center;">
-      <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🔍</div>
+      <div style="margin-bottom: 0.75rem; color: var(--accent-gold); display: flex; justify-content: center;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </div>
       <h3 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">No Booking Found</h3>
       <p style="color: var(--text-secondary); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1.5rem auto;">
         We could not find any active booking matching "<strong>{{ query }}</strong>". Please double check your booking reference or call Dinesh directly.

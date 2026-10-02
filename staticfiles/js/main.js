@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   initNavbarScroll();
+  initScrollSpy();
   initCalculator();
   initBookingModal();
   initLightbox();
@@ -63,6 +64,213 @@ function initNavbarScroll() {
       }
     });
   }
+}
+
+/* ----------------------------------------------------
+   1b. Dynamic Navbar ScrollSpy & Sliding Active Indicator
+   ---------------------------------------------------- */
+function initScrollSpy() {
+  const navLinksContainer = document.querySelector('.nav-links');
+  if (!navLinksContainer) return;
+
+  const navLinks = Array.from(navLinksContainer.querySelectorAll('.nav-link'));
+  if (navLinks.length === 0) return;
+
+  // Create sliding yellow indicator if not already present
+  let indicator = navLinksContainer.querySelector('.nav-indicator');
+  if (!indicator) {
+    indicator = document.createElement('span');
+    indicator.className = 'nav-indicator';
+    navLinksContainer.appendChild(indicator);
+  }
+  navLinksContainer.classList.add('has-indicator');
+
+  // Update position and width of the sliding indicator
+  function updateIndicator(targetLink) {
+    if (!targetLink || window.innerWidth <= 900) {
+      if (indicator) indicator.style.opacity = '0';
+      return;
+    }
+
+    const containerRect = navLinksContainer.getBoundingClientRect();
+    const linkRect = targetLink.getBoundingClientRect();
+
+    if (linkRect.width === 0) return;
+
+    const left = linkRect.left - containerRect.left;
+    const width = linkRect.width;
+
+    indicator.style.transform = `translateX(${left}px)`;
+    indicator.style.width = `${width}px`;
+    indicator.style.opacity = '1';
+  }
+
+  // Get current active link
+  function getActiveLink() {
+    return navLinksContainer.querySelector('.nav-link.active') || navLinks[0];
+  }
+
+  // Set active class on target link and smoothly move indicator
+  function setActiveLink(activeEl) {
+    if (!activeEl) return;
+    navLinks.forEach(link => {
+      if (link === activeEl) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+    updateIndicator(activeEl);
+  }
+
+  // Hover preview: indicator smoothly glides to hovered link, returns to active on leave
+  navLinks.forEach(link => {
+    link.addEventListener('mouseenter', () => {
+      if (window.innerWidth > 900) {
+        updateIndicator(link);
+      }
+    });
+  });
+
+  navLinksContainer.addEventListener('mouseleave', () => {
+    if (window.innerWidth > 900) {
+      updateIndicator(getActiveLink());
+    }
+  });
+
+  // Re-align on resize
+  window.addEventListener('resize', () => {
+    updateIndicator(getActiveLink());
+  }, { passive: true });
+
+  // Re-align after font load
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => {
+      updateIndicator(getActiveLink());
+    });
+  }
+
+  // Map homepage sections
+  const sectionIds = ['home', 'pricing', 'reviews', 'contact'];
+  const sections = sectionIds
+    .map(id => document.getElementById(id))
+    .filter(Boolean);
+
+  // If no sections on current page (e.g. /booking/track/), position indicator on active link and stop
+  if (sections.length === 0) {
+    updateIndicator(getActiveLink());
+    return;
+  }
+
+  let isManualScrolling = false;
+  let manualScrollTimer = null;
+
+  function onScroll() {
+    if (isManualScrolling) return;
+
+    const scrollY = window.scrollY || window.pageYOffset;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    // Bottom of the page: activate Contact
+    if (scrollY + windowHeight >= docHeight - 70) {
+      const contactLink = navLinks.find(link => (link.getAttribute('href') || '').endsWith('#contact'));
+      if (contactLink) setActiveLink(contactLink);
+      return;
+    }
+
+    // ScrollSpy trigger threshold
+    const navbarOffset = 130;
+    let currentSectionId = sections[0].id;
+
+    for (let i = 0; i < sections.length; i++) {
+      const sec = sections[i];
+      if (scrollY + navbarOffset >= sec.offsetTop) {
+        currentSectionId = sec.id;
+      }
+    }
+
+    const currentLink = navLinks.find(link => (link.getAttribute('href') || '').endsWith('#' + currentSectionId));
+    if (currentLink && !currentLink.classList.contains('active')) {
+      setActiveLink(currentLink);
+    }
+  }
+
+  // Smooth scroll and immediate active state transfer on nav link clicks
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href') || '';
+    const hashIndex = href.indexOf('#');
+    if (hashIndex !== -1) {
+      const targetId = href.substring(hashIndex + 1);
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        link.addEventListener('click', (e) => {
+          const currentPath = window.location.pathname.replace(/\/$/, '');
+          const linkPath = href.substring(0, hashIndex).replace(/\/$/, '');
+
+          if (!linkPath || linkPath === currentPath) {
+            e.preventDefault();
+
+            setActiveLink(link);
+
+            isManualScrolling = true;
+            clearTimeout(manualScrollTimer);
+
+            const navbarHeight = 75;
+            const targetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+            window.scrollTo({
+              top: Math.max(0, targetTop),
+              behavior: 'smooth'
+            });
+
+            if (history.pushState) {
+              history.pushState(null, '', '#' + targetId);
+            }
+
+            manualScrollTimer = setTimeout(() => {
+              isManualScrolling = false;
+              onScroll();
+            }, 800);
+          }
+        });
+      }
+    }
+  });
+
+  // Passive throttled scroll listener
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // Initial sync
+  const hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById(hash)) {
+    const matchedLink = navLinks.find(link => (link.getAttribute('href') || '').endsWith('#' + hash));
+    if (matchedLink) {
+      setActiveLink(matchedLink);
+    } else {
+      updateIndicator(getActiveLink());
+    }
+  } else {
+    onScroll();
+    updateIndicator(getActiveLink());
+  }
+
+  setTimeout(() => {
+    updateIndicator(getActiveLink());
+  }, 100);
+  setTimeout(() => {
+    updateIndicator(getActiveLink());
+  }, 400);
 }
 
 /* ----------------------------------------------------
@@ -337,7 +545,7 @@ function initContactForm() {
 function init3DTilt() {
   if (window.matchMedia('(pointer: coarse)').matches) return; // Touch devices skip
 
-  const cards = document.querySelectorAll('.package-card, .hero-image-card');
+  const cards = document.querySelectorAll('.hero-image-card');
 
   cards.forEach(card => {
     card.addEventListener('mousemove', (e) => {
@@ -422,7 +630,7 @@ function initHeroBubbles() {
       speedY: Math.random() * 0.7 + 0.35,
       speedX: (Math.random() - 0.5) * 0.4,
       opacity: Math.random() * 0.35 + 0.15,
-      hue: Math.random() > 0.4 ? '195' : '42', // cyan or warm gold hue
+      hue: Math.random() > 0.4 ? '195' : '210', // electric cyan or deep azure blue
       pulse: Math.random() * Math.PI,
       pulseSpeed: Math.random() * 0.03 + 0.015,
     });
@@ -460,10 +668,10 @@ function initHeroBubbles() {
       ctx.arc(b.x, b.y, b.radius, 0, Math.PI * 2);
       if (b.hue === '195') {
         ctx.fillStyle = `rgba(0, 210, 255, ${b.opacity})`;
-        ctx.shadowColor = 'rgba(0, 210, 255, 0.4)';
+        ctx.shadowColor = 'rgba(0, 210, 255, 0.45)';
       } else {
-        ctx.fillStyle = `rgba(245, 158, 11, ${b.opacity * 0.8})`;
-        ctx.shadowColor = 'rgba(245, 158, 11, 0.3)';
+        ctx.fillStyle = `rgba(2, 132, 199, ${b.opacity * 0.9})`;
+        ctx.shadowColor = 'rgba(2, 132, 199, 0.4)';
       }
       ctx.shadowBlur = 8;
       ctx.fill();
@@ -487,7 +695,7 @@ function initHeroBubbles() {
    ---------------------------------------------------- */
 function initCardSpotlight() {
   const spotlightTargets = document.querySelectorAll(
-    '.package-card, .hero-image-card, .calculator-box, .stage-card, .contact-info-card, .proof-card'
+    '.package-card, .hero-image-card, .calculator-box, .calc-result-card, .stage-card, .faq-item, .contact-info-card, .contact-form, .proof-card'
   );
 
   spotlightTargets.forEach((card) => {

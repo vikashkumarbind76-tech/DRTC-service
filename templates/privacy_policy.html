@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Privacy Policy | DRTC Tank Cleaning Service Gamharia{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 900px; padding-top: 100px; padding-bottom: 60px;">
+  <!-- Breadcrumb -->
+  <div style="margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--text-muted);">
+    <a href="{% url 'home' %}" style="color: var(--accent-gold); text-decoration: none;">Home</a>
+    <span style="margin: 0 8px; color: var(--text-muted);">&gt;</span>
+    <span style="color: var(--text-primary);">Privacy Policy</span>
+  </div>
+
+  <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.5rem 2rem; box-shadow: var(--shadow-md);">
+    <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.5rem; margin-bottom: 2rem;">
+      <span class="section-tag" style="margin-bottom: 0.75rem;">LEGAL &amp; COMPLIANCE</span>
+      <h1 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; margin-bottom: 0.5rem; letter-spacing: -0.5px;">Privacy Policy</h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">
+        Last Updated: {{ last_updated }} • Applicable to DRTC Service (Dinesh Rakesh Tank Cleaning)
+      </p>
+    </div>
+
+    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8; display: flex; flex-direction: column; gap: 1.75rem;">
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">1. Introduction</h2>
+        <p>
+          At DRTC Service ("we", "our", or "us"), we value your privacy and trust. This Privacy Policy outlines how we collect, handle, and safeguard your personal information when you use our website, book mechanized water tank cleaning services, or contact our dispatch team.
+        </p>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">2. Information We Collect</h2>
+        <p>When you schedule a cleaning appointment or submit an inquiry, we collect only necessary operational details, including:</p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><strong>Contact Information:</strong> Full name, 10-digit mobile number, and optional email address.</li>
+          <li><strong>Service Location:</strong> House/flat number, building name, street address, locality, landmark, and pincode in Gamharia, Adityapur, or Jamshedpur.</li>
+          <li><strong>Service Specifications:</strong> Tank capacity (in liters), count of tanks, preferred appointment date, and time slot.</li>
+          <li><strong>Communications:</strong> Call logs or WhatsApp conversation context initiated to verify cleaning access.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">3. Purpose of Data Collection</h2>
+        <p>Your information is used strictly to fulfill your water tank cleaning service, specifically to:</p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li>Dispatch certified cleaning technicians (Dinesh &amp; Rakesh) to your accurate premises.</li>
+          <li>Send booking confirmations and status updates via SMS, Phone, or WhatsApp.</li>
+          <li>Provide authentic booking receipts and warranty support.</li>
+          <li>Improve our local service quality and customer support operations.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">4. Strict No-Sale &amp; Zero Third-Party Sharing</h2>
+        <p>
+          We do not sell, rent, trade, or distribute your personal details, phone numbers, or addresses to any third-party marketing companies, advertisers, or aggregators under any circumstances. Data is exclusively accessed by our direct field dispatch team.
+        </p>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">5. Data Retention &amp; Security</h2>
+        <p>
+          We employ industry-standard encryption and access controls to ensure your records are protected against unauthorized access. Records of completed service appointments are retained only for maintenance recall verification and operational billing audits.
+        </p>
+      </section>
+
+      <section>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">6. Contact Our Privacy Team</h2>
+        <p>If you have any questions, wish to update your records, or request data deletion, contact us directly:</p>
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; margin-top: 0.5rem;">
+          <p style="margin: 0 0 0.4rem 0;"><strong>DRTC Service (Dinesh Rakesh Tank Cleaning)</strong></p>
+          <p style="margin: 0 0 0.4rem 0;">Address: Shantinagar, Gamharia, Near Jhanda Chowk, Jamshedpur, Jharkhand - 832108</p>
+          <p style="margin: 0 0 0.4rem 0;">Phone: <a href="tel:7808611636" style="color: var(--accent-gold); text-decoration: none;">+91 7808611636</a> / <a href="tel:6352561343" style="color: var(--accent-cyan); text-decoration: none;">+91 6352561343</a></p>
+          <p style="margin: 0;">Email: <a href="mailto:drtcservice@gmail.com" style="color: var(--accent-gold); text-decoration: none;">drtcservice@gmail.com</a></p>
+        </div>
+      </section>
+    </div>
+
+    <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; gap: 1rem; flex-wrap: wrap;">
+      <a href="{% url 'terms_and_conditions' %}" class="btn btn-outline btn-sm">Read Terms &amp; Conditions</a>
+      <a href="{% url 'home' %}" class="btn btn-primary btn-sm">Return to Homepage</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

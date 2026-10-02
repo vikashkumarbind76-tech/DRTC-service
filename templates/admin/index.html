@@ -39,7 +39,7 @@
       <a href="{% url 'admin:drtc_app_booking_add' %}" class="drtc-btn-action" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #070a13; font-size: 0.84rem; padding: 9px 16px; border-radius: 8px; font-weight: 700; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4); text-decoration: none;">
         <span>➕</span> Book New Slot
       </a>
-      <a href="https://wa.me/917808611636?text=DRTC%20Admin%20System%20Check" target="_blank" class="drtc-btn-action wa" style="font-size: 0.84rem; padding: 9px 14px; border-radius: 8px; text-decoration: none;">
+      <a href="https://wa.me/917808611636?text=DRTC%20Operations%20System%20Check" target="_blank" class="drtc-btn-action wa" style="font-size: 0.84rem; padding: 9px 14px; border-radius: 8px; text-decoration: none;">
         <span>💬</span> WhatsApp Dinesh
       </a>
       <a href="https://wa.me/916352561343?text=DRTC%20Field%20Operations%20Update" target="_blank" class="drtc-btn-action wa" style="font-size: 0.84rem; padding: 9px 14px; border-radius: 8px; text-decoration: none;">
@@ -50,59 +50,65 @@
 
   <!-- KPI Metric Grid (Responsive 6 -> 3 -> 2 -> 1) -->
   <div class="drtc-kpi-grid">
-    <div class="drtc-kpi-card gold">
+    <a href="{% url 'admin:drtc_app_booking_changelist' %}?operational_status=today" class="drtc-kpi-card gold" title="Filter to Today's Slated Bookings">
       <div class="drtc-kpi-header">
         <span class="drtc-kpi-label">Today's Schedule</span>
         <div class="drtc-kpi-icon gold">📅</div>
       </div>
       <div class="drtc-kpi-val">{{ kpi.today_bookings }}</div>
       <span class="drtc-kpi-sub">Bookings slated for today</span>
-    </div>
+      <span class="drtc-kpi-action">View Schedule →</span>
+    </a>
 
-    <div class="drtc-kpi-card cyan">
+    <a href="{% url 'admin:drtc_app_booking_changelist' %}?operational_status=pending" class="drtc-kpi-card cyan" title="Filter to Bookings Pending Confirmation">
       <div class="drtc-kpi-header">
         <span class="drtc-kpi-label">Pending Confirmation</span>
         <div class="drtc-kpi-icon cyan">⏳</div>
       </div>
       <div class="drtc-kpi-val">{{ kpi.pending_bookings }}</div>
       <span class="drtc-kpi-sub">Requires verification call</span>
-    </div>
+      <span class="drtc-kpi-action">Verify Calls →</span>
+    </a>
 
-    <div class="drtc-kpi-card purple">
+    <a href="{% url 'admin:drtc_app_booking_changelist' %}?operational_status=active" class="drtc-kpi-card purple" title="Filter to Active Field Cleaning Jobs">
       <div class="drtc-kpi-header">
         <span class="drtc-kpi-label">Active Cleaning Jobs</span>
         <div class="drtc-kpi-icon purple">⚡</div>
       </div>
       <div class="drtc-kpi-val">{{ kpi.active_jobs }}</div>
       <span class="drtc-kpi-sub">Scheduled / In-progress</span>
-    </div>
+      <span class="drtc-kpi-action">Track Field Jobs →</span>
+    </a>
 
-    <div class="drtc-kpi-card emerald">
+    <a href="{% url 'admin:drtc_app_booking_changelist' %}?operational_status=completed" class="drtc-kpi-card emerald" title="Filter to Completed Service Jobs">
       <div class="drtc-kpi-header">
         <span class="drtc-kpi-label">Completed Jobs</span>
         <div class="drtc-kpi-icon emerald">🏆</div>
       </div>
       <div class="drtc-kpi-val">{{ kpi.completed_jobs }}</div>
       <span class="drtc-kpi-sub">Successfully cleaned tanks</span>
-    </div>
+      <span class="drtc-kpi-action">Completed Archive →</span>
+    </a>
 
-    <div class="drtc-kpi-card indigo">
+    <a href="{% url 'admin:drtc_app_booking_changelist' %}?payment_status__exact=PAID" class="drtc-kpi-card indigo" title="Filter to Paid In Full Bookings">
       <div class="drtc-kpi-header">
         <span class="drtc-kpi-label">Service Revenue</span>
         <div class="drtc-kpi-icon indigo">💰</div>
       </div>
       <div class="drtc-kpi-val">₹{{ kpi.total_revenue }}</div>
       <span class="drtc-kpi-sub">From completed appointments</span>
-    </div>
+      <span class="drtc-kpi-action">Revenue Records →</span>
+    </a>
 
-    <div class="drtc-kpi-card rose">
+    <a href="{% url 'admin:drtc_app_contactinquiry_changelist' %}?is_resolved__exact=0" class="drtc-kpi-card rose" title="Filter to Unresolved Customer Leads">
       <div class="drtc-kpi-header">
         <span class="drtc-kpi-label">New Inquiries</span>
         <div class="drtc-kpi-icon rose">📩</div>
       </div>
       <div class="drtc-kpi-val">{{ kpi.unresolved_inquiries }}</div>
       <span class="drtc-kpi-sub">Unresolved customer leads</span>
-    </div>
+      <span class="drtc-kpi-action">Respond to Leads →</span>
+    </a>
   </div>
 
   <!-- Recent Bookings Dispatch Stream -->
@@ -220,7 +226,7 @@
                 {% if app.app_label == 'drtc_app' %}
                   💧 DRTC TANK CLEANING CORE ({{ app.models|length }} MODELS)
                 {% elif app.app_label == 'auth' %}
-                  🔐 ACCESS CONTROL &amp; ADMINISTRATORS ({{ app.models|length }} MODELS)
+                  🔐 ACCESS CONTROL &amp; OPERATIONS STAFF ({{ app.models|length }} MODELS)
                 {% else %}
                   {{ app.name|upper }}
                 {% endif %}
@@ -321,7 +327,7 @@
             <span style="color: var(--drtc-text-muted); font-size: 0.74rem;">
               {% if entry.content_type %}{{ entry.content_type.name|capfirst }}{% else %}Object{% endif %}
             </span>
-            <span style="color: var(--drtc-text-dim); font-size: 0.72rem;">— {{ entry.action_time|timesince }} ago</span>
+            <span style="color: var(--drtc-text-dim); font-size: 0.72rem;">({{ entry.action_time|timesince }} ago)</span>
           </li>
         {% endfor %}
         </ul>

@@ -127,6 +127,24 @@ class Booking(models.Model):
     def __str__(self):
         return f"{self.booking_id} - {self.customer_name} ({self.tank_type}, {self.preferred_date})"
 
+    @property
+    def clean_customer_phone(self):
+        """Sanitized 12-digit format with 91 prefix for WhatsApp API."""
+        digits = "".join(filter(str.isdigit, str(self.customer_phone or "")))
+        if len(digits) == 10:
+            return f"91{digits}"
+        elif len(digits) == 12 and digits.startswith("91"):
+            return digits
+        elif len(digits) > 10 and digits.startswith("0"):
+            return f"91{digits[1:]}"
+        return digits or "917808611636"
+
+    @property
+    def clean_customer_tel(self):
+        """Clean phone string for tel: dialing."""
+        digits = "".join(filter(str.isdigit, str(self.customer_phone or "")))
+        return digits or self.customer_phone
+
     def get_whatsapp_url(self):
         """Build instant WhatsApp link to Dinesh / Rakesh with pre-filled message."""
         phone = "917808611636"
@@ -144,6 +162,7 @@ class Booking(models.Model):
         )
         import urllib.parse
         return f"https://wa.me/{phone}?text={urllib.parse.quote(msg)}"
+
 
 
 class ContactInquiry(models.Model):

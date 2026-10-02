@@ -15,7 +15,7 @@ def home_view(request):
     reviews = CustomerReview.objects.all().order_by('-date_added')
     
     total_bookings = Booking.objects.count()
-    clean_tanks_delivered = 1250 + total_bookings
+    clean_tanks_delivered = total_bookings
     today = timezone.localdate()
     today_bookings = Booking.objects.filter(preferred_date=today).count()
     active_bookings = Booking.objects.filter(status__in=['PENDING', 'CONFIRMED', 'IN_PROGRESS']).count()
@@ -57,7 +57,7 @@ def home_view(request):
 def api_live_stats(request):
     """Return live real-time booking statistics for dynamic website updates."""
     total_bookings = Booking.objects.count()
-    clean_tanks_delivered = 1250 + total_bookings
+    clean_tanks_delivered = total_bookings
     today = timezone.localdate()
     today_bookings = Booking.objects.filter(preferred_date=today).count()
     active_bookings = Booking.objects.filter(status__in=['PENDING', 'CONFIRMED', 'IN_PROGRESS']).count()
@@ -147,20 +147,49 @@ def api_create_booking(request):
                 pass
 
         if total == Decimal('0.00'):
-            # Fallback estimation based on official price board
+            # Fallback estimation based on official DRTC price board (all 25 tiers)
             cap_map = {
-                '500': Decimal('250.00'),
-                '1000': Decimal('400.00'),
-                '2000': Decimal('650.00'),
-                '3000': Decimal('900.00'),
-                '5000': Decimal('1100.00'),
+                '500':    Decimal('250.00'),
+                '1000':   Decimal('400.00'),
+                '2000':   Decimal('650.00'),
+                '3000':   Decimal('900.00'),
+                '5000':   Decimal('1100.00'),
+                '8000':   Decimal('1680.00'),
+                '10000':  Decimal('2200.00'),
+                '15000':  Decimal('3080.00'),
+                '20000':  Decimal('3820.00'),
+                '25000':  Decimal('4740.00'),
+                '30000':  Decimal('5490.00'),
+                '40000':  Decimal('6390.00'),
+                '45000':  Decimal('7200.00'),
+                '50000':  Decimal('7600.00'),
+                '60000':  Decimal('8210.00'),
+                '65000':  Decimal('9000.00'),
+                '70000':  Decimal('9600.00'),
+                '80000':  Decimal('11210.00'),
+                '85000':  Decimal('13870.00'),
+                '90000':  Decimal('15500.00'),
+                '100000': Decimal('18780.00'),
+                '105000': Decimal('20810.00'),
+                '120000': Decimal('25950.00'),
+                '125000': Decimal('29590.00'),
+                '150000': Decimal('36830.00'),
             }
             matched = False
+            # Strip commas/spaces for numeric match
+            cap_str = str(custom_cap).replace(',', '').replace(' ', '').replace('L', '').replace('l', '').strip()
             for k, val in cap_map.items():
-                if k in str(custom_cap):
+                if cap_str == k:
                     total = val * number_of_tanks
                     matched = True
                     break
+            if not matched:
+                # partial match fallback
+                for k, val in cap_map.items():
+                    if k in str(custom_cap).replace(',', ''):
+                        total = val * number_of_tanks
+                        matched = True
+                        break
             if not matched:
                 total = Decimal('400.00') * number_of_tanks
 
@@ -281,24 +310,57 @@ def api_calculate_quote(request):
     count = int(request.GET.get('count', 1))
     tank_type = request.GET.get('type', 'OVERHEAD_PVC')
 
-    # Price slabs directly from DRTC board:
-    # 500L: 250, 1000L: 400, 2000L: 650, 3000L: 900, 5000L: 1100
+    # Official DRTC price slabs — all 25 individual tiers
     if capacity <= 500:
-        base_rate = 250
-        duration = 45
+        base_rate = 250;   duration = 45
     elif capacity <= 1000:
-        base_rate = 400
-        duration = 60
+        base_rate = 400;   duration = 60
     elif capacity <= 2000:
-        base_rate = 650
-        duration = 90
+        base_rate = 650;   duration = 90
     elif capacity <= 3000:
-        base_rate = 900
-        duration = 120
+        base_rate = 900;   duration = 120
+    elif capacity <= 5000:
+        base_rate = 1100;  duration = 180
+    elif capacity <= 8000:
+        base_rate = 1680;  duration = 210
+    elif capacity <= 10000:
+        base_rate = 2200;  duration = 240
+    elif capacity <= 15000:
+        base_rate = 3080;  duration = 270
+    elif capacity <= 20000:
+        base_rate = 3820;  duration = 300
+    elif capacity <= 25000:
+        base_rate = 4740;  duration = 330
+    elif capacity <= 30000:
+        base_rate = 5490;  duration = 360
+    elif capacity <= 40000:
+        base_rate = 6390;  duration = 420
+    elif capacity <= 45000:
+        base_rate = 7200;  duration = 450
+    elif capacity <= 50000:
+        base_rate = 7600;  duration = 480
+    elif capacity <= 60000:
+        base_rate = 8210;  duration = 510
+    elif capacity <= 65000:
+        base_rate = 9000;  duration = 540
+    elif capacity <= 70000:
+        base_rate = 9600;  duration = 570
+    elif capacity <= 80000:
+        base_rate = 11210; duration = 600
+    elif capacity <= 85000:
+        base_rate = 13870; duration = 630
+    elif capacity <= 90000:
+        base_rate = 15500; duration = 660
+    elif capacity <= 100000:
+        base_rate = 18780; duration = 720
+    elif capacity <= 105000:
+        base_rate = 20810; duration = 750
+    elif capacity <= 120000:
+        base_rate = 25950; duration = 780
+    elif capacity <= 125000:
+        base_rate = 29590; duration = 840
     else:
-        # Scale for 5000L or bigger
-        base_rate = 1100 + ((capacity - 5000) // 1000) * 200 if capacity > 5000 else 1100
-        duration = 180
+        base_rate = 36830; duration = 900
 
     # Guaranteed official DRTC rates for plastic / PVC / Sintex water tanks
     total = int(round(base_rate * count))
@@ -314,3 +376,21 @@ def api_calculate_quote(request):
         'estimated_duration_mins': duration * count,
         'price_per_tank': base_rate
     })
+
+
+def privacy_policy_view(request):
+    """Dedicated Privacy Policy page for DRTC Tank Cleaning Service."""
+    context = {
+        'page_title': 'Privacy Policy',
+        'last_updated': 'October 2026',
+    }
+    return render(request, 'privacy_policy.html', context)
+
+
+def terms_view(request):
+    """Dedicated Terms and Conditions page for DRTC Tank Cleaning Service."""
+    context = {
+        'page_title': 'Terms & Conditions',
+        'last_updated': 'October 2026',
+    }
+    return render(request, 'terms_and_conditions.html', context)
