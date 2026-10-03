@@ -1,88 +1,298 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Terms &amp; Conditions | DRTC Tank Cleaning Service Gamharia{% endblock %}
+{% block title %}Terms &amp; Conditions (Service Agreement) | DRTC Tank Cleaning Service Gamharia{% endblock %}
 
 {% block content %}
-<div class="container" style="max-width: 900px; padding-top: 100px; padding-bottom: 60px;">
-  <!-- Breadcrumb -->
-  <div style="margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--text-muted);">
+<div class="container" style="max-width: 960px; padding-top: 105px; padding-bottom: 70px;">
+  <!-- Breadcrumb Navigation -->
+  <nav aria-label="breadcrumb" style="margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--text-muted);">
     <a href="{% url 'home' %}" style="color: var(--accent-gold); text-decoration: none;">Home</a>
     <span style="margin: 0 8px; color: var(--text-muted);">&gt;</span>
-    <span style="color: var(--text-primary);">Terms &amp; Conditions</span>
-  </div>
+    <span style="color: var(--text-primary);">Terms &amp; Conditions (Service Agreement)</span>
+  </nav>
 
-  <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.5rem 2rem; box-shadow: var(--shadow-md);">
-    <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.5rem; margin-bottom: 2rem;">
-      <span class="section-tag" style="margin-bottom: 0.75rem;">SERVICE AGREEMENT</span>
-      <h1 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; margin-bottom: 0.5rem; letter-spacing: -0.5px;">Terms &amp; Conditions</h1>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">
-        Last Updated: {{ last_updated }} • Governs Service Bookings with DRTC Service
-      </p>
+  <article style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.75rem 2.25rem; box-shadow: var(--shadow-md);">
+    <!-- Document Header -->
+    <header style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.75rem; margin-bottom: 2.25rem;">
+      <span class="section-tag" style="margin-bottom: 0.75rem;">OPERATIONAL SERVICE AGREEMENT</span>
+      <h1 style="font-size: 2.25rem; font-weight: 800; color: #ffffff; margin-bottom: 0.65rem; letter-spacing: -0.5px; line-height: 1.25;">
+        Terms of Service &amp; Operational Agreement
+      </h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 1.25rem; color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+        <span><strong>Last Revised:</strong> {{ last_updated }}</span>
+        <span>•</span>
+        <span><strong>Governed By:</strong> Indian Contract Act, 1872 &amp; Consumer Protection Act, 2019</span>
+        <span>•</span>
+        <span><strong>Jurisdiction:</strong> Courts of Seraikela-Kharsawan &amp; Jamshedpur (Jharkhand)</span>
+      </div>
+    </header>
+
+    <!-- Main Legal Content Body -->
+    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.85; display: flex; flex-direction: column; gap: 2rem;">
+      
+      <!-- 1. Binding Contract & Parties -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">1. Legally Binding Agreement &amp; Parties</h2>
+        <p>
+          This Operational Service Agreement ("Agreement" or "Terms") constitutes a legally valid and enforceable contract under the provisions of the <strong>Indian Contract Act, 1872</strong> and the <strong>Consumer Protection Act, 2019</strong> between:
+        </p>
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; margin-top: 0.75rem;">
+          <p style="margin: 0 0 0.5rem 0;">
+            <strong>The Service Provider:</strong> <strong>DRTC Service</strong> (operating as Dinesh Rakesh Tank Cleaning Service, having its principal operational workshop at Shantinagar, Gamharia, Near By Jhanda Chowk, Dist. Seraikela-Kharsawan, Jharkhand – 832108); and
+          </p>
+          <p style="margin: 0;">
+            <strong>The Customer / Client:</strong> The individual, property owner, authorized tenant, society representative, or institutional administrator who books, authorizes, or receives mechanized water tank cleaning services.
+          </p>
+        </div>
+        <p style="margin-top: 0.75rem;">
+          By requesting an instant quote, placing an online appointment, scheduling via telephone or WhatsApp, or allowing DRTC personnel onto your premises, you acknowledge that you have attained the age of majority (18 years) and legally agree to be unconditionally bound by all terms, disclaimers, and liability limitations set forth herein.
+        </p>
+      </section>
+
+      <!-- 2. Scope of Mechanized Cleaning -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">2. Scope of Scientific Mechanized Services</h2>
+        <p>
+          DRTC provides mechanized hygiene cleaning for domestic, commercial, and industrial water storage reservoirs (Overhead Sintex/PVC Tanks, Underground RCC Concrete Sumps, and Mega Industrial Reservoirs up to 1,50,000 Liters). Our standard 6-stage scientific process encompasses:
+        </p>
+        <ol style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><strong>Stage 1 — Mechanized Dewatering:</strong> Evacuation of stagnant bottom water using submersible electric drainage pumps.</li>
+          <li><strong>Stage 2 — Sludge &amp; Silt Extraction:</strong> Industrial wet-slurry vacuum extraction of settled mud, silt, rust flakes, and organic matter.</li>
+          <li><strong>Stage 3 — High-Pressure Jet Washing:</strong> Rotary rotary-jet scrubbing of internal tank walls, ceiling, corners, and base with high-pressure water wands.</li>
+          <li><strong>Stage 4 — Vacuum Residue Evacuation:</strong> Pumping out dislodged dirt slurry and residue water.</li>
+          <li><strong>Stage 5 — Anti-Bacterial Bio-Sanitization:</strong> Spraying certified non-toxic, food-grade biodegradable anti-bacterial agents to eliminate micro-pathogens and fungal spores.</li>
+          <li><strong>Stage 6 — Germicidal UV-C Disinfection:</strong> Final UV-C ultraviolet radiation exposure eliminating suspended biological bacteria and algae spores.</li>
+        </ol>
+      </section>
+
+      <!-- 3. Statutory Compliance - Prohibition of Manual Scavenging -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          3. Strict Compliance with the Prohibition of Employment as Manual Scavengers Act, 2013
+        </h2>
+        <div style="background: rgba(14, 165, 233, 0.05); border: 1px solid rgba(14, 165, 233, 0.3); border-radius: var(--radius-sm); padding: 1.25rem; margin-top: 0.5rem;">
+          <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: var(--accent-cyan);">
+            Statutory Declaration &amp; Zero-Tolerance Hazardous Entry Policy:
+          </p>
+          <p style="margin: 0; font-size: 0.92rem; line-height: 1.75;">
+            In strict compliance with <strong>The Prohibition of Employment as Manual Scavengers and their Rehabilitation Act, 2013</strong>, DRTC operates strictly through <strong>mechanized non-hazardous methodology</strong> utilizing automated pumps, pressure wands, extension poles, and industrial suction hoses. DRTC personnel are strictly prohibited by law from performing unequipped or hazardous physical entry into toxic, confined, or unsanitary pits. Customers shall under no circumstances compel, request, or permit technicians to undertake hazardous manual scavenging or enter hazardous spaces devoid of statutory ventilation and safety equipment.
+          </p>
+        </div>
+      </section>
+
+      <!-- 4. Lawful Entry & Criminal Trespass Immunity -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          4. Lawful Premises Entry &amp; Immunity from Criminal Trespass
+        </h2>
+        <p>
+          To safeguard against false complaints and clarify the legal basis of physical entry:
+        </p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li>
+            <strong>Express License &amp; Consent:</strong> DRTC technicians enter residential compounds, rooftops, terraces, basements, or commercial factory grounds <strong>solely upon the explicit booking, invitation, request, and informed consent</strong> of the customer. Such authorized entry does not constitute criminal trespass under Sections 441, 442, or 447 of the Indian Penal Code (IPC) / Sections 329–331 of the Bharatiya Nyaya Sanhita, 2023 (BNS).
+          </li>
+          <li>
+            <strong>Customer Warranty of Legal Authority:</strong> The person booking the service warrants that they are the absolute legal owner, authorized tenant, legal caretaker, or designated facility supervisor with full legal standing to grant access to the water tanks and premises.
+          </li>
+          <li>
+            <strong>Indemnification for Property Disputes:</strong> In the event of any tenancy dispute, landlord-tenant litigation, or neighbor boundary contention regarding tank access, the customer agrees to fully indemnify and hold DRTC and its employees harmless from all legal consequences.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 5. Customer Site Obligations & Protection Against Theft Allegations -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          5. Customer Site Obligations &amp; Safeguarding of Personal Valuables
+        </h2>
+        <p>The customer agrees to observe the following mandatory operational obligations:</p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li>
+            <strong>Electrical Power &amp; Water Supply:</strong> Customer must provide continuous access to a functional 220V AC domestic or commercial electrical socket within reasonable reach of our heavy-duty extension cables to operate pressure washers and vacuum pumps.
+          </li>
+          <li>
+            <strong>Safe Ladder &amp; Terrace Access:</strong> Safe, sturdy staircase or secure metal/bamboo ladder access to overhead tanks must be provided. Technicians reserve the absolute legal right to refuse ascending unanchored, broken, rotten, or hazardous ladders that present life-safety hazards.
+          </li>
+          <li>
+            <strong>Mandatory Customer Presence:</strong> <strong>The customer or an authorized adult representative (aged 18+) MUST remain present on site throughout the service.</strong>
+          </li>
+          <li>
+            <strong>Safeguarding of Valuables (Anti-Theft Disclaimer):</strong> The customer must secure and lock away all cash, currency, jewellery, electronics, and portable valuables before technicians commence work on the premises. <strong>DRTC, its partners, and employees expressly disclaim all civil and criminal liability for unsubstantiated, post-facto allegations of lost, missing, or stolen household property.</strong>
+          </li>
+          <li>
+            <strong>Domestic Pets &amp; Hazards:</strong> Customers must securely restrain all domestic animals, dogs, or livestock prior to technician entry to prevent bites or injuries.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 6. Pre-Existing Structural Defects & Property Damage Disclaimer -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          6. Pre-Existing Structural Defects, Aging Materials &amp; Damage Disclaimer
+        </h2>
+        <div style="background: rgba(245, 158, 11, 0.05); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: var(--radius-sm); padding: 1.25rem; margin-top: 0.5rem;">
+          <p style="margin: 0 0 0.5rem 0; font-weight: 700; color: var(--accent-gold);">
+            Crucial Material Disclaimers (Protection Against Property Damage / Mischief Claims):
+          </p>
+          <ul style="padding-left: 1.25rem; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.92rem; line-height: 1.75;">
+            <li>
+              <strong>Weathered Plastic &amp; UV Degradation:</strong> Overhead plastic (Sintex/PVC) tanks subjected to prolonged tropical sun, heat, and ultraviolet radiation in Jharkhand naturally undergo material degradation, resulting in plastic brittleness, micro-fractures, and compromised structural integrity.
+            </li>
+            <li>
+              <strong>Pre-Existing Plumbing Wear:</strong> Aged plumbing union joints, PVC elbows, brass nipples, corroded ball-valves, weakened float-valves, and unbonded pipe joints frequently suffer from pre-existing fatigue or seal degradation that was previously masked by accumulated dirt, limescale, or sediment.
+            </li>
+            <li>
+              <strong>RCC Concrete Sump Deterioration:</strong> Underground concrete sumps with aged waterproofing, deteriorated mortar plastering, or rusting reinforcement bars may develop dampness or water seepage through pre-existing cracks once heavy sediment is vacuumed.
+            </li>
+            <li>
+              <strong>Zero Liability for Pre-Existing Conditions:</strong> DRTC technicians exercise professional care with scientific calibrated equipment. However, <strong>DRTC is expressly NOT liable for pre-existing structural cracks, aged PVC brittleness, hairline concrete fissures, pipe union leaks, or damaged float valves revealed during or following high-pressure washing.</strong> Such occurrences do not constitute criminal mischief under Section 425 of the IPC / Section 324 of the BNS.
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7. Chemical Safety & Customer Water Flushing Directive -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          7. Chemical Safety, Food-Grade Disinfection &amp; Post-Cleaning Flush Directive
+        </h2>
+        <p>
+          DRTC strictly adheres to safe hygiene standards:
+        </p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li>
+            <strong>Non-Toxic Disinfection:</strong> All chemical antibacterial agents utilized during our 6-stage process are non-hazardous, biodegradable, food-grade sanitizers designed specifically for domestic drinking water storage. No hazardous industrial acids or corrosive compounds are introduced into drinking tanks.
+          </li>
+          <li>
+            <strong>Mandatory Customer Flush Directive:</strong> Following the completion of tank cleaning and subsequent municipal or borewell refill, <strong>the customer is strictly advised to open household faucets and run off the initial 50 to 100 liters of water (first flush)</strong> to clear any loosened pipeline sediment from internal distribution pipes before consuming water for direct ingestion or cooking.
+          </li>
+          <li>
+            <strong>Water Quality Disclaimer:</strong> DRTC cleans, scrubs, and disinfects the internal structural surfaces of the storage vessel. <strong>DRTC has no control over the incoming source water quality</strong> supplied by municipal corporations, deep borewells, or external water tankers. DRTC disclaims liability for subsequent water discoloration, high TDS, rust, or microbial contamination originating from contaminated external supply lines.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 8. Transparent Pricing & Anti-Fraud Payment Policy -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          8. Transparent Pricing &amp; Anti-Fraud Payment Policy
+        </h2>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li>
+            <strong>Official Tariff Matrix:</strong> Rates are published transparently on our official website (from ₹250 for 500L up to ₹36,830 for 1,50,000L). Rates are all-inclusive for dewatering, sludge extraction, pressure jet washing, antibacterial treatment, and UV disinfection.
+          </li>
+          <li>
+            <strong>"Pay After Service" Guarantee:</strong> For residential water tanks, DRTC <u>never</u> demands advance payments or cash deposits. Payment is strictly due upon completion of the service and after your physical inspection and satisfaction.
+          </li>
+          <li>
+            <strong>Authorized Payment Modes:</strong> Cash on site or direct UPI payment (Google Pay, PhonePe, Paytm, BHIM) made <strong>strictly to verified DRTC registered mobile numbers (+91 7808611636 / +91 6352561343)</strong>. DRTC disclaims liability for unauthorized payments made to unverified third-party numbers.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 9. 48-Hour Satisfaction Guarantee & Warranty Conditions -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          9. 48-Hour Re-Cleaning Assurance &amp; Warranty Conditions
+        </h2>
+        <p>
+          We stand unconditionally behind the efficacy of our 6-stage scientific cleaning:
+        </p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li>If demonstrable residual sediment, algae patches, or mud remains inside the tank within <strong>48 hours</strong> of service completion, contact Dinesh Kumar or Rakesh Kumar immediately with photographic evidence.</li>
+          <li>Our operations team will re-dispatch technicians to conduct a <strong>complimentary full re-cleaning at zero additional charge</strong>.</li>
+          <li><strong>Exclusions:</strong> This guarantee does not cover re-contamination caused by missing tank lids, bird droppings entering broken covers, contaminated municipal tanker supply, or backflow from uncleaned internal distribution pipes.</li>
+        </ul>
+      </section>
+
+      <!-- 10. Cancellation & Rescheduling -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          10. Cancellation &amp; Rescheduling Policy
+        </h2>
+        <p>
+          Customers may cancel or reschedule their service appointment without penalty up to <strong>2 hours prior</strong> to the scheduled technician arrival time by calling or messaging our dispatch team. In cases of sudden customer unavailability upon technician arrival at the premises, DRTC reserves the right to reschedule to the next available operating slot.
+        </p>
+      </section>
+
+      <!-- 11. Limitation of Liability & Comprehensive Indemnity -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          11. Limitation of Liability &amp; Comprehensive Customer Indemnity
+        </h2>
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; margin-top: 0.5rem;">
+          <p style="margin: 0 0 0.5rem 0;">
+            <strong>A. Monetary Cap on Liability:</strong> Under Section 73 of the Indian Contract Act, 1872, the total aggregate liability of DRTC Service, its owners, partners, and employees for any direct loss, claim, damage, or dispute arising out of or relating to this Agreement, whether founded in contract, tort (including negligence), or statutory duty, <strong>shall be strictly limited and capped at the total fee actually received by DRTC for that specific service booking</strong>.
+          </p>
+          <p style="margin: 0 0 0.5rem 0;">
+            <strong>B. Exclusion of Indirect &amp; Consequential Damages:</strong> DRTC shall under no circumstances be held liable for any indirect, incidental, punitive, or consequential damages, including loss of business profit, temporary water interruption, commercial downtime, or third-party tenant claims.
+          </p>
+          <p style="margin: 0;">
+            <strong>C. Customer Indemnity:</strong> The customer agrees to defend, indemnify, and hold harmless DRTC Service, its partners, technicians, and contractors from and against all claims, liabilities, damages, penalties, and legal expenses arising from: (i) customer's breach of site safety protocols; (ii) customer's lack of legal authorization to service the tank; or (iii) third-party disputes involving landlords, societies, or municipal authorities.
+          </p>
+        </div>
+      </section>
+
+      <!-- 12. Force Majeure -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          12. Force Majeure (Uncontrollable Events)
+        </h2>
+        <p>
+          DRTC shall not be deemed in breach of this Agreement or held liable for delay or non-performance caused by events beyond reasonable human control, including but not limited to: severe monsoon storms, lightning, electrical power grid failure, municipal water supply halts, civil unrest, road blockades, pandemics, local government curfews, or acts of State. In such circumstances, appointments will be rescheduled promptly upon normalization of conditions.
+        </p>
+      </section>
+
+      <!-- 13. Dispute Resolution, Governing Law & Exclusive Jurisdiction -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          13. Dispute Resolution, Governing Law &amp; Exclusive Jurisdiction
+        </h2>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li>
+            <strong>Governing Law:</strong> This Agreement, its validity, interpretation, and performance shall be governed by and construed in accordance with the substantive laws of the <strong>Republic of India</strong>.
+          </li>
+          <li>
+            <strong>Amicable Dispute Resolution:</strong> Any grievance or dispute arising out of this Agreement shall first be submitted in writing to our designated Compliance Officer (Dinesh Kumar at <a href="mailto:drtcservice@gmail.com" style="color: var(--accent-gold); text-decoration: none;">drtcservice@gmail.com</a>) for amicable settlement within thirty (30) business days.
+          </li>
+          <li>
+            <strong>Exclusive Jurisdiction:</strong> Subject to the above, the civil and consumer courts situated within the territorial jurisdiction of <strong>Seraikela-Kharsawan and Jamshedpur, Jharkhand</strong> shall have exclusive jurisdiction to entertain, try, and adjudicate all proceedings arising out of or in connection with this Agreement.
+          </li>
+        </ul>
+      </section>
+
+      <!-- 14. Severability & Contact -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          14. Severability &amp; Customer Support Contact
+        </h2>
+        <p>
+          If any clause or provision of this Agreement is held to be invalid or unenforceable by a court of competent jurisdiction, such invalidity shall not affect the validity of the remaining provisions, which shall continue in full force and effect.
+        </p>
+        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; margin-top: 0.75rem;">
+          <p style="margin: 0 0 0.35rem 0; font-weight: 700; color: #ffffff;">
+            DRTC Service (Dinesh Rakesh Tank Cleaning Service)
+          </p>
+          <p style="margin: 0 0 0.35rem 0; font-size: 0.9rem;">
+            Shantinagar, Gamharia, Near By Jhanda Chowk, Dist. Seraikela-Kharsawan / Jamshedpur, Jharkhand – 832108
+          </p>
+          <p style="margin: 0 0 0.35rem 0; font-size: 0.9rem;">
+            Customer Support: <a href="tel:7808611636" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">+91 7808611636</a> / <a href="tel:6352561343" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">+91 6352561343</a>
+          </p>
+          <p style="margin: 0; font-size: 0.9rem;">
+            Official Communications: <a href="mailto:drtcservice@gmail.com" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">drtcservice@gmail.com</a>
+          </p>
+        </div>
+      </section>
     </div>
 
-    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8; display: flex; flex-direction: column; gap: 1.75rem;">
-      <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">1. Service Agreement</h2>
-        <p>
-          By booking a tank cleaning service through our website, phone line, or WhatsApp, you agree to these operational terms with DRTC Service (Dinesh Rakesh Tank Cleaning Service, Gamharia).
-        </p>
-      </section>
-
-      <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">2. Booking &amp; Slot Confirmation</h2>
-        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
-          <li>All online bookings receive a unique Tracking ID (e.g., DRTC-XXXXX).</li>
-          <li>Our operations lead will contact you via phone or WhatsApp 1 to 2 hours before the scheduled time slot to verify accessibility.</li>
-          <li>Customers may reschedule or cancel their appointment up to 2 hours before technician dispatch with zero penalty.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">3. Customer Site Requirements</h2>
-        <p>To enable safe and complete mechanized cleaning, the customer agrees to ensure:</p>
-        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
-          <li><strong>Water Level:</strong> Water levels in the tank should ideally be reduced prior to arrival to minimize water waste.</li>
-          <li><strong>Electricity &amp; Water Connection:</strong> Standard 220V electrical socket access within reach of our heavy-duty extension cables for operating pumps and high-pressure jetters.</li>
-          <li><strong>Safe Physical Access:</strong> A stable ladder or safe rooftop stairway access to overhead and underground tanks.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">4. Transparent Pricing &amp; Payment Policy</h2>
-        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
-          <li><strong>Pay After Service:</strong> We never ask for advance payments. Payment is due strictly upon completion of the service and after your physical inspection of the clean tank.</li>
-          <li><strong>Accepted Payment Methods:</strong> Cash, Google Pay, PhonePe, Paytm, or direct UPI transfer on-site.</li>
-          <li><strong>No Hidden Surcharges:</strong> Published rates (₹250 for 500L, ₹400 for 1000L, etc.) are fixed and include dewatering, sludge extraction, jetting, and antibacterial sanitization.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">5. 48-Hour Satisfaction Guarantee</h2>
-        <p>
-          We stand behind the quality of our mechanized cleaning. If you observe any residual algae, dirt, or sediment within 48 hours of service completion, contact Dinesh or Rakesh immediately. Our team will return and perform a complimentary re-cleaning at zero additional charge.
-        </p>
-      </section>
-
-      <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">6. Safety &amp; Non-Toxic Commitment</h2>
-        <p>
-          Our cleaning procedure uses certified non-toxic, food-grade antibacterial disinfectants. No harmful industrial bleaches or toxic acids are used in domestic drinking water tanks.
-        </p>
-      </section>
-
-      <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">7. Governing Law &amp; Jurisdiction</h2>
-        <p>
-          These terms are governed by the laws of India and the jurisdiction of courts in Seraikela-Kharsawan and Jamshedpur, Jharkhand.
-        </p>
-      </section>
-    </div>
-
-    <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; gap: 1rem; flex-wrap: wrap;">
+    <!-- Bottom Actions -->
+    <div style="margin-top: 3rem; padding-top: 1.75rem; border-top: 1px solid var(--border-subtle); display: flex; gap: 1rem; flex-wrap: wrap;">
       <a href="{% url 'privacy_policy' %}" class="btn btn-outline btn-sm">Read Privacy Policy</a>
       <a href="{% url 'home' %}" class="btn btn-primary btn-sm">Return to Homepage</a>
     </div>
-  </div>
+  </article>
 </div>
 {% endblock %}

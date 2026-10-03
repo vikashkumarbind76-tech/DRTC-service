@@ -9,6 +9,30 @@ from django.utils import timezone
 from .models import ServicePackage, Booking, CustomerReview, ContactInquiry
 
 
+BUSINESS_INFO = {
+    'brand_name': 'DRTC SERVICE',
+    'sub_brand': 'DINESH RAKESH TANK CLEANING SERVICE',
+    'tagline': 'CLEANER TANKS, SAFER TOMORROW',
+    'dinesh_phone': '7808611636',
+    'rakesh_phone': '6352561343',
+    'email': 'drtcservice@gmail.com',
+    'address': 'SHANTINAGAR, GAMHARIA, NEAR BY JHANDA CHOWK',
+    'city': 'Gamharia, Jamshedpur',
+    'district': 'Seraikela-Kharsawan',
+    'state': 'Jharkhand',
+    'pincode': '832108',
+    'grievance_officer': 'Dinesh Kumar',
+    'grievance_email': 'drtcservice@gmail.com',
+    'grievance_phone': '+91 7808611636',
+    'value_props': [
+        {'icon': 'shield-check', 'title': 'Safe Cleaning', 'desc': 'Scientific mechanized cleaning with food-grade disinfectants.'},
+        {'icon': 'droplet-check', 'title': 'Hygienic Water', 'desc': 'Germ-free, odor-free, pure drinking water for your loved ones.'},
+        {'icon': 'cog-outline', 'title': 'Professional Service', 'desc': 'Trained & certified technicians with heavy-duty safety gear.'},
+        {'icon': 'currency-inr', 'title': 'Reliable & Affordable', 'desc': 'Starting at just ₹250. Transparent pricing with zero hidden fees.'},
+    ],
+}
+
+
 def home_view(request):
     """Main presentation storefront for DRTC Tank Cleaning Service with live metrics."""
     packages = ServicePackage.objects.all().order_by('order')
@@ -22,23 +46,7 @@ def home_view(request):
     cheapest = packages.first()
     starting_price = int(cheapest.price) if cheapest else 250
 
-    business_info = {
-        'brand_name': 'DRTC SERVICE',
-        'sub_brand': 'DINESH RAKESH TANK CLEANING SERVICE',
-        'tagline': 'CLEANER TANKS, SAFER TOMORROW',
-        'dinesh_phone': '7808611636',
-        'rakesh_phone': '6352561343',
-        'email': 'drtcservice@gmail.com',
-        'address': 'SHANTINAGAR, GAMHARIA, NEAR BY JHANDA CHOWK',
-        'city': 'Gamharia, Jamshedpur',
-        'pincode': '832108',
-        'value_props': [
-            {'icon': 'shield-check', 'title': 'Safe Cleaning', 'desc': 'Scientific mechanized cleaning with food-grade disinfectants.'},
-            {'icon': 'droplet-check', 'title': 'Hygienic Water', 'desc': 'Germ-free, odor-free, pure drinking water for your loved ones.'},
-            {'icon': 'cog-outline', 'title': 'Professional Service', 'desc': 'Trained & certified technicians with heavy-duty safety gear.'},
-            {'icon': 'currency-inr', 'title': 'Reliable & Affordable', 'desc': 'Starting at just ₹250. Transparent pricing with zero hidden fees.'},
-        ],
-    }
+    business_info = BUSINESS_INFO
 
     context = {
         'packages': packages,
@@ -423,18 +431,20 @@ def api_calculate_quote(request):
 
 
 def privacy_policy_view(request):
-    """Dedicated Privacy Policy page for DRTC Tank Cleaning Service."""
+    """Dedicated Privacy Policy page for DRTC Tank Cleaning Service compliant with DPDP Act 2023 & IT Rules."""
     context = {
         'page_title': 'Privacy Policy',
-        'last_updated': 'October 2026',
+        'last_updated': 'October 4, 2026',
+        'business': BUSINESS_INFO,
     }
     return render(request, 'privacy_policy.html', context)
 
 
 def terms_view(request):
-    """Dedicated Terms and Conditions page for DRTC Tank Cleaning Service."""
+    """Dedicated Terms and Conditions page for DRTC Tank Cleaning Service compliant with Indian law."""
     context = {
         'page_title': 'Terms & Conditions',
-        'last_updated': 'October 2026',
+        'last_updated': 'October 4, 2026',
+        'business': BUSINESS_INFO,
     }
     return render(request, 'terms_and_conditions.html', context)

@@ -1,86 +1,211 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Privacy Policy | DRTC Tank Cleaning Service Gamharia{% endblock %}
+{% block title %}Privacy Policy &amp; Data Protection | DRTC Tank Cleaning Service Gamharia{% endblock %}
 
 {% block content %}
-<div class="container" style="max-width: 900px; padding-top: 100px; padding-bottom: 60px;">
-  <!-- Breadcrumb -->
-  <div style="margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--text-muted);">
+<div class="container" style="max-width: 960px; padding-top: 105px; padding-bottom: 70px;">
+  <!-- Breadcrumb Navigation -->
+  <nav aria-label="breadcrumb" style="margin-bottom: 1.5rem; font-size: 0.88rem; color: var(--text-muted);">
     <a href="{% url 'home' %}" style="color: var(--accent-gold); text-decoration: none;">Home</a>
     <span style="margin: 0 8px; color: var(--text-muted);">&gt;</span>
-    <span style="color: var(--text-primary);">Privacy Policy</span>
-  </div>
+    <span style="color: var(--text-primary);">Privacy Policy &amp; Data Protection</span>
+  </nav>
 
-  <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.5rem 2rem; box-shadow: var(--shadow-md);">
-    <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.5rem; margin-bottom: 2rem;">
-      <span class="section-tag" style="margin-bottom: 0.75rem;">LEGAL &amp; COMPLIANCE</span>
-      <h1 style="font-size: 2.2rem; font-weight: 800; color: #ffffff; margin-bottom: 0.5rem; letter-spacing: -0.5px;">Privacy Policy</h1>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0;">
-        Last Updated: {{ last_updated }} • Applicable to DRTC Service (Dinesh Rakesh Tank Cleaning)
-      </p>
-    </div>
+  <article style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 2.75rem 2.25rem; box-shadow: var(--shadow-md);">
+    <!-- Document Header -->
+    <header style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.75rem; margin-bottom: 2.25rem;">
+      <span class="section-tag" style="margin-bottom: 0.75rem;">STATUTORY LEGAL COMPLIANCE</span>
+      <h1 style="font-size: 2.25rem; font-weight: 800; color: #ffffff; margin-bottom: 0.65rem; letter-spacing: -0.5px; line-height: 1.25;">
+        Privacy Policy &amp; Personal Data Protection
+      </h1>
+      <div style="display: flex; flex-wrap: wrap; gap: 1.25rem; color: var(--text-muted); font-size: 0.88rem; margin-top: 0.5rem;">
+        <span><strong>Effective Date:</strong> {{ last_updated }}</span>
+        <span>•</span>
+        <span><strong>Governing Law:</strong> Digital Personal Data Protection Act, 2023 &amp; IT Act, 2000 (India)</span>
+        <span>•</span>
+        <span><strong>Entity:</strong> DRTC Service, Gamharia</span>
+      </div>
+    </header>
 
-    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8; display: flex; flex-direction: column; gap: 1.75rem;">
+    <!-- Main Legal Content Body -->
+    <div style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.85; display: flex; flex-direction: column; gap: 2rem;">
+      
+      <!-- 1. Preamble & Statutory Scope -->
       <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">1. Introduction</h2>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">1. Preamble &amp; Statutory Applicability</h2>
         <p>
-          At DRTC Service ("we", "our", or "us"), we value your privacy and trust. This Privacy Policy outlines how we collect, handle, and safeguard your personal information when you use our website, book mechanized water tank cleaning services, or contact our dispatch team.
+          This Privacy Policy and Personal Data Protection Charter ("Policy") constitutes a legally binding document between you ("User", "Customer", or "Data Principal") and <strong>DRTC Service</strong> (operating as Dinesh Rakesh Tank Cleaning Service, hereinafter referred to as "DRTC", "the Enterprise", "we", "our", or "us").
         </p>
-      </section>
-
-      <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">2. Information We Collect</h2>
-        <p>When you schedule a cleaning appointment or submit an inquiry, we collect only necessary operational details, including:</p>
+        <p style="margin-top: 0.75rem;">
+          This Policy is framed in strict compliance with the statutory provisions of:
+        </p>
         <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
-          <li><strong>Contact Information:</strong> Full name, 10-digit mobile number, and optional email address.</li>
-          <li><strong>Service Location:</strong> House/flat number, building name, street address, locality, landmark, and pincode in Gamharia, Adityapur, or Jamshedpur.</li>
-          <li><strong>Service Specifications:</strong> Tank capacity (in liters), count of tanks, preferred appointment date, and time slot.</li>
-          <li><strong>Communications:</strong> Call logs or WhatsApp conversation context initiated to verify cleaning access.</li>
+          <li><strong>The Digital Personal Data Protection Act, 2023 (DPDP Act, 2023)</strong> and applicable rules notified thereunder;</li>
+          <li><strong>The Information Technology Act, 2000 (IT Act)</strong>, specifically Sections 43A, 72, and 72A (penalties for disclosure of information in breach of lawful contract);</li>
+          <li><strong>The Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 (SPDI Rules)</strong>; and</li>
+          <li><strong>The Consumer Protection Act, 2019</strong> read alongside the Consumer Protection (E-Commerce) Rules, 2020.</li>
         </ul>
-      </section>
-
-      <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">3. Purpose of Data Collection</h2>
-        <p>Your information is used strictly to fulfill your water tank cleaning service, specifically to:</p>
-        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
-          <li>Dispatch certified cleaning technicians (Dinesh &amp; Rakesh) to your accurate premises.</li>
-          <li>Send booking confirmations and status updates via SMS, Phone, or WhatsApp.</li>
-          <li>Provide authentic booking receipts and warranty support.</li>
-          <li>Improve our local service quality and customer support operations.</li>
-        </ul>
-      </section>
-
-      <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">4. Strict No-Sale &amp; Zero Third-Party Sharing</h2>
-        <p>
-          We do not sell, rent, trade, or distribute your personal details, phone numbers, or addresses to any third-party marketing companies, advertisers, or aggregators under any circumstances. Data is exclusively accessed by our direct field dispatch team.
+        <p style="margin-top: 0.75rem;">
+          By accessing <a href="{% url 'home' %}" style="color: var(--accent-gold); text-decoration: none;">our platform</a>, generating an instant quote, placing a service booking, communicating via telephone, SMS, or WhatsApp, or permitting our certified cleaning technicians onto your premises, you acknowledge that you have read, understood, and unequivocally consented to the collection, lawful processing, and protection of your personal data as governed by this Policy.
         </p>
       </section>
 
+      <!-- 2. Categories of Data Collected -->
       <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">5. Data Retention &amp; Security</h2>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">2. Categories of Personal Data Collected</h2>
         <p>
-          We employ industry-standard encryption and access controls to ensure your records are protected against unauthorized access. Records of completed service appointments are retained only for maintenance recall verification and operational billing audits.
+          In accordance with the principle of <em>Data Minimization</em> under Section 6 of the DPDP Act, 2023, DRTC collects only such personal information as is strictly necessary to fulfill your mechanized water tank cleaning request and ensure worker safety:
         </p>
-      </section>
-
-      <section>
-        <h2 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">6. Contact Our Privacy Team</h2>
-        <p>If you have any questions, wish to update your records, or request data deletion, contact us directly:</p>
-        <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; margin-top: 0.5rem;">
-          <p style="margin: 0 0 0.4rem 0;"><strong>DRTC Service (Dinesh Rakesh Tank Cleaning)</strong></p>
-          <p style="margin: 0 0 0.4rem 0;">Address: Shantinagar, Gamharia, Near Jhanda Chowk, Jamshedpur, Jharkhand - 832108</p>
-          <p style="margin: 0 0 0.4rem 0;">Phone: <a href="tel:7808611636" style="color: var(--accent-gold); text-decoration: none;">+91 7808611636</a> / <a href="tel:6352561343" style="color: var(--accent-cyan); text-decoration: none;">+91 6352561343</a></p>
-          <p style="margin: 0;">Email: <a href="mailto:drtcservice@gmail.com" style="color: var(--accent-gold); text-decoration: none;">drtcservice@gmail.com</a></p>
+        <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 1.25rem; margin-top: 0.75rem;">
+          <ul style="padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.6rem; margin: 0;">
+            <li>
+              <strong>Identity &amp; Contact Information:</strong> Full name of the customer or authorized facility manager, primary 10-digit mobile telephone number, secondary contact number (if provided), and electronic mail (email) address.
+            </li>
+            <li>
+              <strong>Physical Geo-Location &amp; Premises Address:</strong> House/flat number, apartment/society name, street name, nearest prominent landmark, locality (e.g., Gamharia, Adityapur, Bistupur, Sonari, Kadma, Telco, Jugsalai), town, and postal PIN code (832108 / 831001 etc.).
+            </li>
+            <li>
+              <strong>Tank &amp; Service Technical Data:</strong> Tank capacity in liters (500L up to 1,50,000L), tank type (Overhead Sintex/PVC or Underground RCC Concrete Sump), number of units, preferred date and time slot, and photographs of the tank or terrace access voluntarily shared via WhatsApp for preliminary technical assessment.
+            </li>
+            <li>
+              <strong>Transactional &amp; Fulfillment Logs:</strong> Unique DRTC Service Tracking ID (e.g., <code>DRTC-9821</code>), date and time of dispatch, assigned technician name, service completion timestamp, customer feedback, and physical verification sign-off.
+            </li>
+            <li>
+              <strong>Technical &amp; Telemetry Data:</strong> Internet Protocol (IP) address, browser user-agent string, and submission timestamps recorded solely for cybersecurity monitoring, automated bot defense, and verification against malicious or fraudulent bookings.
+            </li>
+          </ul>
         </div>
+        <p style="margin-top: 0.75rem; color: #f59e0b;">
+          <strong>Financial Data Disclaimer:</strong> DRTC <u>never</u> stores, processes, or captures bank account passwords, debit/credit card CVV numbers, net banking credentials, or UPI PINs. All payments are strictly peer-to-peer (P2P UPI or on-site Cash on Delivery) processed through official NPCI-licensed UPI applications (Google Pay, PhonePe, Paytm, BHIM) directly to authorized accounts.
+        </p>
+      </section>
+
+      <!-- 3. Lawful Basis & Specified Purposes -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">3. Lawful Basis &amp; Specific Purpose of Data Processing</h2>
+        <p>
+          Under Indian law, your personal data is processed strictly under the lawful basis of your explicit consent and legitimate operational necessity:
+        </p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li><strong>Technician Dispatch &amp; Field Routing:</strong> Directing certified cleaning technicians (Dinesh Kumar &amp; Rakesh Kumar) with industrial pressure-wash equipment directly to your premises without delay.</li>
+          <li><strong>Operational Verification &amp; Access Check:</strong> Contacting you 1–2 hours prior to arrival via phone call or WhatsApp to confirm power supply availability (220V socket) and water drainage permissions.</li>
+          <li><strong>Warranty &amp; Satisfaction Tracking:</strong> Verifying your unique Booking Tracking ID to honor our 48-Hour Free Re-Cleaning Satisfaction Guarantee.</li>
+          <li><strong>Receipt Generation &amp; Invoicing:</strong> Issuing transparent electronic service receipts and GST-compliant service documentation for commercial/society clients.</li>
+          <li><strong>Prevention of Fraudulent &amp; Hoax Bookings:</strong> Protecting our field technicians against fake dispatch addresses, malicious hoax bookings, and harassment under Sections 336 / 415 of the Indian Penal Code (IPC) / Bharatiya Nyaya Sanhita (BNS).</li>
+        </ul>
+      </section>
+
+      <!-- 4. Strict Non-Disclosure & Zero Commercial Sale -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">4. Absolute Prohibition on Data Sale &amp; Third-Party Sharing</h2>
+        <p>
+          <strong>DRTC maintains a strict zero-commercialization policy regarding personal data:</strong>
+        </p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li>We <strong>do not sell, rent, lease, trade, barter, or distribute</strong> your personal phone numbers, addresses, or booking histories to third-party telemarketing companies, lead aggregators, digital ad networks, or data brokers.</li>
+          <li>Access to your contact details and address is restricted strictly to our direct operations leads and dispatched field personnel who are bound by confidentiality obligations.</li>
+          <li><strong>Statutory Disclosures:</strong> Personal information will only be disclosed to Indian law enforcement authorities, Cyber Crime Cells, or judicial courts when compelled by a valid statutory notice, warrant, or court order under the Code of Criminal Procedure, 1973 (CrPC) / Bharatiya Nagarik Suraksha Sanhita, 2023 (BNSS).</li>
+        </ul>
+      </section>
+
+      <!-- 5. Technical Safeguards & Reasonable Security Practices -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">5. Security Safeguards &amp; IT Act Rule 8 Compliance</h2>
+        <p>
+          In accordance with Rule 8 of the Information Technology (SPDI) Rules, 2011 and Section 8(5) of the DPDP Act, 2023, DRTC enforces comprehensive technical and operational safeguards:
+        </p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li><strong>Cryptographic Data In Transit:</strong> All communication between your web browser and our servers is secured with 256-bit Secure Sockets Layer / Transport Layer Security (TLS 1.3) encryption.</li>
+          <li><strong>Protected Database Architecture:</strong> Backend database records are hosted on enterprise cloud infrastructure (PostgreSQL with SSL mode required) protected by automated firewalls, isolated VPC networks, and stringent role-based credential controls.</li>
+          <li><strong>Cross-Site Request Forgery (CSRF) &amp; XSS Defense:</strong> Django cryptographic token protection on every booking form preventing unauthorized submission injection.</li>
+          <li><strong>Data Breach Protocol:</strong> In the unforeseen event of a security compromise impacting personal data, DRTC shall notify affected Data Principals and the Data Protection Board of India in accordance with statutory guidelines.</li>
+        </ul>
+      </section>
+
+      <!-- 6. Data Retention & Erasure -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">6. Data Retention Period &amp; Deletion Protocol</h2>
+        <p>
+          Personal data collected for service fulfillment is retained only for the period necessary to:
+        </p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.4rem;">
+          <li>Honor the 48-Hour Satisfaction Guarantee and provide periodic bi-annual or annual tank maintenance recall notifications requested by the customer;</li>
+          <li>Maintain operational and financial records as mandated by Indian tax and accounting regulations.</li>
+        </ul>
+        <p style="margin-top: 0.75rem;">
+          Once the retention purpose is achieved, records are either securely purged from production databases or irreversibly anonymized for aggregate statistical auditing.
+        </p>
+      </section>
+
+      <!-- 7. Data Principal Rights (Under DPDP Act 2023) -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">7. Rights of the Data Principal</h2>
+        <p>As a Data Principal under Indian law, you are entitled to exercise the following rights at any time:</p>
+        <ul style="padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <li><strong>Right to Access:</strong> Request a summary of the personal data and booking history processed by DRTC.</li>
+          <li><strong>Right to Correction &amp; Updation:</strong> Request correction of any inaccurate, outdated, or incomplete phone numbers or service addresses.</li>
+          <li><strong>Right to Erasure ("Right to be Forgotten"):</strong> Request the complete deletion of your booking records and contact information, subject to statutory retention obligations under tax laws.</li>
+          <li><strong>Right to Withdraw Consent:</strong> Withdraw your consent for non-essential service notifications by contacting our Grievance Officer.</li>
+          <li><strong>Right of Grievance Redressal:</strong> Avail of an accessible grievance redressal mechanism regarding your privacy rights.</li>
+        </ul>
+      </section>
+
+      <!-- 8. Protection of Minors -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">8. Protection of Minors</h2>
+        <p>
+          Our services and web portal are strictly intended for property owners, authorized adult tenants, residential welfare association (RWA) executives, or facility administrators aged <strong>18 years or older</strong>. DRTC does not knowingly solicit or collect personal data from minors. If we become aware that a minor has scheduled an appointment without parental or legal guardian consent, the booking and related data will be cancelled and deleted immediately.
+        </p>
+      </section>
+
+      <!-- 9. Statutory Grievance Redressal Officer -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">
+          9. Statutory Grievance Redressal Officer &amp; Regulatory Contact
+        </h2>
+        <p>
+          In accordance with Rule 5(9) of the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 and Section 12 of the Digital Personal Data Protection Act, 2023, the designated Grievance &amp; Compliance Officer for DRTC Service is:
+        </p>
+        <div style="background: rgba(14, 165, 233, 0.05); border: 1px solid rgba(14, 165, 233, 0.3); border-radius: var(--radius-sm); padding: 1.5rem; margin-top: 0.85rem;">
+          <h3 style="font-size: 1.05rem; font-weight: 700; color: var(--accent-cyan); margin: 0 0 0.5rem 0;">
+            Dinesh Kumar
+          </h3>
+          <p style="margin: 0 0 0.35rem 0; font-size: 0.9rem; color: #ffffff;">
+            <strong>Designation:</strong> Compliance &amp; Grievance Redressal Officer
+          </p>
+          <p style="margin: 0 0 0.35rem 0; font-size: 0.9rem;">
+            <strong>Entity:</strong> DRTC Service (Dinesh Rakesh Tank Cleaning Service)
+          </p>
+          <p style="margin: 0 0 0.35rem 0; font-size: 0.9rem;">
+            <strong>Office Address:</strong> Shantinagar, Gamharia, Near By Jhanda Chowk, Dist. Seraikela-Kharsawan / Jamshedpur, Jharkhand – 832108, India
+          </p>
+          <p style="margin: 0 0 0.35rem 0; font-size: 0.9rem;">
+            <strong>Direct Phone:</strong> <a href="tel:7808611636" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">+91 7808611636</a> / <a href="tel:6352561343" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">+91 6352561343</a>
+          </p>
+          <p style="margin: 0; font-size: 0.9rem;">
+            <strong>Official Email:</strong> <a href="mailto:drtcservice@gmail.com" style="color: var(--accent-gold); text-decoration: none; font-weight: 600;">drtcservice@gmail.com</a>
+          </p>
+        </div>
+        <p style="margin-top: 0.85rem; font-size: 0.88rem; color: var(--text-muted);">
+          <strong>Statutory Redressal Timeline:</strong> All privacy-related grievances or data modification requests received will be acknowledged within <strong>48 hours</strong> and comprehensively addressed and resolved within a maximum statutory period of <strong>30 days</strong> from receipt.
+        </p>
+      </section>
+
+      <!-- 10. Amendments & Updates -->
+      <section>
+        <h2 style="font-size: 1.3rem; font-weight: 700; color: #ffffff; margin-bottom: 0.75rem;">10. Policy Amendments &amp; Notifications</h2>
+        <p>
+          DRTC reserves the right to periodically update this Policy to reflect changes in regulatory directives from the Data Protection Board of India, judicial pronouncements, or operational procedures. Material updates will be published on this page with an updated "Effective Date". Continued use of our booking facilities signifies acceptance of the amended terms.
+        </p>
       </section>
     </div>
 
-    <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; gap: 1rem; flex-wrap: wrap;">
+    <!-- Bottom Actions -->
+    <div style="margin-top: 3rem; padding-top: 1.75rem; border-top: 1px solid var(--border-subtle); display: flex; gap: 1rem; flex-wrap: wrap;">
       <a href="{% url 'terms_and_conditions' %}" class="btn btn-outline btn-sm">Read Terms &amp; Conditions</a>
       <a href="{% url 'home' %}" class="btn btn-primary btn-sm">Return to Homepage</a>
     </div>
-  </div>
+  </article>
 </div>
 {% endblock %}
