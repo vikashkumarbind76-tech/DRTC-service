@@ -2693,3 +2693,291 @@ textarea.form-control {
   color: #34d399;
   flex-shrink: 0;
 }
+
+/* ==========================================================================
+   COMPREHENSIVE RESPONSIVE OVERRIDES
+   ========================================================================== */
+
+/* ── Container padding tighter on small screens ── */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* ── Trust Metric Strip ── */
+@media (max-width: 900px) {
+  .trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .trust-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .trust-item {
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+/* ── Section padding ── */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 3rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+  }
+}
+
+/* ── Packages grid: 2-col at tablet before going 1-col ── */
+@media (min-width: 481px) and (max-width: 768px) {
+  .packages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Calculator box ── */
+@media (max-width: 768px) {
+  .calculator-box {
+    padding: 1.75rem 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  .calc-title {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calculator-box {
+    padding: 1.25rem 1rem;
+    margin-top: 2rem;
+  }
+
+  .capacity-pills-row {
+    gap: 0.4rem;
+  }
+
+  .capacity-pill {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.82rem;
+  }
+
+  .calc-result-total {
+    font-size: 2.4rem;
+  }
+}
+
+/* ── Contact section inner form grids ── */
+/* phone + email two-column row in contact form */
+@media (max-width: 600px) {
+  .contact-form-inline-grid {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+}
+
+/* ── Booking modal inner sub-grids ── */
+/* date/slot row & landmark/area row are 1fr 1fr via inline style */
+@media (max-width: 480px) {
+  .booking-modal-col > div[style*="grid-template-columns: 1fr 1fr"],
+  .booking-modal-col > div[style*="grid-template-columns: 1.2fr"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+}
+
+/* Modal body padding on small screens */
+@media (max-width: 480px) {
+  .modal-body {
+    padding: 1rem;
+  }
+
+  .modal-header {
+    padding: 0.85rem 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* ── Contact info buttons row ── */
+@media (max-width: 480px) {
+  .contact-info-card > div[style*="display: flex"] {
+    flex-direction: column;
+  }
+}
+
+/* ── Live toast: move up above mobile bottom bar ── */
+@media (max-width: 768px) {
+  .live-toast-container {
+    bottom: 90px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .live-toast {
+    max-width: 100%;
+    font-size: 0.8rem;
+  }
+}
+
+/* ── Toast notification ── */
+@media (max-width: 480px) {
+  .toast-container {
+    bottom: 80px;
+    right: 12px;
+    left: 12px;
+  }
+
+  .toast {
+    min-width: unset;
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.84rem;
+  }
+}
+
+/* ── Booking track page inline 2-col grid ── */
+@media (max-width: 580px) {
+  /* booking result detail grid */
+  #trackResultGrid,
+  .booking-result-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Force the inline-style detail grids in booking_track to stack */
+@media (max-width: 580px) {
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── FAQ section ── */
+@media (max-width: 480px) {
+  .faq-summary {
+    font-size: 0.95rem;
+  }
+
+  .faq-item {
+    padding: 1rem 1.1rem;
+  }
+}
+
+/* ── Reviews grid: ensure 2 col at medium tablet ── */
+@media (min-width: 601px) and (max-width: 1100px) {
+  .reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Value prop cards: 2-col on medium tablet ── */
+@media (min-width: 581px) and (max-width: 1024px) {
+  .value-props-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Hero actions: stack on xs ── */
+@media (max-width: 400px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* ── Footer ── */
+@media (max-width: 480px) {
+  .footer {
+    padding: 3rem 0 1.5rem 0;
+  }
+
+  .footer-grid {
+    gap: 1.5rem;
+  }
+}
+
+/* ── Floating badges: hide on xs to prevent overflow ── */
+@media (max-width: 380px) {
+  .floating-badge {
+    display: none;
+  }
+}
+
+/* ── Ensure images never overflow their containers ── */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ── Proof grid ── */
+@media (max-width: 480px) {
+  .proof-content {
+    padding: 1rem;
+  }
+}
+
+/* ── Stage cards ── */
+@media (max-width: 480px) {
+  .stage-card {
+    padding: 1.25rem;
+  }
+}
+
+/* ── Contact grid cards ── */
+@media (max-width: 480px) {
+  .contact-info-card,
+  .contact-form {
+    padding: 1.5rem 1.1rem;
+  }
+}
+
+/* ── Very small screens (320px base) ── */
+@media (max-width: 360px) {
+  html {
+    font-size: 14px;
+  }
+
+  .btn-lg {
+    padding: 0.75rem 1.2rem;
+    font-size: 0.95rem;
+  }
+
+  .brand-title {
+    font-size: 1.2rem;
+  }
+
+  .nav-actions .btn-primary span {
+    display: none;
+  }
+
+  .nav-actions .btn-primary svg {
+    margin: 0;
+  }
+}
+

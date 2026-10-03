@@ -116,19 +116,38 @@ def api_create_booking(request):
             data = json.loads(request.body)
         else:
             data = request.POST
+            # Handle edge-case where client passes dict or raw body with application/x-www-form-urlencoded
+            if not data.get('customer_name') and len(data) == 1:
+                first_key = list(data.keys())[0]
+                if first_key.startswith('{') and first_key.endswith('}'):
+                    try:
+                        import ast
+                        parsed_dict = ast.literal_eval(first_key)
+                        if isinstance(parsed_dict, dict):
+                            data = parsed_dict
+                    except Exception:
+                        pass
+            if not data.get('customer_name') and request.body:
+                try:
+                    import urllib.parse
+                    parsed = urllib.parse.parse_qs(request.body.decode('utf-8'))
+                    if parsed:
+                        data = {k: v[0] for k, v in parsed.items()}
+                except Exception:
+                    pass
 
-        name = data.get('customer_name', '').strip()
-        phone = data.get('customer_phone', '').strip()
-        address = data.get('address', '').strip()
+        name = str(data.get('customer_name', '')).strip()
+        phone = str(data.get('customer_phone', '')).strip()
+        address = str(data.get('address', '')).strip()
         package_id = data.get('package_id')
-        custom_cap = data.get('custom_capacity', '').strip()
+        custom_cap = str(data.get('custom_capacity', '')).strip()
         tank_type = data.get('tank_type', 'OVERHEAD_PVC')
         number_of_tanks = int(data.get('number_of_tanks', 1))
         preferred_date = data.get('preferred_date') or timezone.now().date().isoformat()
         preferred_time_slot = data.get('preferred_time_slot', '08:00 AM - 11:00 AM')
-        landmark = data.get('landmark', '').strip()
-        area_locality = data.get('area_locality', 'Gamharia, Jamshedpur').strip()
-        notes = data.get('notes', '').strip()
+        landmark = str(data.get('landmark', '')).strip()
+        area_locality = str(data.get('area_locality', 'Gamharia, Jamshedpur')).strip()
+        notes = str(data.get('notes', '')).strip()
         payment_method = data.get('payment_method', 'PAY_ON_SERVICE')
 
         if not name or not phone or not address:
@@ -281,11 +300,36 @@ def booking_track_view(request):
 @require_http_methods(["POST"])
 def api_contact(request):
     """Receive contact and emergency inquiry messages."""
-    name = request.POST.get('name', '').strip()
-    phone = request.POST.get('phone', '').strip()
-    email = request.POST.get('email', '').strip()
-    subject = request.POST.get('subject', 'General Inquiry').strip()
-    message = request.POST.get('message', '').strip()
+    data = request.POST
+    if request.content_type == 'application/json':
+        try:
+            data = json.loads(request.body)
+        except Exception:
+            data = {}
+    elif not data.get('name') and len(data) == 1:
+        first_key = list(data.keys())[0]
+        if first_key.startswith('{') and first_key.endswith('}'):
+            try:
+                import ast
+                parsed_dict = ast.literal_eval(first_key)
+                if isinstance(parsed_dict, dict):
+                    data = parsed_dict
+            except Exception:
+                pass
+    elif not data.get('name') and request.body:
+        try:
+            import urllib.parse
+            parsed = urllib.parse.parse_qs(request.body.decode('utf-8'))
+            if parsed:
+                data = {k: v[0] for k, v in parsed.items()}
+        except Exception:
+            pass
+
+    name = str(data.get('name', '')).strip()
+    phone = str(data.get('phone', '')).strip()
+    email = str(data.get('email', '')).strip()
+    subject = str(data.get('subject', 'General Inquiry')).strip()
+    message = str(data.get('message', '')).strip()
 
     if not name or not phone or not message:
         return JsonResponse({'status': 'error', 'message': 'Name, Phone and Message are required.'}, status=400)

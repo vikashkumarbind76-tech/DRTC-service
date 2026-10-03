@@ -441,6 +441,7 @@ function initBookingModal() {
         closeModal();
         showBookingSuccessModal(result);
         form.reset();
+        window.dispatchEvent(new CustomEvent('drtc:booking_created'));
       } else {
         showToast(result.message || 'Error creating booking. Please try again.', 'error');
       }

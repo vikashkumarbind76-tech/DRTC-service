@@ -294,39 +294,48 @@ function initCalculator() {
     const count = parseInt(countSelect?.value || '1', 10);
     const tankType = 'OVERHEAD_PVC';
 
-    // Official DRTC rates:
-    // 500L: 250, 1000L: 400, 2000L: 650, 3000L: 900, 5000L: 1100
+    // Official DRTC price board — all 25 tiers
     let baseRate = 400;
     let baseDuration = 60;
 
-    if (currentCapacity <= 500) {
-      baseRate = 250;
-      baseDuration = 45;
-    } else if (currentCapacity <= 1000) {
-      baseRate = 400;
-      baseDuration = 60;
-    } else if (currentCapacity <= 2000) {
-      baseRate = 650;
-      baseDuration = 90;
-    } else if (currentCapacity <= 3000) {
-      baseRate = 900;
-      baseDuration = 120;
-    } else {
-      baseRate = 1100 + Math.floor((currentCapacity - 5000) / 1000) * 200;
-      baseDuration = 180;
-    }
+    if      (currentCapacity <= 500)    { baseRate = 250;   baseDuration = 45; }
+    else if (currentCapacity <= 1000)   { baseRate = 400;   baseDuration = 60; }
+    else if (currentCapacity <= 2000)   { baseRate = 650;   baseDuration = 90; }
+    else if (currentCapacity <= 3000)   { baseRate = 900;   baseDuration = 120; }
+    else if (currentCapacity <= 5000)   { baseRate = 1100;  baseDuration = 180; }
+    else if (currentCapacity <= 8000)   { baseRate = 1680;  baseDuration = 210; }
+    else if (currentCapacity <= 10000)  { baseRate = 2200;  baseDuration = 240; }
+    else if (currentCapacity <= 15000)  { baseRate = 3080;  baseDuration = 270; }
+    else if (currentCapacity <= 20000)  { baseRate = 3820;  baseDuration = 300; }
+    else if (currentCapacity <= 25000)  { baseRate = 4740;  baseDuration = 330; }
+    else if (currentCapacity <= 30000)  { baseRate = 5490;  baseDuration = 360; }
+    else if (currentCapacity <= 40000)  { baseRate = 6390;  baseDuration = 420; }
+    else if (currentCapacity <= 45000)  { baseRate = 7200;  baseDuration = 450; }
+    else if (currentCapacity <= 50000)  { baseRate = 7600;  baseDuration = 480; }
+    else if (currentCapacity <= 60000)  { baseRate = 8210;  baseDuration = 510; }
+    else if (currentCapacity <= 65000)  { baseRate = 9000;  baseDuration = 540; }
+    else if (currentCapacity <= 70000)  { baseRate = 9600;  baseDuration = 570; }
+    else if (currentCapacity <= 80000)  { baseRate = 11210; baseDuration = 600; }
+    else if (currentCapacity <= 85000)  { baseRate = 13870; baseDuration = 630; }
+    else if (currentCapacity <= 90000)  { baseRate = 15500; baseDuration = 660; }
+    else if (currentCapacity <= 100000) { baseRate = 18780; baseDuration = 720; }
+    else if (currentCapacity <= 105000) { baseRate = 20810; baseDuration = 750; }
+    else if (currentCapacity <= 120000) { baseRate = 25950; baseDuration = 780; }
+    else if (currentCapacity <= 125000) { baseRate = 29590; baseDuration = 840; }
+    else                                { baseRate = 36830; baseDuration = 900; }
 
     const finalPerTank = baseRate;
     const finalTotal = finalPerTank * count;
     const originalMrp = Math.round(finalTotal * 1.45);
     const savings = originalMrp - finalTotal;
+    const savingsPct = Math.round((savings / originalMrp) * 100);
     const totalDuration = baseDuration * count;
 
-    if (totalDisplay) totalDisplay.textContent = `₹${finalTotal}`;
-    if (mrpDisplay) mrpDisplay.textContent = `₹${originalMrp}`;
-    if (savingsDisplay) savingsDisplay.textContent = `You Save ₹${savings} (31% OFF)`;
+    if (totalDisplay) totalDisplay.textContent = `₹${finalTotal.toLocaleString('en-IN')}`;
+    if (mrpDisplay) mrpDisplay.textContent = `₹${originalMrp.toLocaleString('en-IN')}`;
+    if (savingsDisplay) savingsDisplay.textContent = `You Save ₹${savings.toLocaleString('en-IN')} (${savingsPct}% OFF)`;
     if (durationDisplay) durationDisplay.textContent = `${totalDuration} Minutes`;
-    if (perTankDisplay) perTankDisplay.textContent = `₹${finalPerTank} / tank`;
+    if (perTankDisplay) perTankDisplay.textContent = `₹${finalPerTank.toLocaleString('en-IN')} / tank`;
 
     // Update WhatsApp link
     if (calcWhatsAppBtn) {
@@ -432,6 +441,7 @@ function initBookingModal() {
         closeModal();
         showBookingSuccessModal(result);
         form.reset();
+        window.dispatchEvent(new CustomEvent('drtc:booking_created'));
       } else {
         showToast(result.message || 'Error creating booking. Please try again.', 'error');
       }

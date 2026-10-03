@@ -11,10 +11,18 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 import os
+import shutil
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Load local environment variables if .env exists
+try:
+    from dotenv import load_dotenv
+    load_dotenv(BASE_DIR / '.env')
+except ImportError:
+    pass
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-v2o58()@*zxwhga-4cx%0+j(p7@9&7s!2gwvj0!22#o6)x76@e')
@@ -23,6 +31,15 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-v2o58()@*zxwhg
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.vercel.app',
+    'https://*.now.sh',
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+]
+if os.environ.get('VERCEL_URL'):
+    CSRF_TRUSTED_ORIGINS.append(f"https://{os.environ.get('VERCEL_URL')}")
 
 
 # Application definition
@@ -70,13 +87,51 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Database Configuration
+# 1. Cloud PostgreSQL (Neon, Supabase, Railway, RDS) via DATABASE_URL
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if DATABASE_URL:
+    try:
+        import dj_database_url
+        DATABASES = {
+            'default': dj_database_url.config(
+                default=DATABASE_URL,
+                conn_max_age=600,
+                conn_health_checks=True,
+            )
+        }
+    except Exception:
+        DATABASE_URL = None
+
+if not DATABASE_URL:
+    # 2. Serverless SQLite on Vercel (/var/task is strictly read-only, only /tmp is writable)
+    if os.environ.get('VERCEL'):
+        tmp_db = Path('/tmp/db.sqlite3')
+        orig_db = BASE_DIR / 'db.sqlite3'
+        if not tmp_db.exists() and orig_db.exists():
+            try:
+                shutil.copyfile(orig_db, tmp_db)
+            except Exception:
+                try:
+                    shutil.copy2(orig_db, tmp_db)
+                except Exception:
+                    pass
+        if tmp_db.exists():
+            try:
+                os.chmod(tmp_db, 0o666)
+            except Exception:
+                pass
+        db_path = tmp_db
+    else:
+        db_path = BASE_DIR / 'db.sqlite3'
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': db_path,
+        }
     }
-}
 
 
 # Password validation
