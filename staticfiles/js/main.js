@@ -279,6 +279,8 @@ function initScrollSpy() {
 function initCalculator() {
   const pills = document.querySelectorAll('.capacity-pill');
   const countSelect = document.getElementById('calc-count');
+  const capacitySelect = document.getElementById('calc-capacity-select');
+  const tabBtns = document.querySelectorAll('.calc-tab-btn');
   
   const totalDisplay = document.getElementById('calc-total-display');
   const mrpDisplay = document.getElementById('calc-mrp-display');
@@ -337,34 +339,94 @@ function initCalculator() {
     if (durationDisplay) durationDisplay.textContent = `${totalDuration} Minutes`;
     if (perTankDisplay) perTankDisplay.textContent = `₹${finalPerTank.toLocaleString('en-IN')} / tank`;
 
+    // Format human-friendly capacity label
+    const capLabel = currentCapacity >= 1000 ? `${(currentCapacity).toLocaleString('en-IN')} L` : `${currentCapacity} Liter`;
+
     // Update WhatsApp link
     if (calcWhatsAppBtn) {
-      const msg = `Hello Dinesh & Rakesh (DRTC Service), I want to clean ${count} plastic tank(s) of ${currentCapacity}L. Estimated Quote: ₹${finalTotal}. Please contact me to confirm a slot.`;
+      const msg = `Hello Dinesh & Rakesh (DRTC Service), I want to clean ${count} tank(s) of ${capLabel}. Estimated Quote: ₹${finalTotal}. Please contact me to confirm a slot.`;
       calcWhatsAppBtn.href = `https://wa.me/917808611636?text=${encodeURIComponent(msg)}`;
     }
 
     // Pass data to booking modal trigger
     if (calcBookBtn) {
-      calcBookBtn.setAttribute('data-capacity', `${currentCapacity} L`);
+      calcBookBtn.setAttribute('data-capacity', capLabel);
       calcBookBtn.setAttribute('data-count', count);
       calcBookBtn.setAttribute('data-type', tankType);
       calcBookBtn.setAttribute('data-total', finalTotal);
     }
   }
 
+  function setCapacity(liters, source) {
+    currentCapacity = parseInt(liters || '1000', 10);
+
+    // Sync capacity pills
+    pills.forEach(pill => {
+      const pLiters = parseInt(pill.getAttribute('data-liters') || '0', 10);
+      if (pLiters === currentCapacity) {
+        pill.classList.add('active');
+        if (source === 'select') {
+          pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        }
+      } else {
+        pill.classList.remove('active');
+      }
+    });
+
+    // Sync dropdown selector
+    if (capacitySelect && source !== 'select') {
+      capacitySelect.value = String(currentCapacity);
+    }
+
+    updateCalculator();
+  }
+
+  // Pill click handlers
   pills.forEach(pill => {
     pill.addEventListener('click', () => {
-      pills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      currentCapacity = parseInt(pill.getAttribute('data-liters') || '1000', 10);
-      updateCalculator();
+      const liters = parseInt(pill.getAttribute('data-liters') || '1000', 10);
+      setCapacity(liters, 'pill');
     });
+  });
+
+  // Category filter tabs handler
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.getAttribute('data-filter') || 'all';
+
+      pills.forEach(pill => {
+        const cat = pill.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          pill.classList.remove('pill-hidden');
+        } else {
+          pill.classList.add('pill-hidden');
+        }
+      });
+    });
+  });
+
+  // Dropdown selector handler
+  capacitySelect?.addEventListener('change', () => {
+    const liters = parseInt(capacitySelect.value || '1000', 10);
+    // If current filter tab hides this pill, reset tab filter to 'all' so pill is visible
+    const targetPill = document.querySelector(`.capacity-pill[data-liters="${liters}"]`);
+    if (targetPill && targetPill.classList.contains('pill-hidden')) {
+      tabBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-filter') === 'all'));
+      pills.forEach(p => p.classList.remove('pill-hidden'));
+    }
+    setCapacity(liters, 'select');
   });
 
   countSelect?.addEventListener('change', updateCalculator);
 
   // Initial calculation
-  updateCalculator();
+  if (capacitySelect && capacitySelect.value) {
+    setCapacity(capacitySelect.value, 'init');
+  } else {
+    updateCalculator();
+  }
 }
 
 /* ----------------------------------------------------

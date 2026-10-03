@@ -196,13 +196,92 @@
           </p>
 
           <div class="calc-control-group">
-            <div class="calc-label">1. Select Tank Capacity (Liters)</div>
-            <div class="capacity-pills-row">
-              <button type="button" class="capacity-pill" data-liters="500">500 Liter</button>
-              <button type="button" class="capacity-pill active" data-liters="1000">1000 L</button>
-              <button type="button" class="capacity-pill" data-liters="2000">2000 L</button>
-              <button type="button" class="capacity-pill" data-liters="3000">3000 L</button>
-              <button type="button" class="capacity-pill" data-liters="5000">5000 L</button>
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.65rem;">
+              <label class="calc-label" for="calc-capacity-select" style="margin-bottom: 0;">1. Select Tank Capacity (Up to 1,50,000 L)</label>
+              <!-- Quick Select Dropdown for direct access to all 25 capacities -->
+              <select id="calc-capacity-select" class="calc-count-select" style="max-width: 250px; padding: 0.45rem 0.85rem; font-size: 0.84rem;" aria-label="Select Tank Capacity">
+                {% if packages %}
+                  {% for pkg in packages %}
+                    <option value="{{ pkg.capacity_liters }}" {% if pkg.capacity_liters == 1000 %}selected{% endif %}>
+                      {{ pkg.capacity }} (₹{{ pkg.price|floatformat:0 }})
+                    </option>
+                  {% endfor %}
+                {% else %}
+                  <option value="500">500 Liter (₹250)</option>
+                  <option value="1000" selected>1000 L (₹400)</option>
+                  <option value="2000">2000 L (₹650)</option>
+                  <option value="3000">3000 L (₹900)</option>
+                  <option value="5000">5000 L (₹1100)</option>
+                  <option value="8000">8000 L (₹1680)</option>
+                  <option value="10000">10,000 L (₹2200)</option>
+                  <option value="15000">15,000 L (₹3080)</option>
+                  <option value="20000">20,000 L (₹3820)</option>
+                  <option value="25000">25,000 L (₹4740)</option>
+                  <option value="30000">30,000 L (₹5490)</option>
+                  <option value="40000">40,000 L (₹6390)</option>
+                  <option value="45000">45,000 L (₹7200)</option>
+                  <option value="50000">50,000 L (₹7600)</option>
+                  <option value="60000">60,000 L (₹8210)</option>
+                  <option value="65000">65,000 L (₹9000)</option>
+                  <option value="70000">70,000 L (₹9600)</option>
+                  <option value="80000">80,000 L (₹11210)</option>
+                  <option value="85000">85,000 L (₹13870)</option>
+                  <option value="90000">90,000 L (₹15500)</option>
+                  <option value="100000">1,00,000 L (₹18780)</option>
+                  <option value="105000">1,05,000 L (₹20810)</option>
+                  <option value="120000">1,20,000 L (₹25950)</option>
+                  <option value="125000">1,25,000 L (₹29590)</option>
+                  <option value="150000">1,50,000 L (₹36830)</option>
+                {% endif %}
+              </select>
+            </div>
+
+            <!-- Category filter tabs -->
+            <div class="calc-tabs-row" style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+              <button type="button" class="calc-tab-btn active" data-filter="all">All (25 Tiers)</button>
+              <button type="button" class="calc-tab-btn" data-filter="residential">Residential (500L - 5kL)</button>
+              <button type="button" class="calc-tab-btn" data-filter="commercial">Commercial (8kL - 30kL)</button>
+              <button type="button" class="calc-tab-btn" data-filter="industrial">Industrial (40kL - 150kL)</button>
+            </div>
+
+            <!-- Capacity Pills (all 25 options) -->
+            <div class="capacity-pills-row" id="calc-pills-container">
+              {% if packages %}
+                {% for pkg in packages %}
+                  <button type="button" 
+                          class="capacity-pill {% if pkg.capacity_liters == 1000 %}active{% endif %}" 
+                          data-liters="{{ pkg.capacity_liters }}"
+                          data-category="{% if pkg.capacity_liters <= 5000 %}residential{% elif pkg.capacity_liters <= 30000 %}commercial{% else %}industrial{% endif %}">
+                    {{ pkg.capacity }}
+                  </button>
+                {% endfor %}
+              {% else %}
+                <button type="button" class="capacity-pill" data-liters="500" data-category="residential">500 Liter</button>
+                <button type="button" class="capacity-pill active" data-liters="1000" data-category="residential">1000 L</button>
+                <button type="button" class="capacity-pill" data-liters="2000" data-category="residential">2000 L</button>
+                <button type="button" class="capacity-pill" data-liters="3000" data-category="residential">3000 L</button>
+                <button type="button" class="capacity-pill" data-liters="5000" data-category="residential">5000 L</button>
+                <button type="button" class="capacity-pill" data-liters="8000" data-category="commercial">8000 L</button>
+                <button type="button" class="capacity-pill" data-liters="10000" data-category="commercial">10,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="15000" data-category="commercial">15,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="20000" data-category="commercial">20,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="25000" data-category="commercial">25,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="30000" data-category="commercial">30,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="40000" data-category="industrial">40,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="45000" data-category="industrial">45,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="50000" data-category="industrial">50,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="60000" data-category="industrial">60,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="65000" data-category="industrial">65,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="70000" data-category="industrial">70,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="80000" data-category="industrial">80,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="85000" data-category="industrial">85,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="90000" data-category="industrial">90,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="100000" data-category="industrial">1,00,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="105000" data-category="industrial">1,05,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="120000" data-category="industrial">1,20,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="125000" data-category="industrial">1,25,000 L</button>
+                <button type="button" class="capacity-pill" data-liters="150000" data-category="industrial">1,50,000 L</button>
+              {% endif %}
             </div>
           </div>
 
