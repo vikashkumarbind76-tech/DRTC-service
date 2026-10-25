@@ -439,16 +439,97 @@ function initBookingModal() {
   const openButtons = document.querySelectorAll('.open-booking-modal-btn');
 
   const capInput = document.getElementById('modal-package-cap');
+  const capLabel = document.getElementById('modal-cap-label');
+  const priceDisplay = document.getElementById('modal-price-display');
+  const capSelect = document.getElementById('modal-capacity-select');
+  const modalPills = document.querySelectorAll('.modal-cap-pill');
   const pkgIdInput = document.getElementById('modal-package-id');
   const typeSelect = document.getElementById('modal-tank-type');
   const countInput = document.getElementById('modal-tank-count');
+
+  const modalPriceMap = {
+    '500 L': 250, '500': 250, '500 Liter': 250,
+    '1000 L': 400, '1000': 400,
+    '2000 L': 650, '2000': 650,
+    '3000 L': 900, '3000': 900,
+    '5000 L': 1100, '5000': 1100,
+    '8000 L': 1680, '8000': 1680,
+    '10,000 L': 2200, '10000 L': 2200, '10000': 2200,
+    '15,000 L': 3080, '15000 L': 3080, '15000': 3080,
+    '20,000 L': 3820, '20000 L': 3820, '20000': 3820,
+    '25,000 L': 4740, '25000 L': 4740, '25000': 4740,
+    '30,000 L': 5490, '30000 L': 5490, '30000': 5490,
+    '40,000 L': 6390, '40000 L': 6390, '40000': 6390,
+    '45,000 L': 7200, '45000 L': 7200, '45000': 7200,
+    '50,000 L': 7600, '50000 L': 7600, '50000': 7600,
+    '60,000 L': 8210, '60000 L': 8210, '60000': 8210,
+    '65,000 L': 9000, '65000 L': 9000, '65000': 9000,
+    '70,000 L': 9600, '70000 L': 9600, '70000': 9600,
+    '80,000 L': 11210, '80000 L': 11210, '80000': 11210,
+    '85,000 L': 13870, '85000 L': 13870, '85000': 13870,
+    '90,000 L': 15500, '90000 L': 15500, '90000': 15500,
+    '1,00,000 L': 18780, '100000 L': 18780, '100000': 18780,
+    '1,05,000 L': 20810, '105000 L': 20810, '105000': 20810,
+    '1,20,000 L': 25950, '120000 L': 25950, '120000': 25950,
+    '1,25,000 L': 29590, '125000 L': 29590, '125000': 29590,
+    '1,50,000 L': 36830, '150000 L': 36830, '150000': 36830
+  };
+
+  function updateModalCapacity(capacityVal, priceVal) {
+    let rawVal = (capacityVal || '1000 L').trim();
+    let norm = rawVal.replace(/\s+/g, ' ');
+    if (!norm.toLowerCase().endsWith('l') && !isNaN(norm.replace(/,/g, ''))) {
+      norm = `${parseInt(norm.replace(/,/g, '')).toLocaleString('en-IN')} L`;
+    }
+
+    const price = priceVal || modalPriceMap[norm] || modalPriceMap[norm.replace(/,/g, '')] || modalPriceMap[norm.replace(/\s*L/i, '')] || 400;
+
+    if (capInput) capInput.value = norm;
+    if (capLabel) capLabel.textContent = norm;
+    if (priceDisplay) priceDisplay.textContent = `(₹${price.toLocaleString('en-IN')})`;
+
+    if (capSelect) {
+      for (let i = 0; i < capSelect.options.length; i++) {
+        const opt = capSelect.options[i];
+        if (opt.value === norm || opt.value.replace(/,/g, '') === norm.replace(/,/g, '')) {
+          capSelect.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    modalPills.forEach(pill => {
+      const pCap = pill.getAttribute('data-capacity');
+      if (pCap === norm || pCap.replace(/,/g, '') === norm.replace(/,/g, '')) {
+        pill.classList.add('active');
+      } else {
+        pill.classList.remove('active');
+      }
+    });
+  }
+
+  capSelect?.addEventListener('change', () => {
+    const selectedOpt = capSelect.options[capSelect.selectedIndex];
+    const price = selectedOpt ? selectedOpt.getAttribute('data-price') : null;
+    updateModalCapacity(capSelect.value, price ? parseInt(price, 10) : null);
+  });
+
+  modalPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const cap = pill.getAttribute('data-capacity');
+      const price = pill.getAttribute('data-price');
+      updateModalCapacity(cap, price ? parseInt(price, 10) : null);
+    });
+  });
 
   function openModal(data = {}) {
     if (modal) {
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
 
-      if (data.capacity && capInput) capInput.value = data.capacity;
+      const initialCap = data.capacity || '1000 L';
+      updateModalCapacity(initialCap, data.total ? parseInt(data.total, 10) : null);
+
       if (data.packageId && pkgIdInput) pkgIdInput.value = data.packageId;
       if (data.type && typeSelect) typeSelect.value = data.type;
       if (data.count && countInput) countInput.value = data.count;
@@ -469,7 +550,8 @@ function initBookingModal() {
       const packageId = btn.getAttribute('data-package-id') || '';
       const type = btn.getAttribute('data-type') || 'OVERHEAD_PVC';
       const count = btn.getAttribute('data-count') || '1';
-      openModal({ capacity, packageId, type, count });
+      const total = btn.getAttribute('data-total') || '';
+      openModal({ capacity, packageId, type, count, total });
     });
   });
 

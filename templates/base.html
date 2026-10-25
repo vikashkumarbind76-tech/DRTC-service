@@ -116,22 +116,71 @@
             <!-- Left Column: Service & Customer Info -->
             <div class="booking-modal-col">
               <div
-                style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.28); padding: 0.85rem 1rem; border-radius: var(--radius-md); margin-bottom: 1.1rem; display: flex; align-items: center; justify-content: space-between;">
+                style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.28); padding: 0.85rem 1rem; border-radius: var(--radius-md); margin-bottom: 0.9rem; display: flex; align-items: center; justify-content: space-between;">
                 <div>
                   <div
                     style="font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">
-                    Selected Capacity</div>
+                    Selected Tank Capacity</div>
                   <div style="font-family: var(--font-display); font-size: 1.35rem; color: var(--accent-gold-bright);"
                     id="modal-cap-display">
-                    <input type="text" id="modal-package-cap" name="custom_capacity" value="1000 L"
-                      aria-label="Selected Capacity"
-                      style="background: transparent; border: none; font-family: inherit; font-size: inherit; color: inherit; width: 140px; font-weight: bold;"
-                      readonly>
+                    <span id="modal-cap-label">1000 L</span>
+                    <span id="modal-price-display" style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: #ffffff; margin-left: 6px; font-weight: 700;">(₹400)</span>
+                    <input type="hidden" id="modal-package-cap" name="custom_capacity" value="1000 L">
                   </div>
                 </div>
                 <div style="text-align: right;">
                   <div style="font-size: 0.82rem; color: #10b981; font-weight: 700;">Safe Disinfection</div>
                   <div style="font-size: 0.72rem; color: #fbbf24;">₹0 Advance Required</div>
+                </div>
+              </div>
+
+              <!-- Choose Litre / Capacity Option -->
+              <div class="form-group" style="margin-bottom: 0.9rem;">
+                <label class="form-label" for="modal-capacity-select" style="display: flex; justify-content: space-between; align-items: center;">
+                  <span>Choose Tank Capacity (Litre) *</span>
+                  <span style="font-size: 0.72rem; color: var(--accent-cyan); font-weight: 600;">25 Official Tiers</span>
+                </label>
+                <select id="modal-capacity-select" class="form-control" style="font-size: 0.92rem; font-weight: 600; cursor: pointer;">
+                  <optgroup label="Residential Tiers (Popular)">
+                    <option value="500 L" data-price="250">500 Liter (₹250)</option>
+                    <option value="1000 L" data-price="400" selected>1000 L (₹400) ★ Most Popular</option>
+                    <option value="2000 L" data-price="650">2000 L (₹650)</option>
+                    <option value="3000 L" data-price="900">3000 L (₹900)</option>
+                    <option value="5000 L" data-price="1100">5000 L (₹1,100)</option>
+                  </optgroup>
+                  <optgroup label="Commercial Tiers">
+                    <option value="8000 L" data-price="1680">8000 L (₹1,680)</option>
+                    <option value="10,000 L" data-price="2200">10,000 L (₹2,200)</option>
+                    <option value="15,000 L" data-price="3080">15,000 L (₹3,080)</option>
+                    <option value="20,000 L" data-price="3820">20,000 L (₹3,820)</option>
+                    <option value="25,000 L" data-price="4740">25,000 L (₹4,740)</option>
+                    <option value="30,000 L" data-price="5490">30,000 L (₹5,490)</option>
+                  </optgroup>
+                  <optgroup label="Industrial & Sump Tiers">
+                    <option value="40,000 L" data-price="6390">40,000 L (₹6,390)</option>
+                    <option value="45,000 L" data-price="7200">45,000 L (₹7,200)</option>
+                    <option value="50,000 L" data-price="7600">50,000 L (₹7,600)</option>
+                    <option value="60,000 L" data-price="8210">60,000 L (₹8,210)</option>
+                    <option value="65,000 L" data-price="9000">65,000 L (₹9,000)</option>
+                    <option value="70,000 L" data-price="9600">70,000 L (₹9,600)</option>
+                    <option value="80,000 L" data-price="11210">80,000 L (₹11,210)</option>
+                    <option value="85,000 L" data-price="13870">85,000 L (₹13,870)</option>
+                    <option value="90,000 L" data-price="15500">90,000 L (₹15,500)</option>
+                    <option value="1,00,000 L" data-price="18780">1,00,000 L (₹18,780)</option>
+                    <option value="1,05,000 L" data-price="20810">1,05,000 L (₹20,810)</option>
+                    <option value="1,20,000 L" data-price="25950">1,20,000 L (₹25,950)</option>
+                    <option value="1,25,000 L" data-price="29590">1,25,000 L (₹29,590)</option>
+                    <option value="1,50,000 L" data-price="36830">1,50,000 L (₹36,830)</option>
+                  </optgroup>
+                </select>
+
+                <!-- Quick Pick Capacity Pills -->
+                <div class="modal-capacity-pills" style="display: flex; gap: 0.35rem; margin-top: 0.45rem; flex-wrap: wrap;">
+                  <button type="button" class="capacity-pill modal-cap-pill" data-capacity="500 L" data-price="250" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">500 L</button>
+                  <button type="button" class="capacity-pill modal-cap-pill active" data-capacity="1000 L" data-price="400" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">1000 L</button>
+                  <button type="button" class="capacity-pill modal-cap-pill" data-capacity="2000 L" data-price="650" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">2000 L</button>
+                  <button type="button" class="capacity-pill modal-cap-pill" data-capacity="3000 L" data-price="900" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">3000 L</button>
+                  <button type="button" class="capacity-pill modal-cap-pill" data-capacity="5000 L" data-price="1100" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">5000 L</button>
                 </div>
               </div>
 
