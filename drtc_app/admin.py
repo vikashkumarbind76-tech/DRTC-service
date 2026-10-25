@@ -243,6 +243,8 @@ class BookingAdmin(admin.ModelAdmin):
     service_display.short_description = "Tank & Capacity"
 
     def schedule_display(self, obj):
+        if not obj.preferred_date:
+            return format_html('<span style="color:#94a3b8;">Not scheduled</span>')
         today = timezone.localdate()
         is_today = obj.preferred_date == today
         date_badge = '<span class="drtc-badge amber" style="font-size:0.65rem; margin-left:4px;">TODAY</span>' if is_today else ''
@@ -251,7 +253,7 @@ class BookingAdmin(admin.ModelAdmin):
             '<small style="color:#94a3b8;">{}</small>',
             obj.preferred_date.strftime("%d %b %Y"),
             mark_safe(date_badge),
-            obj.preferred_time_slot
+            obj.preferred_time_slot or "Slot not specified"
         )
     schedule_display.short_description = "Scheduled Slot"
 

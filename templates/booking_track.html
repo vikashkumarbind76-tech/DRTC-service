@@ -64,32 +64,32 @@
         style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
         <div>
           <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Customer Name</div>
-          <div style="font-size: 1.05rem; font-weight: 700; color: #ffffff;">{{ booking.customer_name }}</div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: #ffffff;">{{ booking.customer_name|default:"Valued Customer" }}</div>
         </div>
 
         <div>
           <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Phone Number</div>
-          <div style="font-size: 1.05rem; font-weight: 600; color: #ffffff;">{{ booking.customer_phone }}</div>
+          <div style="font-size: 1.05rem; font-weight: 600; color: #ffffff;">{{ booking.customer_phone|default:"Not provided" }}</div>
         </div>
 
         <div>
           <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Scheduled Service Date</div>
-          <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-gold-bright);">{{ booking.preferred_date|date:"l, d M Y" }}</div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-gold-bright);">{{ booking.preferred_date|date:"l, d M Y"|default:"To be scheduled" }}</div>
         </div>
 
         <div>
           <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Assigned Slot</div>
-          <div style="font-size: 1.05rem; font-weight: 600; color: var(--accent-cyan);">{{ booking.preferred_time_slot }}</div>
+          <div style="font-size: 1.05rem; font-weight: 600; color: var(--accent-cyan);">{{ booking.preferred_time_slot|default:"Flexible Slot" }}</div>
         </div>
 
         <div>
           <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Tank Capacity</div>
-          <div style="font-size: 1rem; color: #ffffff;">{{ booking.display_capacity }}</div>
+          <div style="font-size: 1rem; color: #ffffff;">{{ booking.display_capacity|default:"1,000 L" }}</div>
         </div>
 
         <div>
           <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Lead Operator</div>
-          <div style="font-size: 1rem; color: #ffffff;">{{ booking.assigned_technician }}</div>
+          <div style="font-size: 1rem; color: #ffffff;">{{ booking.assigned_technician|default:"Rakesh (Lead Operator)" }}</div>
         </div>
       </div>
 
