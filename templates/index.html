@@ -3,183 +3,184 @@
 
 {% block extra_css %}
 <style>
-/* Work Overview Video Section Styles */
-.video-overview-section {
-  position: relative;
-  background: #080c16;
-  padding: 4.5rem 0;
-  border-top: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
-  overflow: hidden;
-}
-
-/* Compact Video Card */
-.overview-video-card {
-  max-width: 720px;
-  margin: 0 auto;
-  background: linear-gradient(135deg, #0e1628 0%, #090e1a 100%);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
-  position: relative;
-  overflow: hidden;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
-}
-
-.overview-video-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--accent-cyan-gradient);
-  opacity: 0.85;
-}
-
-.overview-video-card:hover {
-  border-color: rgba(0, 210, 255, 0.45);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(0, 210, 255, 0.18);
-}
-
-.overview-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.overview-video-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: var(--accent-cyan);
-  text-transform: uppercase;
-  letter-spacing: 0.7px;
-}
-
-/* Expand Button Option */
-.video-expand-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.35rem 0.8rem;
-  background: rgba(0, 210, 255, 0.1);
-  color: var(--accent-cyan);
-  border: 1px solid rgba(0, 210, 255, 0.3);
-  border-radius: var(--radius-sm);
-  font-size: 0.78rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.video-expand-btn:hover {
-  background: var(--accent-cyan);
-  color: #000;
-  box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
-  transform: translateY(-1px);
-}
-
-.overview-video-frame {
-  position: relative;
-  width: 100%;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: #000;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  aspect-ratio: 16 / 9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.overview-video {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-  background: #000;
-  outline: none;
-}
-
-.overview-card-footer {
-  margin-top: 1rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.overview-footer-label {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-}
-
-/* Theater Mode Lightbox Modal */
-.theater-dialog {
-  max-width: 960px;
-  background: #090e1a;
-  border: 1px solid rgba(0, 210, 255, 0.35);
-  padding: 1.25rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 210, 255, 0.2);
-}
-
-.theater-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.85rem;
-  padding-bottom: 0.65rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.theater-close-btn {
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 1.75rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: color var(--transition-fast);
-  padding: 0 0.5rem;
-}
-
-.theater-close-btn:hover {
-  color: #ffffff;
-}
-
-.theater-video-wrap {
-  width: 100%;
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  background: #000;
-  aspect-ratio: 16 / 9;
-}
-
-.theater-video {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: contain;
-}
-
-@media (max-width: 640px) {
+  /* Work Overview Video Section Styles */
   .video-overview-section {
-    padding: 3rem 0;
+    position: relative;
+    background: #080c16;
+    padding: 4.5rem 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    overflow: hidden;
   }
+
+  /* Compact Video Card */
   .overview-video-card {
-    padding: 1.15rem;
+    max-width: 720px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #0e1628 0%, #090e1a 100%);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.55);
+    position: relative;
+    overflow: hidden;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
   }
-}
+
+  .overview-video-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-cyan-gradient);
+    opacity: 0.85;
+  }
+
+  .overview-video-card:hover {
+    border-color: rgba(0, 210, 255, 0.45);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(0, 210, 255, 0.18);
+  }
+
+  .overview-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .overview-video-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+  }
+
+  /* Expand Button Option */
+  .video-expand-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.8rem;
+    background: rgba(0, 210, 255, 0.1);
+    color: var(--accent-cyan);
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    border-radius: var(--radius-sm);
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .video-expand-btn:hover {
+    background: var(--accent-cyan);
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+    transform: translateY(-1px);
+  }
+
+  .overview-video-frame {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .overview-video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+    background: #000;
+    outline: none;
+  }
+
+  .overview-card-footer {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .overview-footer-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  /* Theater Mode Lightbox Modal */
+  .theater-dialog {
+    max-width: 960px;
+    background: #090e1a;
+    border: 1px solid rgba(0, 210, 255, 0.35);
+    padding: 1.25rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 210, 255, 0.2);
+  }
+
+  .theater-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .theater-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.75rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+    padding: 0 0.5rem;
+  }
+
+  .theater-close-btn:hover {
+    color: #ffffff;
+  }
+
+  .theater-video-wrap {
+    width: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 9;
+  }
+
+  .theater-video {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+  }
+
+  @media (max-width: 640px) {
+    .video-overview-section {
+      padding: 3rem 0;
+    }
+
+    .overview-video-card {
+      padding: 1.15rem;
+    }
+  }
 </style>
 {% endblock %}
 
@@ -207,22 +208,43 @@
       </h1>
 
       <p class="hero-subhead">
-        Professional mechanized water tank cleaning in Gamharia &amp; Jamshedpur. High-pressure descaling, sludge extraction, and food-grade antibacterial disinfection for overhead and underground tanks.
+        Professional mechanized water tank cleaning in Gamharia &amp; Jamshedpur. High-pressure descaling, sludge
+        extraction, and food-grade antibacterial disinfection for overhead and underground tanks.
       </p>
 
       <div class="hero-actions">
         <button class="btn btn-primary btn-lg open-booking-modal-btn" data-capacity="1000 L">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
           <span>Book Cleaning @ ₹250+</span>
         </button>
 
         <a href="#calculator" class="btn btn-outline btn-lg">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16" y2="18"></line><path d="M16 10h.01"></path><path d="M12 10h.01"></path><path d="M8 10h.01"></path><path d="M12 14h.01"></path><path d="M8 14h.01"></path><path d="M12 18h.01"></path><path d="M8 18h.01"></path></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
+            <line x1="8" y1="6" x2="16" y2="6"></line>
+            <line x1="16" y1="14" x2="16" y2="18"></line>
+            <path d="M16 10h.01"></path>
+            <path d="M12 10h.01"></path>
+            <path d="M8 10h.01"></path>
+            <path d="M12 14h.01"></path>
+            <path d="M8 14h.01"></path>
+            <path d="M12 18h.01"></path>
+            <path d="M8 18h.01"></path>
+          </svg>
           <span>Calculate Price</span>
         </a>
 
         <a href="tel:7808611636" class="btn btn-cyan btn-lg" title="Call Dinesh">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+            </path>
+          </svg>
           <span>Call Owner: 7808611636</span>
         </a>
       </div>
@@ -238,7 +260,8 @@
           <span class="water-ripple-ring"></span>
         </div>
 
-        <img src="{% static 'images/tank_feature_cutout.png' %}" alt="DRTC High-Tech Mechanized Water Tank Cleaning" class="hero-tank-img">
+        <img src="{% static 'images/tank_feature_cutout.png' %}" alt="DRTC High-Tech Mechanized Water Tank Cleaning"
+          class="hero-tank-img">
 
         <!-- Specular Glare Layer -->
         <div class="card-specular-flare"></div>
@@ -246,7 +269,9 @@
         <!-- Floating Badge Top Right -->
         <div class="floating-badge floating-badge-1">
           <div class="floating-badge-icon" style="color: var(--accent-gold-bright);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
           </div>
           <div>
             <div class="badge-label">1000L Most Popular</div>
@@ -257,7 +282,9 @@
         <!-- Floating Badge Bottom Left -->
         <div class="floating-badge floating-badge-2">
           <div class="floating-badge-icon" style="color: var(--accent-cyan);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
           </div>
           <div>
             <div class="badge-label">UV Sterilized</div>
@@ -279,7 +306,10 @@
       <!-- 1. Safe Cleaning -->
       <div class="value-prop-card prop-safe">
         <div class="value-prop-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <polyline points="9 12 11 14 15 10"></polyline>
+          </svg>
         </div>
         <h3 class="value-prop-title">Safe Cleaning</h3>
         <p class="value-prop-desc">Scientific mechanized cleaning with food-grade safe disinfectants.</p>
@@ -288,7 +318,10 @@
       <!-- 2. Hygienic Water -->
       <div class="value-prop-card prop-hygienic">
         <div class="value-prop-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+            <polyline points="9 12 11 14 15 10"></polyline>
+          </svg>
         </div>
         <h3 class="value-prop-title">Hygienic Water</h3>
         <p class="value-prop-desc">Germ-free, odor-free, pure drinking water for your loved ones.</p>
@@ -297,7 +330,11 @@
       <!-- 3. Professional Service -->
       <div class="value-prop-card prop-pro">
         <div class="value-prop-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="5"></circle><path d="M20 21a8 8 0 0 0-16 0"></path><polyline points="16 11 18 13 22 9"></polyline></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <circle cx="12" cy="8" r="5"></circle>
+            <path d="M20 21a8 8 0 0 0-16 0"></path>
+            <polyline points="16 11 18 13 22 9"></polyline>
+          </svg>
         </div>
         <h3 class="value-prop-title">Professional Service</h3>
         <p class="value-prop-desc">Trained &amp; certified technicians with heavy-duty safety gear.</p>
@@ -306,7 +343,9 @@
       <!-- 4. Reliable & Affordable -->
       <div class="value-prop-card prop-affordable">
         <div class="value-prop-icon">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 3h12M6 8h12M6 13l7 8M6 13h3a4 4 0 0 0 0-8"></path></svg>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M6 3h12M6 8h12M6 13l7 8M6 13h3a4 4 0 0 0 0-8"></path>
+          </svg>
         </div>
         <h3 class="value-prop-title">Reliable &amp; Affordable</h3>
         <p class="value-prop-desc">Starting at just ₹250. Transparent pricing with zero hidden fees.</p>
@@ -332,9 +371,9 @@
       {% for pkg in packages %}
       <div class="package-card">
         {% if pkg.is_popular %}
-          <div class="popular-badge">MOST POPULAR</div>
+        <div class="popular-badge">MOST POPULAR</div>
         {% elif pkg.badge_text %}
-          <div class="popular-badge" style="background: rgba(14, 165, 233, 0.85);">{{ pkg.badge_text }}</div>
+        <div class="popular-badge" style="background: rgba(14, 165, 233, 0.85);">{{ pkg.badge_text }}</div>
         {% endif %}
 
         <div class="package-card-top">
@@ -344,21 +383,20 @@
           <div class="package-pricing-row">
             <div class="package-price">₹{{ pkg.price|floatformat:0 }}</div>
             {% if pkg.original_mrp %}
-              <div class="package-mrp">₹{{ pkg.original_mrp|floatformat:0 }}</div>
+            <div class="package-mrp">₹{{ pkg.original_mrp|floatformat:0 }}</div>
             {% endif %}
           </div>
 
           <div class="package-meta-row">
             {% if pkg.discount_percent %}
-              <span class="package-discount-badge">{{ pkg.discount_percent }}% OFF</span>
+            <span class="package-discount-badge">{{ pkg.discount_percent }}% OFF</span>
             {% endif %}
             <span class="package-duration">⏱️ ~{{ pkg.duration_mins }} Mins</span>
           </div>
         </div>
 
-        <button class="btn btn-outline package-cta-btn open-booking-modal-btn" 
-                data-capacity="{{ pkg.capacity }}" 
-                data-package-id="{{ pkg.id }}">
+        <button class="btn btn-outline package-cta-btn open-booking-modal-btn" data-capacity="{{ pkg.capacity }}"
+          data-package-id="{{ pkg.id }}">
           Book {{ pkg.capacity }}
         </button>
       </div>
@@ -374,46 +412,51 @@
           <span class="section-tag" style="margin-bottom: 0.5rem;">INSTANT ESTIMATOR</span>
           <h3 class="calc-title">MULTI-TANK ESTIMATOR &amp; QUOTE CALCULATOR</h3>
           <p class="calc-subtitle">
-            Need multiple plastic tanks or custom capacity cleaned? Pick your specifications for an instant guaranteed rate.
+            Need multiple plastic tanks or custom capacity cleaned? Pick your specifications for an instant guaranteed
+            rate.
           </p>
 
           <div class="calc-control-group">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.65rem;">
-              <label class="calc-label" for="calc-capacity-select" style="margin-bottom: 0;">1. Select Tank Capacity (Up to 1,50,000 L)</label>
+            <div
+              style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.65rem;">
+              <label class="calc-label" for="calc-capacity-select" style="margin-bottom: 0;">1. Select Tank Capacity (Up
+                to 1,50,000 L)</label>
               <!-- Quick Select Dropdown for direct access to all 25 capacities -->
-              <select id="calc-capacity-select" class="calc-count-select" style="max-width: 250px; padding: 0.45rem 0.85rem; font-size: 0.84rem;" aria-label="Select Tank Capacity">
+              <select id="calc-capacity-select" class="calc-count-select"
+                style="max-width: 250px; padding: 0.45rem 0.85rem; font-size: 0.84rem;"
+                aria-label="Select Tank Capacity">
                 {% if packages %}
-                  {% for pkg in packages %}
-                    <option value="{{ pkg.capacity_liters }}" {% if pkg.capacity_liters == 1000 %}selected{% endif %}>
-                      {{ pkg.capacity }} (₹{{ pkg.price|floatformat:0 }})
-                    </option>
-                  {% endfor %}
+                {% for pkg in packages %}
+                <option value="{{ pkg.capacity_liters }}" {% if pkg.capacity_liters == 1000 %}selected{% endif %}>
+                  {{ pkg.capacity }} (₹{{ pkg.price|floatformat:0 }})
+                </option>
+                {% endfor %}
                 {% else %}
-                  <option value="500">500 Liter (₹250)</option>
-                  <option value="1000" selected>1000 L (₹400)</option>
-                  <option value="2000">2000 L (₹650)</option>
-                  <option value="3000">3000 L (₹900)</option>
-                  <option value="5000">5000 L (₹1100)</option>
-                  <option value="8000">8000 L (₹1680)</option>
-                  <option value="10000">10,000 L (₹2200)</option>
-                  <option value="15000">15,000 L (₹3080)</option>
-                  <option value="20000">20,000 L (₹3820)</option>
-                  <option value="25000">25,000 L (₹4740)</option>
-                  <option value="30000">30,000 L (₹5490)</option>
-                  <option value="40000">40,000 L (₹6390)</option>
-                  <option value="45000">45,000 L (₹7200)</option>
-                  <option value="50000">50,000 L (₹7600)</option>
-                  <option value="60000">60,000 L (₹8210)</option>
-                  <option value="65000">65,000 L (₹9000)</option>
-                  <option value="70000">70,000 L (₹9600)</option>
-                  <option value="80000">80,000 L (₹11210)</option>
-                  <option value="85000">85,000 L (₹13870)</option>
-                  <option value="90000">90,000 L (₹15500)</option>
-                  <option value="100000">1,00,000 L (₹18780)</option>
-                  <option value="105000">1,05,000 L (₹20810)</option>
-                  <option value="120000">1,20,000 L (₹25950)</option>
-                  <option value="125000">1,25,000 L (₹29590)</option>
-                  <option value="150000">1,50,000 L (₹36830)</option>
+                <option value="500">500 Liter (₹250)</option>
+                <option value="1000" selected>1000 L (₹400)</option>
+                <option value="2000">2000 L (₹650)</option>
+                <option value="3000">3000 L (₹900)</option>
+                <option value="5000">5000 L (₹1100)</option>
+                <option value="8000">8000 L (₹1680)</option>
+                <option value="10000">10,000 L (₹2200)</option>
+                <option value="15000">15,000 L (₹3080)</option>
+                <option value="20000">20,000 L (₹3820)</option>
+                <option value="25000">25,000 L (₹4740)</option>
+                <option value="30000">30,000 L (₹5490)</option>
+                <option value="40000">40,000 L (₹6390)</option>
+                <option value="45000">45,000 L (₹7200)</option>
+                <option value="50000">50,000 L (₹7600)</option>
+                <option value="60000">60,000 L (₹8210)</option>
+                <option value="65000">65,000 L (₹9000)</option>
+                <option value="70000">70,000 L (₹9600)</option>
+                <option value="80000">80,000 L (₹11210)</option>
+                <option value="85000">85,000 L (₹13870)</option>
+                <option value="90000">90,000 L (₹15500)</option>
+                <option value="100000">1,00,000 L (₹18780)</option>
+                <option value="105000">1,05,000 L (₹20810)</option>
+                <option value="120000">1,20,000 L (₹25950)</option>
+                <option value="125000">1,25,000 L (₹29590)</option>
+                <option value="150000">1,50,000 L (₹36830)</option>
                 {% endif %}
               </select>
             </div>
@@ -429,40 +472,60 @@
             <!-- Capacity Pills (all 25 options) -->
             <div class="capacity-pills-row" id="calc-pills-container">
               {% if packages %}
-                {% for pkg in packages %}
-                  <button type="button" 
-                          class="capacity-pill {% if pkg.capacity_liters == 1000 %}active{% endif %}" 
-                          data-liters="{{ pkg.capacity_liters }}"
-                          data-category="{% if pkg.capacity_liters <= 5000 %}residential{% elif pkg.capacity_liters <= 30000 %}commercial{% else %}industrial{% endif %}">
-                    {{ pkg.capacity }}
-                  </button>
-                {% endfor %}
+              {% for pkg in packages %}
+              <button type="button" class="capacity-pill {% if pkg.capacity_liters == 1000 %}active{% endif %}"
+                data-liters="{{ pkg.capacity_liters }}"
+                data-category="{% if pkg.capacity_liters <= 5000 %}residential{% elif pkg.capacity_liters <= 30000 %}commercial{% else %}industrial{% endif %}">
+                {{ pkg.capacity }}
+              </button>
+              {% endfor %}
               {% else %}
-                <button type="button" class="capacity-pill" data-liters="500" data-category="residential">500 Liter</button>
-                <button type="button" class="capacity-pill active" data-liters="1000" data-category="residential">1000 L</button>
-                <button type="button" class="capacity-pill" data-liters="2000" data-category="residential">2000 L</button>
-                <button type="button" class="capacity-pill" data-liters="3000" data-category="residential">3000 L</button>
-                <button type="button" class="capacity-pill" data-liters="5000" data-category="residential">5000 L</button>
-                <button type="button" class="capacity-pill" data-liters="8000" data-category="commercial">8000 L</button>
-                <button type="button" class="capacity-pill" data-liters="10000" data-category="commercial">10,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="15000" data-category="commercial">15,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="20000" data-category="commercial">20,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="25000" data-category="commercial">25,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="30000" data-category="commercial">30,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="40000" data-category="industrial">40,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="45000" data-category="industrial">45,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="50000" data-category="industrial">50,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="60000" data-category="industrial">60,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="65000" data-category="industrial">65,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="70000" data-category="industrial">70,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="80000" data-category="industrial">80,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="85000" data-category="industrial">85,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="90000" data-category="industrial">90,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="100000" data-category="industrial">1,00,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="105000" data-category="industrial">1,05,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="120000" data-category="industrial">1,20,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="125000" data-category="industrial">1,25,000 L</button>
-                <button type="button" class="capacity-pill" data-liters="150000" data-category="industrial">1,50,000 L</button>
+              <button type="button" class="capacity-pill" data-liters="500" data-category="residential">500
+                Liter</button>
+              <button type="button" class="capacity-pill active" data-liters="1000" data-category="residential">1000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="2000" data-category="residential">2000 L</button>
+              <button type="button" class="capacity-pill" data-liters="3000" data-category="residential">3000 L</button>
+              <button type="button" class="capacity-pill" data-liters="5000" data-category="residential">5000 L</button>
+              <button type="button" class="capacity-pill" data-liters="8000" data-category="commercial">8000 L</button>
+              <button type="button" class="capacity-pill" data-liters="10000" data-category="commercial">10,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="15000" data-category="commercial">15,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="20000" data-category="commercial">20,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="25000" data-category="commercial">25,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="30000" data-category="commercial">30,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="40000" data-category="industrial">40,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="45000" data-category="industrial">45,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="50000" data-category="industrial">50,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="60000" data-category="industrial">60,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="65000" data-category="industrial">65,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="70000" data-category="industrial">70,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="80000" data-category="industrial">80,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="85000" data-category="industrial">85,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="90000" data-category="industrial">90,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="100000" data-category="industrial">1,00,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="105000" data-category="industrial">1,05,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="120000" data-category="industrial">1,20,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="125000" data-category="industrial">1,25,000
+                L</button>
+              <button type="button" class="capacity-pill" data-liters="150000" data-category="industrial">1,50,000
+                L</button>
               {% endif %}
             </div>
           </div>
@@ -498,11 +561,17 @@
           </div>
 
           <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-            <button class="btn btn-primary open-booking-modal-btn" id="calc-book-btn" data-capacity="1000 L" data-count="1">
+            <button class="btn btn-primary open-booking-modal-btn" id="calc-book-btn" data-capacity="1000 L"
+              data-count="1">
               Lock This Rate &amp; Schedule
             </button>
-            <a href="https://wa.me/917808611636?text=Hello%20DRTC%20Service%2C%20I%20want%20a%20quote." target="_blank" class="btn btn-outline btn-sm" id="calc-whatsapp-btn" style="border-color: rgba(37, 211, 102, 0.4); color: #25d366;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.541 1.956.818 2.801.819 3.178 0 5.767-2.587 5.767-5.766.002-3.181-2.584-5.766-5.772-5.766zm9.969 5.768c0 5.485-4.467 9.953-9.969 9.953-1.748 0-3.376-.452-4.79-1.242l-5.241 1.373 1.4-5.109c-.89-1.488-1.398-3.235-1.398-5.093 0-5.486 4.469-9.953 9.969-9.953 5.486 0 10.029 4.467 10.029 9.953z"/></svg>
+            <a href="https://wa.me/917808611636?text=Hello%20DRTC%20Service%2C%20I%20want%20a%20quote." target="_blank"
+              class="btn btn-outline btn-sm" id="calc-whatsapp-btn"
+              style="border-color: rgba(37, 211, 102, 0.4); color: #25d366;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.541 1.956.818 2.801.819 3.178 0 5.767-2.587 5.767-5.766.002-3.181-2.584-5.766-5.772-5.766zm9.969 5.768c0 5.485-4.467 9.953-9.969 9.953-1.748 0-3.376-.452-4.79-1.242l-5.241 1.373 1.4-5.109c-.89-1.488-1.398-3.235-1.398-5.093 0-5.486 4.469-9.953 9.969-9.953 5.486 0 10.029 4.467 10.029 9.953z" />
+              </svg>
               Get Instant WhatsApp Quote
             </a>
           </div>
@@ -521,7 +590,8 @@
       <span class="section-tag">FIELD DEMONSTRATION</span>
       <h2 class="section-title">SEE OUR CLEANING PROCESS IN ACTION</h2>
       <p class="section-subtitle">
-        Watch our mechanized cleaning team in action — high-pressure rotary descaling, submersible sludge extraction, and food-grade antibacterial disinfection for spotless water tanks.
+        Watch our mechanized cleaning team in action — high-pressure rotary descaling, submersible sludge extraction,
+        and food-grade antibacterial disinfection for spotless water tanks.
       </p>
     </div>
 
@@ -534,20 +604,16 @@
         </div>
         <!-- Option to Expand Video to Large View -->
         <button type="button" class="video-expand-btn" id="expandVideoBtn" title="Watch in Large View">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"></path>
+          </svg>
           <span>Expand Video</span>
         </button>
       </div>
 
       <div class="overview-video-frame">
-        <video 
-          id="overviewVideoPlayer"
-          class="overview-video" 
-          controls 
-          preload="metadata" 
-          playsinline 
-          controlsList="nodownload"
-          aria-label="DRTC Mechanized Water Tank Cleaning Overview Video">
+        <video id="overviewVideoPlayer" class="overview-video" controls preload="metadata" playsinline
+          controlsList="nodownload" aria-label="DRTC Mechanized Water Tank Cleaning Overview Video">
           <source src="{% static 'videos/overview_video.mp4' %}" type="video/mp4">
           <p style="color: var(--text-secondary); padding: 1.5rem; text-align: center;">
             Your browser does not support HTML5 video.
@@ -570,15 +636,11 @@
         <span class="badge-pulse"></span>
         <span>DRTC Mechanized Water Tank Cleaning Demonstration</span>
       </div>
-      <button type="button" class="theater-close-btn" id="closeTheaterModal" aria-label="Close Large View">&times;</button>
+      <button type="button" class="theater-close-btn" id="closeTheaterModal"
+        aria-label="Close Large View">&times;</button>
     </div>
     <div class="theater-video-wrap">
-      <video 
-        id="theaterVideoPlayer"
-        class="theater-video" 
-        controls 
-        preload="metadata" 
-        playsinline>
+      <video id="theaterVideoPlayer" class="theater-video" controls preload="metadata" playsinline>
         <source src="{% static 'videos/overview_video.mp4' %}" type="video/mp4">
       </video>
     </div>
@@ -601,30 +663,91 @@
     <!-- Comparative Breakdown Cards -->
     <div class="comparison-breakdown-grid">
       <div class="comparison-card card-unserviced">
-        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-red-bright); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1rem;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+        <div
+          style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-red-bright); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
           <span>UNSERVICED TANK (OVER 6 MONTHS)</span>
         </div>
-        <ul style="list-style: none; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; display: flex; flex-direction: column; gap: 0.5rem; padding: 0;">
-          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span>Toxic silt &amp; brown sludge settled at tank bottom</span></li>
-          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span>Green algae sticking to corrugated walls</span></li>
-          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span>Microscopic bacterial biofilm generating bad odor &amp; taste</span></li>
-          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span>Risk of waterborne infections and foul odors</span></li>
-          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg><span>Corroded internal pipes &amp; clogged plumbing fixtures</span></li>
+        <ul
+          style="list-style: none; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; display: flex; flex-direction: column; gap: 0.5rem; padding: 0;">
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16"
+              viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"
+              style="flex-shrink: 0; margin-top: 3px;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg><span>Toxic silt &amp; brown sludge settled at tank bottom</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16"
+              viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"
+              style="flex-shrink: 0; margin-top: 3px;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg><span>Green algae sticking to corrugated walls</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16"
+              viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"
+              style="flex-shrink: 0; margin-top: 3px;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg><span>Microscopic bacterial biofilm generating bad odor &amp; taste</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16"
+              viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"
+              style="flex-shrink: 0; margin-top: 3px;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg><span>Risk of waterborne infections and foul odors</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16"
+              viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"
+              style="flex-shrink: 0; margin-top: 3px;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg><span>Corroded internal pipes &amp; clogged plumbing fixtures</span></li>
         </ul>
       </div>
 
       <div class="comparison-card card-serviced">
-        <div style="display: flex; align-items: center; gap: 0.5rem; color: #34d399; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1rem;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <div
+          style="display: flex; align-items: center; gap: 0.5rem; color: #34d399; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 1rem;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
           <span>AFTER DRTC MECHANIZED DISINFECTION</span>
         </div>
-        <ul style="list-style: none; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; display: flex; flex-direction: column; gap: 0.5rem; padding: 0;">
-          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><span>100% sludge extracted with high-pressure suction pumps</span></li>
-          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Spotless walls descaled with 150-bar rotary jets</span></li>
-          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Food-grade non-toxic antibacterial sanitization</span></li>
-          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><span>UV radiation eradicates 99.9% viruses &amp; bacteria</span></li>
-          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" style="flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"></polyline></svg><span>Crystal-pure, odorless, healthy water for cooking &amp; drinking</span></li>
+        <ul
+          style="list-style: none; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; display: flex; flex-direction: column; gap: 0.5rem; padding: 0;">
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16"
+              viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"
+              style="flex-shrink: 0; margin-top: 3px;">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg><span>100% sludge extracted with high-pressure suction pumps</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16"
+              viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"
+              style="flex-shrink: 0; margin-top: 3px;">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg><span>Spotless walls descaled with 150-bar rotary jets</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16"
+              viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"
+              style="flex-shrink: 0; margin-top: 3px;">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg><span>Food-grade non-toxic antibacterial sanitization</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16"
+              viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"
+              style="flex-shrink: 0; margin-top: 3px;">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg><span>UV radiation eradicates 99.9% viruses &amp; bacteria</span></li>
+          <li style="display: flex; align-items: flex-start; gap: 0.5rem;"><svg width="16" height="16"
+              viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"
+              style="flex-shrink: 0; margin-top: 3px;">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg><span>Crystal-pure, odorless, healthy water for cooking &amp; drinking</span></li>
         </ul>
       </div>
     </div>
@@ -650,7 +773,11 @@
         <div>
           <div class="review-stars">
             {% for i in "12345" %}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+              </polygon>
+            </svg>
             {% endfor %}
           </div>
           <h4 class="review-title">{{ rev.review_title }}</h4>
@@ -684,35 +811,40 @@
       <details class="faq-item">
         <summary class="faq-summary">How frequently should I get my water tank cleaned?</summary>
         <p class="faq-answer">
-          According to health standards, residential water storage tanks should be cleaned every 4 to 6 months to prevent the accumulation of mud, algae, and hazardous bacterial colonies.
+          According to health standards, residential water storage tanks should be cleaned every 4 to 6 months to
+          prevent the accumulation of mud, algae, and hazardous bacterial colonies.
         </p>
       </details>
 
       <details class="faq-item">
         <summary class="faq-summary">Do I need to empty the tank before the DRTC team arrives?</summary>
         <p class="faq-answer">
-          No! Our technicians bring high-flow submersible dewatering drainage pumps. It is helpful if water levels are low, but we handle the complete dewatering and sludge removal on-site.
+          No! Our technicians bring high-flow submersible dewatering drainage pumps. It is helpful if water levels are
+          low, but we handle the complete dewatering and sludge removal on-site.
         </p>
       </details>
 
       <details class="faq-item">
         <summary class="faq-summary">Are the antibacterial chemicals safe for drinking water?</summary>
         <p class="faq-answer">
-          Yes, 100%! We strictly use certified food-grade, chlorine-free and eco-friendly disinfectants followed by UV germicidal radiation that leave zero chemical residue, color, or toxic aftertaste.
+          Yes, 100%! We strictly use certified food-grade, chlorine-free and eco-friendly disinfectants followed by UV
+          germicidal radiation that leave zero chemical residue, color, or toxic aftertaste.
         </p>
       </details>
 
       <details class="faq-item">
         <summary class="faq-summary">How long does the 6-stage cleaning take?</summary>
         <p class="faq-answer">
-          A standard 1000L plastic tank takes approximately 45–60 minutes. Larger 3000L or 5000L tanks take between 90 to 120 minutes.
+          A standard 1000L plastic tank takes approximately 45–60 minutes. Larger 3000L or 5000L tanks take between 90
+          to 120 minutes.
         </p>
       </details>
 
       <details class="faq-item">
         <summary class="faq-summary">When and how do I make payment?</summary>
         <p class="faq-answer">
-          You only pay AFTER you inspect the cleaned tank and are 100% satisfied. You can pay via Cash, PhonePe, Google Pay, or Paytm directly to Dinesh or Rakesh.
+          You only pay AFTER you inspect the cleaned tank and are 100% satisfied. You can pay via Cash, PhonePe, Google
+          Pay, or Paytm directly to Dinesh or Rakesh.
         </p>
       </details>
     </div>
@@ -735,11 +867,16 @@
     <div class="contact-grid">
       <!-- Contact Information Card -->
       <div class="contact-info-card">
-        <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 1.5rem;">DRTC DIRECT CONTACTS</h3>
+        <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 1.5rem;">DRTC DIRECT CONTACTS
+        </h3>
 
         <div class="contact-item">
           <div class="contact-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+              </path>
+            </svg>
           </div>
           <div>
             <div class="contact-label">Owner (Dinesh)</div>
@@ -749,7 +886,12 @@
 
         <div class="contact-item">
           <div class="contact-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7.5" r="4"></circle><line x1="20" y1="8" x2="20" y2="14"></line><line x1="23" y1="11" x2="17" y2="11"></line></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="8.5" cy="7.5" r="4"></circle>
+              <line x1="20" y1="8" x2="20" y2="14"></line>
+              <line x1="23" y1="11" x2="17" y2="11"></line>
+            </svg>
           </div>
           <div>
             <div class="contact-label">Operator (Rakesh)</div>
@@ -759,7 +901,10 @@
 
         <div class="contact-item">
           <div class="contact-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
           </div>
           <div>
             <div class="contact-label">Operational Hub Address</div>
@@ -771,7 +916,10 @@
 
         <div class="contact-item">
           <div class="contact-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
           </div>
           <div>
             <div class="contact-label">Email Inquiries</div>
@@ -780,7 +928,9 @@
         </div>
 
         <div style="margin-top: 2rem; display: flex; gap: 1rem;">
-          <a href="https://wa.me/917808611636?text=Hello%20DRTC%20Service%2C%20I%20want%20to%20book%20a%20tank%20cleaning%20slot." target="_blank" class="btn btn-primary" style="background:#25d366; color:#fff; border-color:#25d366; flex: 1;">
+          <a href="https://wa.me/917808611636?text=Hello%20DRTC%20Service%2C%20I%20want%20to%20book%20a%20tank%20cleaning%20slot."
+            target="_blank" class="btn btn-primary"
+            style="background:#25d366; color:#fff; border-color:#25d366; flex: 1;">
             Chat on WhatsApp
           </a>
           <button class="btn btn-red open-booking-modal-btn" data-capacity="1000 L" style="flex: 1;">
@@ -800,23 +950,28 @@
           {% csrf_token %}
           <div class="form-group">
             <label class="form-label" for="inq-name">Your Name *</label>
-            <input type="text" id="inq-name" name="name" class="form-control" placeholder="e.g. Anand Sen" autocomplete="name" required>
+            <input type="text" id="inq-name" name="name" class="form-control" placeholder="e.g. Anand Sen"
+              autocomplete="name" required>
           </div>
 
           <div class="contact-form-inline-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
             <div class="form-group">
               <label class="form-label" for="inq-phone">Phone Number *</label>
-              <input type="tel" id="inq-phone" name="phone" class="form-control" placeholder="10-digit mobile" autocomplete="tel" required>
+              <input type="tel" id="inq-phone" name="phone" class="form-control" placeholder="10-digit mobile"
+                autocomplete="tel" required>
             </div>
             <div class="form-group">
               <label class="form-label" for="inq-email">Email (Optional)</label>
-              <input type="email" id="inq-email" name="email" class="form-control" placeholder="your@email.com" autocomplete="email">
+              <input type="email" id="inq-email" name="email" class="form-control" placeholder="your@email.com"
+                autocomplete="email">
             </div>
           </div>
 
           <div class="form-group">
             <label class="form-label" for="inq-msg">Requirement / Message *</label>
-            <textarea id="inq-msg" name="message" class="form-control" placeholder="Tell us about your tank capacity, location in Gamharia/Jamshedpur, or any special requirements..." required></textarea>
+            <textarea id="inq-msg" name="message" class="form-control"
+              placeholder="Tell us about your tank capacity, location in Gamharia/Jamshedpur, or any special requirements..."
+              required></textarea>
           </div>
 
           <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.85rem;">
@@ -832,54 +987,54 @@
 
 {% block extra_js %}
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const expandBtn = document.getElementById('expandVideoBtn');
-  const theaterModal = document.getElementById('videoTheaterModal');
-  const closeTheaterBtn = document.getElementById('closeTheaterModal');
-  const overviewVideo = document.getElementById('overviewVideoPlayer');
-  const theaterVideo = document.getElementById('theaterVideoPlayer');
+  document.addEventListener('DOMContentLoaded', function () {
+    const expandBtn = document.getElementById('expandVideoBtn');
+    const theaterModal = document.getElementById('videoTheaterModal');
+    const closeTheaterBtn = document.getElementById('closeTheaterModal');
+    const overviewVideo = document.getElementById('overviewVideoPlayer');
+    const theaterVideo = document.getElementById('theaterVideoPlayer');
 
-  if (expandBtn && theaterModal) {
-    expandBtn.addEventListener('click', function() {
-      theaterModal.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      if (overviewVideo && theaterVideo) {
-        theaterVideo.currentTime = overviewVideo.currentTime;
-        if (!overviewVideo.paused) {
-          overviewVideo.pause();
-          theaterVideo.play();
+    if (expandBtn && theaterModal) {
+      expandBtn.addEventListener('click', function () {
+        theaterModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        if (overviewVideo && theaterVideo) {
+          theaterVideo.currentTime = overviewVideo.currentTime;
+          if (!overviewVideo.paused) {
+            overviewVideo.pause();
+            theaterVideo.play();
+          }
+        }
+      });
+
+      function closeTheater() {
+        theaterModal.classList.remove('active');
+        document.body.style.overflow = '';
+        if (overviewVideo && theaterVideo) {
+          overviewVideo.currentTime = theaterVideo.currentTime;
+          if (!theaterVideo.paused) {
+            theaterVideo.pause();
+            overviewVideo.play();
+          }
         }
       }
-    });
 
-    function closeTheater() {
-      theaterModal.classList.remove('active');
-      document.body.style.overflow = '';
-      if (overviewVideo && theaterVideo) {
-        overviewVideo.currentTime = theaterVideo.currentTime;
-        if (!theaterVideo.paused) {
-          theaterVideo.pause();
-          overviewVideo.play();
+      if (closeTheaterBtn) {
+        closeTheaterBtn.addEventListener('click', closeTheater);
+      }
+
+      theaterModal.addEventListener('click', function (e) {
+        if (e.target === theaterModal) {
+          closeTheater();
         }
-      }
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && theaterModal.classList.contains('active')) {
+          closeTheater();
+        }
+      });
     }
-
-    if (closeTheaterBtn) {
-      closeTheaterBtn.addEventListener('click', closeTheater);
-    }
-
-    theaterModal.addEventListener('click', function(e) {
-      if (e.target === theaterModal) {
-        closeTheater();
-      }
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && theaterModal.classList.contains('active')) {
-        closeTheater();
-      }
-    });
-  }
-});
+  });
 </script>
 {% endblock %}

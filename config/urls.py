@@ -48,10 +48,31 @@ def drtc_admin_index(request, extra_context=None):
     context['kpi'] = kpi
     return original_admin_index(request, extra_context=context)
 
+from django.http import Http404
+from django.urls import path, include, re_path
+from drtc_app.security import SecureAdminAuthenticationForm
+
+# Attach brute-force protected login form
+admin.site.login_form = SecureAdminAuthenticationForm
 admin.site.index = drtc_admin_index
 
+def decoy_admin_404(request, *args, **kwargs):
+    """
+    Decoy handler:
+    Anyone requesting '/admin' or '/admin/' receives a standard 404 Page Not Found.
+    This completely conceals the admin panel so unauthorized users cannot guess or brute-force passwords.
+    """
+    raise Http404("Page not found")
+
+admin_secret_path = getattr(settings, 'DJANGO_ADMIN_URL', 'drtc-management-hub-786/').strip('/') + '/'
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # Secret Admin Dashboard (known only to the owner)
+    path(admin_secret_path, admin.site.urls),
+
+    # Decoy trap: /admin/ and /admin/* always return 404
+    re_path(r'^admin(/.*)?$', decoy_admin_404),
+
     path('', include('drtc_app.urls')),
 ]
 

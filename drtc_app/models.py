@@ -198,3 +198,19 @@ class CustomerReview(models.Model):
 
     def __str__(self):
         return f"{self.customer_name} ({self.rating}★)"
+
+
+class AdminLoginAttempt(models.Model):
+    """Tracks failed admin login attempts to prevent brute-force attacks and audit unauthorized attempts."""
+    ip_address = models.CharField(max_length=64, db_index=True)
+    username = models.CharField(max_length=150, blank=True, null=True, db_index=True)
+    attempted_at = models.DateTimeField(auto_now_add=True, db_index=True)
+    user_agent = models.TextField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['-attempted_at']
+        verbose_name = "Admin Security Audit Log"
+        verbose_name_plural = "Admin Security Audit Logs"
+
+    def __str__(self):
+        return f"Attempt from {self.ip_address} ({self.username}) at {self.attempted_at}"

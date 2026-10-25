@@ -46,7 +46,7 @@ A premium, responsive full-stack Django web application and interactive booking 
    - Step 04: Industrial Slurry Vacuuming
    - Step 05: Food-Grade Anti-Bacterial Spray
    - Step 06: UV Germicidal Radiation Treatment
-9. **Django Operations Admin Dashboard (`/admin/`):** Manage booking records, change statuses, manage service packages, review inquiries, and export customer data.
+9. **Secure Django Operations Admin Portal:** Fully hidden custom URL (`DJANGO_ADMIN_URL`) with automatic decoy 404 trap for `/admin/` and active brute-force IP rate-limiting (lockout after 5 failed attempts).
 10. **Sticky Mobile Action Bar:** Rapid 1-tap Call and WhatsApp buttons optimized for mobile conversions.
 
 ---

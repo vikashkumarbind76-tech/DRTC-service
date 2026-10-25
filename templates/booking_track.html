@@ -6,7 +6,7 @@
 {% block content %}
 <section class="section" style="padding-top: 130px; min-height: 85vh;">
   <div class="container" style="max-width: 720px;">
-    
+
     <div class="section-header" style="margin-bottom: 2.5rem;">
       <span class="section-tag">LIVE SERVICE TRACKER</span>
       <h1 class="section-title">TRACK YOUR TANK CLEANING</h1>
@@ -16,9 +16,11 @@
     </div>
 
     <!-- Search Form -->
-    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem; margin-bottom: 2rem;">
+    <div
+      style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem; margin-bottom: 2rem;">
       <form method="GET" action="{% url 'booking_track' %}" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-        <input type="text" name="q" value="{{ query }}" class="form-control" style="flex: 1; min-width: 240px; font-size: 1rem;" placeholder="e.g. DRTC-9821 or 9835123456" required>
+        <input type="text" name="q" value="{{ query }}" class="form-control"
+          style="flex: 1; min-width: 240px; font-size: 1rem;" placeholder="e.g. DRTC-9821 or 9835123456" required>
         <button type="submit" class="btn btn-primary" style="padding: 0.75rem 1.75rem;">
           Track Status
         </button>
@@ -27,32 +29,40 @@
 
     {% if booking %}
     <!-- Booking Found Result -->
-    <div style="background: var(--bg-card); border: 1.5px solid var(--border-gold); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
-      
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.25rem; margin-bottom: 1.25rem;">
+    <div
+      style="background: var(--bg-card); border: 1.5px solid var(--border-gold); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
+
+      <div
+        style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.25rem; margin-bottom: 1.25rem;">
         <div>
-          <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Booking Reference</span>
-          <div style="font-family: monospace; font-size: 1.4rem; font-weight: 800; color: var(--accent-gold-bright);">{{ booking.booking_id }}</div>
+          <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Booking
+            Reference</span>
+          <div style="font-family: monospace; font-size: 1.4rem; font-weight: 800; color: var(--accent-gold-bright);">{{
+            booking.booking_id }}</div>
         </div>
 
         <div id="trackStatusContainer">
           {% if booking.status == 'CONFIRMED' %}
-            <span id="trackStatusBadge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
-              ● Confirmed &amp; Scheduled
-            </span>
+          <span id="trackStatusBadge"
+            style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
+            ● Confirmed &amp; Scheduled
+          </span>
           {% elif booking.status == 'COMPLETED' %}
-            <span id="trackStatusBadge" style="background: rgba(14, 165, 233, 0.15); color: var(--accent-cyan); border: 1px solid rgba(14, 165, 233, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
-              ● Service Completed
-            </span>
+          <span id="trackStatusBadge"
+            style="background: rgba(14, 165, 233, 0.15); color: var(--accent-cyan); border: 1px solid rgba(14, 165, 233, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
+            ● Service Completed
+          </span>
           {% else %}
-            <span id="trackStatusBadge" style="background: rgba(245, 158, 11, 0.15); color: var(--accent-gold-bright); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
-              ● {{ booking.get_status_display }}
-            </span>
+          <span id="trackStatusBadge"
+            style="background: rgba(245, 158, 11, 0.15); color: var(--accent-gold-bright); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
+            ● {{ booking.get_status_display }}
+          </span>
           {% endif %}
         </div>
       </div>
 
-      <div class="booking-result-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
+      <div class="booking-result-grid"
+        style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
         <div>
           <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Customer Name</div>
           <div style="font-size: 1.05rem; font-weight: 700; color: #ffffff;">{{ booking.customer_name }}</div>
@@ -64,13 +74,16 @@
         </div>
 
         <div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Scheduled Service Date</div>
-          <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-gold-bright);">{{ booking.preferred_date|date:"l, d M Y" }}</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Scheduled Service Date
+          </div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-gold-bright);">{{
+            booking.preferred_date|date:"l, d M Y" }}</div>
         </div>
 
         <div>
           <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Assigned Slot</div>
-          <div style="font-size: 1.05rem; font-weight: 600; color: var(--accent-cyan);">{{ booking.preferred_time_slot }}</div>
+          <div style="font-size: 1.05rem; font-weight: 600; color: var(--accent-cyan);">{{ booking.preferred_time_slot
+            }}</div>
         </div>
 
         <div>
@@ -84,9 +97,12 @@
         </div>
       </div>
 
-      <div style="background: rgba(5, 7, 12, 0.6); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin-bottom: 1.5rem;">
-        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 2px;">Service Address</div>
-        <div style="font-size: 0.9rem; color: #ffffff;">{{ booking.address }}, {{ booking.landmark }}, {{ booking.area_locality }}</div>
+      <div
+        style="background: rgba(5, 7, 12, 0.6); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin-bottom: 1.5rem;">
+        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 2px;">
+          Service Address</div>
+        <div style="font-size: 0.9rem; color: #ffffff;">{{ booking.address }}, {{ booking.landmark }}, {{
+          booking.area_locality }}</div>
       </div>
 
       <div style="display: flex; gap: 0.75rem;">
@@ -96,13 +112,18 @@
     </div>
     {% elif not_found %}
     <!-- Not Found State -->
-    <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem 2rem; text-align: center; box-shadow: var(--shadow-md);">
+    <div
+      style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem 2rem; text-align: center; box-shadow: var(--shadow-md);">
       <div style="margin-bottom: 0.75rem; color: var(--accent-gold); display: flex; justify-content: center;">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
       </div>
       <h3 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">No Booking Found</h3>
       <p style="color: var(--text-secondary); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1.5rem auto;">
-        We could not find any active booking matching "<strong>{{ query }}</strong>". Please double check your booking reference or call Dinesh directly.
+        We could not find any active booking matching "<strong>{{ query }}</strong>". Please double check your booking
+        reference or call Dinesh directly.
       </p>
       <a href="tel:7808611636" class="btn btn-primary">Call 7808611636 for Assistance</a>
     </div>
@@ -115,7 +136,7 @@
 {% block extra_js %}
 {% if booking %}
 <script>
-  (function() {
+  (function () {
     const bookingId = "{{ booking.booking_id }}";
     const statusEl = document.getElementById('trackStatusBadge');
     let currentStatus = "{{ booking.status }}";
@@ -124,18 +145,18 @@
       fetch(`/api/booking/status/${bookingId}/`, {
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
       })
-      .then(res => res.json())
-      .then(data => {
-        if (data.found && data.status !== currentStatus) {
-          currentStatus = data.status;
-          if (statusEl) {
-            statusEl.textContent = `● ${data.status_display}`;
-            statusEl.classList.add('stat-updated');
-            setTimeout(() => statusEl.classList.remove('stat-updated'), 1500);
+        .then(res => res.json())
+        .then(data => {
+          if (data.found && data.status !== currentStatus) {
+            currentStatus = data.status;
+            if (statusEl) {
+              statusEl.textContent = `● ${data.status_display}`;
+              statusEl.classList.add('stat-updated');
+              setTimeout(() => statusEl.classList.remove('stat-updated'), 1500);
+            }
           }
-        }
-      })
-      .catch(() => {});
+        })
+        .catch(() => { });
     }
 
     setInterval(pollStatus, 4000);

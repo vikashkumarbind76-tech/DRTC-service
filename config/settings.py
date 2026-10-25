@@ -40,6 +40,12 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 if os.environ.get('VERCEL_URL'):
     CSRF_TRUSTED_ORIGINS.append(f"https://{os.environ.get('VERCEL_URL')}")
+if os.environ.get('CUSTOM_DOMAIN'):
+    CSRF_TRUSTED_ORIGINS.append(f"https://{os.environ.get('CUSTOM_DOMAIN').strip('/')}")
+if os.environ.get('ADDITIONAL_CSRF_ORIGINS'):
+    for origin in os.environ.get('ADDITIONAL_CSRF_ORIGINS').split(','):
+        if origin.strip():
+            CSRF_TRUSTED_ORIGINS.append(origin.strip())
 
 
 # Application definition
@@ -170,4 +176,14 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Secret Admin Portal URL (Never expose standard 'admin/')
+# Can be changed anytime via .env (e.g. DJANGO_ADMIN_URL="my-secret-vault-path/")
+DJANGO_ADMIN_URL = os.environ.get('DJANGO_ADMIN_URL', 'drtc-management-hub-786/').strip('/') + '/'
+
+# Hardened Session & Cookie Security
+SESSION_COOKIE_HTTPONLY = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 43200  # 12 hours active session limit
+CSRF_COOKIE_HTTPONLY = True
 

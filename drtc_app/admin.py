@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils import timezone
-from .models import ServicePackage, Booking, ContactInquiry, CustomerReview
+from .models import ServicePackage, Booking, ContactInquiry, CustomerReview, AdminLoginAttempt
 
 
 @admin.register(ServicePackage)
@@ -409,3 +409,21 @@ class CustomerReviewAdmin(admin.ModelAdmin):
             return mark_safe('<span class="drtc-badge emerald">✓ Verified Customer</span>')
         return mark_safe('<span style="color:#64748b;">Unverified</span>')
     verified_badge.short_description = "Verification"
+
+
+@admin.register(AdminLoginAttempt)
+class AdminLoginAttemptAdmin(admin.ModelAdmin):
+    list_display = ('ip_address', 'username', 'attempted_at', 'user_agent_short')
+    list_filter = ('attempted_at',)
+    search_fields = ('ip_address', 'username', 'user_agent')
+    readonly_fields = ('ip_address', 'username', 'attempted_at', 'user_agent')
+    ordering = ('-attempted_at',)
+
+    def user_agent_short(self, obj):
+        if obj.user_agent:
+            return (obj.user_agent[:60] + '...') if len(obj.user_agent) > 60 else obj.user_agent
+        return '-'
+    user_agent_short.short_description = "Device / Browser"
+
+    def has_add_permission(self, request):
+        return False
