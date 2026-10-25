@@ -45,20 +45,17 @@
               style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.65rem; margin-bottom: 0.65rem;">
               <span style="font-size: 0.82rem; color: var(--text-secondary);">Booking ID:</span>
               <span
-                style="font-family: monospace; font-size: 1.15rem; font-weight: 800; color: var(--accent-gold-bright);">{{
-                booking.booking_id }}</span>
+                style="font-family: monospace; font-size: 1.15rem; font-weight: 800; color: var(--accent-gold-bright);">{{ booking.booking_id }}</span>
             </div>
 
             <div style="display: flex; justify-content: space-between; margin-bottom: 0.55rem;">
               <span style="font-size: 0.82rem; color: var(--text-secondary);">Scheduled Date:</span>
-              <span style="font-size: 0.88rem; font-weight: 700; color: #ffffff;">{{ booking.preferred_date|date:"D, d M
-                Y" }}</span>
+              <span style="font-size: 0.88rem; font-weight: 700; color: #ffffff;">{{ booking.preferred_date|date:"D, d M Y" }}</span>
             </div>
 
             <div style="display: flex; justify-content: space-between; margin-bottom: 0.55rem;">
               <span style="font-size: 0.82rem; color: var(--text-secondary);">Preferred Slot:</span>
-              <span style="font-size: 0.88rem; font-weight: 600; color: var(--accent-cyan);">{{
-                booking.preferred_time_slot }}</span>
+              <span style="font-size: 0.88rem; font-weight: 600; color: var(--accent-cyan);">{{ booking.preferred_time_slot }}</span>
             </div>
 
             <div style="display: flex; justify-content: space-between;">
@@ -73,15 +70,13 @@
               <span
                 style="font-size: 0.82rem; color: var(--text-secondary); display: block; margin-bottom: 2px;">Service
                 Address:</span>
-              <span style="font-size: 0.86rem; color: #ffffff; display: block; line-height: 1.4;">{{ booking.address }},
-                {{ booking.landmark }}, {{ booking.area_locality }}</span>
+              <span style="font-size: 0.86rem; color: #ffffff; display: block; line-height: 1.4;">{{ booking.address }}{% if booking.landmark %}, Near {{ booking.landmark }}{% endif %}{% if booking.area_locality %}, {{ booking.area_locality }}{% endif %}</span>
             </div>
 
             <div
               style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px dashed var(--border-gold); padding-top: 0.65rem; margin-top: 0.65rem;">
               <span style="font-size: 0.92rem; font-weight: 700; color: #ffffff;">Total Payable:</span>
-              <span style="font-family: var(--font-display); font-size: 1.5rem; color: var(--accent-gold-bright);">₹{{
-                booking.total_amount|floatformat:0 }}</span>
+              <span style="font-family: var(--font-display); font-size: 1.5rem; color: var(--accent-gold-bright);">₹{{ booking.total_amount|floatformat:0 }}</span>
             </div>
 
             <div style="font-size: 0.76rem; color: #34d399; margin-top: 0.35rem; text-align: right;">
@@ -96,8 +91,7 @@
       <div style="display: flex; align-items: center; justify-content: center; gap: 0.65rem; margin-bottom: 1.25rem;">
         <span class="live-indicator-pill">
           <span class="live-dot"></span>
-          <span>LIVE STATUS: <strong id="liveReceiptStatus" style="color: #ffffff;">{{ booking.get_status_display
-              }}</strong></span>
+          <span>LIVE STATUS: <strong id="liveReceiptStatus" style="color: #ffffff;">{{ booking.get_status_display }}</strong></span>
         </span>
       </div>
 

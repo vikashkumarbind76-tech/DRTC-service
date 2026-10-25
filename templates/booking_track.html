@@ -37,8 +37,7 @@
         <div>
           <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Booking
             Reference</span>
-          <div style="font-family: monospace; font-size: 1.4rem; font-weight: 800; color: var(--accent-gold-bright);">{{
-            booking.booking_id }}</div>
+          <div style="font-family: monospace; font-size: 1.4rem; font-weight: 800; color: var(--accent-gold-bright);">{{ booking.booking_id }}</div>
         </div>
 
         <div id="trackStatusContainer">
@@ -74,16 +73,13 @@
         </div>
 
         <div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Scheduled Service Date
-          </div>
-          <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-gold-bright);">{{
-            booking.preferred_date|date:"l, d M Y" }}</div>
+          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Scheduled Service Date</div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-gold-bright);">{{ booking.preferred_date|date:"l, d M Y" }}</div>
         </div>
 
         <div>
           <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Assigned Slot</div>
-          <div style="font-size: 1.05rem; font-weight: 600; color: var(--accent-cyan);">{{ booking.preferred_time_slot
-            }}</div>
+          <div style="font-size: 1.05rem; font-weight: 600; color: var(--accent-cyan);">{{ booking.preferred_time_slot }}</div>
         </div>
 
         <div>
@@ -101,8 +97,7 @@
         style="background: rgba(5, 7, 12, 0.6); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin-bottom: 1.5rem;">
         <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 2px;">
           Service Address</div>
-        <div style="font-size: 0.9rem; color: #ffffff;">{{ booking.address }}, {{ booking.landmark }}, {{
-          booking.area_locality }}</div>
+        <div style="font-size: 0.9rem; color: #ffffff;">{{ booking.address }}{% if booking.landmark %}, Near {{ booking.landmark }}{% endif %}{% if booking.area_locality %}, {{ booking.area_locality }}{% endif %}</div>
       </div>
 
       <div style="display: flex; gap: 0.75rem;">
