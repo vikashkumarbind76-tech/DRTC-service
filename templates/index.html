@@ -199,7 +199,7 @@
     <div>
       <div class="hero-badge">
         <span class="badge-pulse"></span>
-        <span>OPERATING DAILY IN GAMHARIA &amp; JAMSHEDPUR</span>
+        <span>Operating Daily in Gamharia &amp; Jamshedpur</span>
       </div>
 
       <h1 class="hero-headline">
@@ -302,6 +302,7 @@
      ================================================================= -->
 <section class="section" style="padding-top: 4rem; padding-bottom: 2.5rem;">
   <div class="container">
+    <h2 class="sr-only">Our Core Service Standards</h2>
     <div class="value-props-grid">
       <!-- 1. Safe Cleaning -->
       <div class="value-prop-card prop-safe">
@@ -361,15 +362,23 @@
   <div class="container">
     <div class="section-header">
       <span class="section-tag">OFFICIAL CAPACITY &amp; PRICE MATRIX</span>
-      <h2 class="section-title">TRANSPARENT TANK CLEANING PACKAGES</h2>
+      <h2 class="section-title">Transparent Tank Cleaning Packages</h2>
       <p class="section-subtitle">
         Official rates from Dinesh &amp; Rakesh. No hidden travel fees or sudden surcharges in Gamharia.
       </p>
     </div>
 
+    <!-- Category Filter Tabs to organize 25 tiers cleanly -->
+    <div class="pricing-filter-tabs" role="tablist" aria-label="Tank pricing categories">
+      <button type="button" class="pricing-filter-tab active" role="tab" aria-selected="true" data-category="all">All Packages (25 Tiers)</button>
+      <button type="button" class="pricing-filter-tab" role="tab" aria-selected="false" data-category="residential">Residential (500L – 5,000L)</button>
+      <button type="button" class="pricing-filter-tab" role="tab" aria-selected="false" data-category="commercial">Commercial (8,000L – 30,000L)</button>
+      <button type="button" class="pricing-filter-tab" role="tab" aria-selected="false" data-category="industrial">Industrial (40,000L – 1,50,000L)</button>
+    </div>
+
     <div class="packages-grid">
       {% for pkg in packages %}
-      <div class="package-card">
+      <div class="package-card" data-category="{% if pkg.capacity_liters <= 5000 %}residential{% elif pkg.capacity_liters <= 30000 %}commercial{% else %}industrial{% endif %}">
         {% if pkg.is_popular %}
         <div class="popular-badge">MOST POPULAR</div>
         {% elif pkg.badge_text %}
@@ -410,7 +419,7 @@
       <div class="calc-grid">
         <div>
           <span class="section-tag" style="margin-bottom: 0.5rem;">INSTANT ESTIMATOR</span>
-          <h3 class="calc-title">MULTI-TANK ESTIMATOR &amp; QUOTE CALCULATOR</h3>
+          <h3 class="calc-title">Multi-Tank Estimator &amp; Quote Calculator</h3>
           <p class="calc-subtitle">
             Need multiple plastic tanks or custom capacity cleaned? Pick your specifications for an instant guaranteed
             rate.
@@ -761,7 +770,7 @@
   <div class="container">
     <div class="section-header">
       <span class="section-tag">CUSTOMER SATISFACTION</span>
-      <h2 class="section-title">WHAT GAMHARIA RESIDENTS SAY</h2>
+      <h2 class="section-title">What Gamharia Residents Say</h2>
       <p class="section-subtitle">
         Real feedback from homeowners, apartments, and factories across Gamharia &amp; Jamshedpur.
       </p>
@@ -780,7 +789,7 @@
             </svg>
             {% endfor %}
           </div>
-          <h4 class="review-title">{{ rev.review_title }}</h4>
+          <h3 class="review-title">{{ rev.review_title }}</h3>
           <p class="review-text">"{{ rev.comment }}"</p>
         </div>
 
@@ -867,63 +876,64 @@
     <div class="contact-grid">
       <!-- Contact Information Card -->
       <div class="contact-info-card">
-        <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 1.5rem;">DRTC DIRECT CONTACTS
-        </h3>
+        <h3 style="font-family: var(--font-display); font-size: 1.6rem; margin-bottom: 1.75rem;">DRTC Direct Contacts</h3>
 
-        <div class="contact-item">
-          <div class="contact-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path
-                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-              </path>
-            </svg>
-          </div>
-          <div>
-            <div class="contact-label">Owner (Dinesh)</div>
-            <div class="contact-val"><a href="tel:7808611636">+91 7808611636</a></div>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="8.5" cy="7.5" r="4"></circle>
-              <line x1="20" y1="8" x2="20" y2="14"></line>
-              <line x1="23" y1="11" x2="17" y2="11"></line>
-            </svg>
-          </div>
-          <div>
-            <div class="contact-label">Operator (Rakesh)</div>
-            <div class="contact-val"><a href="tel:6352561343">+91 6352561343</a></div>
-          </div>
-        </div>
-
-        <div class="contact-item">
-          <div class="contact-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-          </div>
-          <div>
-            <div class="contact-label">Operational Hub Address</div>
-            <div class="contact-val" style="font-size: 0.95rem; font-weight: 500;">
-              SHANTINAGAR, GAMHARIA,<br>NEAR BY JHANDA CHOWK, 832108
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div class="contact-item" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0;">
+            <div class="contact-icon" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0, 210, 255, 0.12); color: var(--accent-cyan); flex-shrink: 0;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                </path>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">Owner (Dinesh)</div>
+              <div class="contact-val"><a href="tel:7808611636">+91 7808611636</a></div>
             </div>
           </div>
-        </div>
 
-        <div class="contact-item">
-          <div class="contact-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
+          <div class="contact-item" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0;">
+            <div class="contact-icon" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0, 210, 255, 0.12); color: var(--accent-cyan); flex-shrink: 0;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7.5" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">Operator (Rakesh)</div>
+              <div class="contact-val"><a href="tel:6352561343">+91 6352561343</a></div>
+            </div>
           </div>
-          <div>
-            <div class="contact-label">Email Inquiries</div>
-            <div class="contact-val"><a href="mailto:drtcservice@gmail.com">drtcservice@gmail.com</a></div>
+
+          <div class="contact-item-box" style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); padding: 0.9rem 1.1rem; display: flex; align-items: flex-start; gap: 1rem;">
+            <div class="contact-icon" style="width: 40px; height: 40px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; background: rgba(245, 158, 11, 0.12); color: var(--accent-gold-bright); flex-shrink: 0; margin-top: 2px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label" style="color: var(--accent-gold-bright);">Operational Hub Address</div>
+              <address class="contact-val" style="font-size: 0.92rem; font-weight: 500; font-style: normal; line-height: 1.5; color: #ffffff; margin: 0;">
+                Shantinagar, Gamharia,<br>Near by Jhanda Chowk, 832108
+              </address>
+            </div>
+          </div>
+
+          <div class="contact-item" style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0;">
+            <div class="contact-icon" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(0, 210, 255, 0.12); color: var(--accent-cyan); flex-shrink: 0;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-label">Email Inquiries</div>
+              <div class="contact-val"><a href="mailto:drtcservice@gmail.com">drtcservice@gmail.com</a></div>
+            </div>
           </div>
         </div>
 
