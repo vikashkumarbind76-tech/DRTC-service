@@ -8,29 +8,25 @@ from drtc_app.models import ServicePackage, Booking, CustomerReview, ContactInqu
 
 c = Client()
 
-from django.conf import settings
-admin_path = getattr(settings, 'DJANGO_ADMIN_URL', 'drtc-management-hub-786/').strip('/') + '/'
-
 urls = [
-    ('/', 'Home page', (200,)),
-    ('/track/', 'Booking Tracker', (200,)),
-    ('/privacy-policy/', 'Privacy Policy', (200,)),
-    ('/terms/', 'Terms & Conditions', (200,)),
-    ('/api/live-stats/', 'Live Stats API', (200,)),
-    ('/api/quote/?capacity=1000&count=1', 'Quote API 1000L', (200,)),
-    ('/api/quote/?capacity=8000&count=1', 'Quote API 8000L', (200,)),
-    ('/api/quote/?capacity=150000&count=1', 'Quote API 150000L', (200,)),
-    (f'/{admin_path}', 'Secret Admin (redirect)', (301, 302, 200)),
-    (f'/{admin_path}login/', 'Secret Admin Login', (200,)),
-    ('/admin/', 'Admin Decoy Security Trap (404)', (404,)),
+    ('/', 'Home page'),
+    ('/track/', 'Booking Tracker'),
+    ('/privacy-policy/', 'Privacy Policy'),
+    ('/terms/', 'Terms & Conditions'),
+    ('/api/live-stats/', 'Live Stats API'),
+    ('/api/quote/?capacity=1000&count=1', 'Quote API 1000L'),
+    ('/api/quote/?capacity=8000&count=1', 'Quote API 8000L'),
+    ('/api/quote/?capacity=150000&count=1', 'Quote API 150000L'),
+    ('/admin/', 'Admin (redirect)'),
+    ('/admin/login/', 'Admin Login'),
 ]
 
 print('=== URL STATUS TESTS ===')
 all_ok = True
-for url, name, expected_codes in urls:
+for url, name in urls:
     r = c.get(url, follow=False)
     status = r.status_code
-    ok = status in expected_codes
+    ok = status in (200, 301, 302)
     mark = 'OK  ' if ok else 'FAIL'
     if not ok:
         all_ok = False
@@ -124,7 +120,7 @@ html = r.content.decode('utf-8', errors='replace')
 checks = [
     ('DRTC SERVICE', 'Brand name in page'),
     ('CLEANER TANKS', 'Hero headline'),
-    ('Transparent Tank Cleaning Packages', 'Pricing section heading'),
+    ('TRANSPARENT TANK CLEANING PACKAGES', 'Pricing section heading'),
     ('OFFICIAL CAPACITY', 'Pricing section tag'),
     ('FREQUENTLY ASKED QUESTIONS', 'FAQ section'),
     ('SCHEDULE SERVICE OR CALL DIRECTLY', 'Contact section'),

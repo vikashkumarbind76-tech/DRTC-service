@@ -150,7 +150,7 @@ class Booking(models.Model):
         phone = "917808611636"
         msg = (
             f"Hello DRTC Service! I have booked a tank cleaning appointment.\n\n"
-            f"*Tracking ID:* {self.booking_id}\n"
+            f"*Booking ID:* {self.booking_id}\n"
             f"*Name:* {self.customer_name}\n"
             f"*Phone:* {self.customer_phone}\n"
             f"*Capacity:* {self.custom_capacity or (self.package.capacity if self.package else 'Custom')}\n"

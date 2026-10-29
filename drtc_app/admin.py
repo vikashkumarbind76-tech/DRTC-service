@@ -201,7 +201,7 @@ class BookingAdmin(admin.ModelAdmin):
             '#{}</div>',
             obj.booking_id
         )
-    booking_id_display.short_description = "Tracking ID"
+    booking_id_display.short_description = "Booking ID"
 
     def customer_display(self, obj):
         return format_html(

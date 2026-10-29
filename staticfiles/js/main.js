@@ -6,7 +6,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNavbarScroll();
   initScrollSpy();
-  initPricingFilter();
   initCalculator();
   initBookingModal();
   initLightbox();
@@ -272,37 +271,6 @@ function initScrollSpy() {
   setTimeout(() => {
     updateIndicator(getActiveLink());
   }, 400);
-}
-
-/* ----------------------------------------------------
-   1c. Pricing Matrix Category Filter Tabs
-   ---------------------------------------------------- */
-function initPricingFilter() {
-  const tabs = document.querySelectorAll('.pricing-filter-tab');
-  const cards = document.querySelectorAll('.packages-grid .package-card');
-  if (!tabs.length || !cards.length) return;
-
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-
-      const filter = tab.getAttribute('data-category') || 'all';
-
-      cards.forEach(card => {
-        const cat = card.getAttribute('data-category');
-        if (filter === 'all' || cat === filter) {
-          card.classList.remove('card-hidden');
-        } else {
-          card.classList.add('card-hidden');
-        }
-      });
-    });
-  });
 }
 
 /* ----------------------------------------------------
