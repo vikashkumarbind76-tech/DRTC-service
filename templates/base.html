@@ -34,7 +34,7 @@
   <link rel="apple-touch-icon" href="{% static 'images/drtc_icon.png' %}">
 
   <!-- CSS Stylesheet with Cache-Busting Version -->
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=6.0">
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=7.0">
   {% block extra_css %}{% endblock %}
 </head>
 
@@ -67,6 +67,7 @@
         <li><a href="{% url 'home' %}#home"
             class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
         <li><a href="{% url 'home' %}#pricing" class="nav-link">Pricing</a></li>
+        <li><a href="{% url 'home' %}#process" class="nav-link">Process</a></li>
         <li><a href="{% url 'home' %}#reviews" class="nav-link">Reviews</a></li>
         <li><a href="{% url 'booking_track' %}"
             class="nav-link {% if request.resolver_match.url_name == 'booking_track' %}active{% endif %}">Track</a></li>
@@ -443,7 +444,7 @@
   </footer>
 
   <!-- Core JavaScript -->
-  <script src="{% static 'js/main.js' %}?v=5.2"></script>
+  <script src="{% static 'js/main.js' %}?v=5.3"></script>
   {% block extra_js %}{% endblock %}
 </body>
 

@@ -1169,13 +1169,13 @@ function initButtonRipples() {
    14. Scroll Reveal Staggered Animations
    ---------------------------------------------------- */
 function initScrollReveal() {
-  const elements = document.querySelectorAll(
+  // Legacy reveal: package-card, review-card, etc.
+  const legacyEls = document.querySelectorAll(
     '.package-card, .stage-card, .proof-card, .review-card, .calc-grid, .before-after-container'
   );
+  legacyEls.forEach((el) => el.classList.add('reveal-fade-up'));
 
-  elements.forEach((el) => el.classList.add('reveal-fade-up'));
-
-  const observer = new IntersectionObserver(
+  const legacyObserver = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -1184,9 +1184,24 @@ function initScrollReveal() {
         }
       });
     },
-    { threshold: 0.15 }
+    { threshold: 0.12 }
   );
+  legacyEls.forEach((el) => legacyObserver.observe(el));
 
-  elements.forEach((el) => observer.observe(el));
+  // New premium section reveal: .reveal-on-scroll → .revealed
+  const revealEls = document.querySelectorAll('.reveal-on-scroll');
+  const revealObserver = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+  revealEls.forEach((el) => revealObserver.observe(el));
 }
+
 
