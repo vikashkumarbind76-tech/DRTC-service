@@ -13,9 +13,20 @@ class Command(BaseCommand):
         self.stdout.write("Seeding DRTC data...")
 
         # 1. Superuser
-        if not User.objects.filter(username="admin").exists():
-            User.objects.create_superuser("admin", "drtcservice@gmail.com", "admin123")
-            self.stdout.write(self.style.SUCCESS("Superuser 'admin' created (password: admin123)"))
+        admin_user, created = User.objects.get_or_create(
+            username="admin",
+            defaults={"email": "drtcservice@gmail.com", "is_staff": True, "is_superuser": True}
+        )
+        admin_user.set_password("admin123")
+        admin_user.is_staff = True
+        admin_user.is_superuser = True
+        admin_user.save()
+        self.stdout.write(self.style.SUCCESS("Superuser 'admin' ready (password: admin123)"))
+
+        # Clear any failed login lockout attempts
+        from drtc_app.models import AdminLoginAttempt
+        AdminLoginAttempt.objects.all().delete()
+        self.stdout.write(self.style.SUCCESS("Cleared any security lockout records"))
 
         # 2. Official Packages (from official DRTC price chart - all 25 tiers)
         packages_data = [

@@ -3,30 +3,36 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'config.settings'
 django.setup()
 
 from django.test import Client
+from django.conf import settings
 from django.contrib.auth.models import User
 from drtc_app.models import ServicePackage, Booking, CustomerReview, ContactInquiry
 
 c = Client()
+secret_admin = getattr(settings, 'DJANGO_ADMIN_URL', 'drtc-management-hub-786/').strip('/') + '/'
 
 urls = [
-    ('/', 'Home page'),
-    ('/track/', 'Booking Tracker'),
-    ('/privacy-policy/', 'Privacy Policy'),
-    ('/terms/', 'Terms & Conditions'),
-    ('/api/live-stats/', 'Live Stats API'),
-    ('/api/quote/?capacity=1000&count=1', 'Quote API 1000L'),
-    ('/api/quote/?capacity=8000&count=1', 'Quote API 8000L'),
-    ('/api/quote/?capacity=150000&count=1', 'Quote API 150000L'),
-    ('/admin/', 'Admin (redirect)'),
-    ('/admin/login/', 'Admin Login'),
+    ('/', 'Home page', (200,)),
+    ('/track/', 'Booking Tracker (Alias)', (200,)),
+    ('/booking/track/', 'Booking Tracker (Canonical)', (200,)),
+    ('/privacy-policy/', 'Privacy Policy (Canonical)', (200,)),
+    ('/privacy/', 'Privacy Policy (Alias)', (200,)),
+    ('/terms/', 'Terms & Conditions (Alias)', (200,)),
+    ('/terms-and-conditions/', 'Terms & Conditions (Canonical)', (200,)),
+    ('/api/live-stats/', 'Live Stats API', (200,)),
+    ('/api/quote/?capacity=1000&count=1', 'Quote API 1000L', (200,)),
+    ('/api/quote/?capacity=8000&count=1', 'Quote API 8000L', (200,)),
+    ('/api/quote/?capacity=150000&count=1', 'Quote API 150000L', (200,)),
+    ('/admin/', 'Admin Decoy Trap / Dev Redirect', (302, 404)),
+    (f'/{secret_admin}', 'Secret Operations Portal (Redirect)', (302,)),
+    (f'/{secret_admin}login/', 'Secret Operations Login Page', (200,)),
 ]
 
-print('=== URL STATUS TESTS ===')
+print('=== URL STATUS & SECURITY TESTS ===')
 all_ok = True
-for url, name in urls:
+for url, name, expected_statuses in urls:
     r = c.get(url, follow=False)
     status = r.status_code
-    ok = status in (200, 301, 302)
+    ok = status in expected_statuses
     mark = 'OK  ' if ok else 'FAIL'
     if not ok:
         all_ok = False
@@ -67,7 +73,6 @@ print('  Superuser accounts: %s' % superusers)
 
 print()
 print('=== BOOKING FORM POST TEST ===')
-from django.test import RequestFactory
 import datetime
 
 r = c.post('/api/booking/create/', {
@@ -83,18 +88,37 @@ r = c.post('/api/booking/create/', {
     'payment_method': 'PAY_ON_SERVICE',
 }, HTTP_X_REQUESTED_WITH='XMLHttpRequest', content_type='application/x-www-form-urlencoded')
 
+created_booking_id = None
 if r.status_code == 200:
     data = json.loads(r.content)
     ok = data.get('status') == 'success'
+    created_booking_id = data.get('booking_id')
     print('  [%s] Booking create: status=%s, booking_id=%s, amount=%s' % (
-        'OK  ' if ok else 'FAIL', data.get('status'), data.get('booking_id'), data.get('total_amount')))
-    # Clean up test booking
-    if data.get('status') == 'success':
-        from drtc_app.models import Booking
-        Booking.objects.filter(booking_id=data.get('booking_id')).delete()
-        print('       (test booking cleaned up)')
+        'OK  ' if ok else 'FAIL', data.get('status'), created_booking_id, data.get('total_amount')))
 else:
     print('  [FAIL] Booking create returned HTTP %s' % r.status_code)
+
+print()
+print('=== BOOKING TRACKING & SUCCESS PAGE TEST ===')
+if created_booking_id:
+    # 1. Booking success receipt page
+    r_success = c.get(f'/booking/success/{created_booking_id}/')
+    ok_succ = r_success.status_code == 200 and created_booking_id in r_success.content.decode('utf-8')
+    print('  [%s] Booking success view for %s (HTTP %s)' % ('OK  ' if ok_succ else 'FAIL', created_booking_id, r_success.status_code))
+
+    # 2. Tracking page search
+    r_track = c.get(f'/booking/track/?q={created_booking_id}')
+    ok_track = r_track.status_code == 200 and created_booking_id in r_track.content.decode('utf-8')
+    print('  [%s] Booking track HTML search for %s (HTTP %s)' % ('OK  ' if ok_track else 'FAIL', created_booking_id, r_track.status_code))
+
+    # 3. Tracking API real-time status
+    r_track_api = c.get(f'/api/booking/status/{created_booking_id}/')
+    ok_api = r_track_api.status_code == 200 and json.loads(r_track_api.content).get('found') is True
+    print('  [%s] Booking status API for %s (HTTP %s)' % ('OK  ' if ok_api else 'FAIL', created_booking_id, r_track_api.status_code))
+
+    # Clean up test booking
+    Booking.objects.filter(booking_id=created_booking_id).delete()
+    print('       (test booking cleaned up)')
 
 print()
 print('=== CONTACT FORM POST TEST ===')
@@ -112,6 +136,13 @@ if r.status_code == 200:
         print('       (test inquiry cleaned up)')
 else:
     print('  [FAIL] Contact form returned HTTP %s' % r.status_code)
+
+print()
+print('=== ADMIN AUTHENTICATION & DASHBOARD ACCESS TEST ===')
+login_url = f'/{secret_admin}login/'
+res_login = c.post(login_url, {'username': 'admin', 'password': 'admin123'}, follow=True)
+login_ok = res_login.status_code == 200 and ('Bookings slated for today' in res_login.content.decode('utf-8') or 'COMMAND & DISPATCH' in res_login.content.decode('utf-8'))
+print('  [%s] Admin login & dashboard load with credentials (HTTP %s)' % ('OK  ' if login_ok else 'FAIL', res_login.status_code))
 
 print()
 print('=== HOME PAGE CONTENT CHECK ===')

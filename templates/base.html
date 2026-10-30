@@ -282,7 +282,7 @@
         <div
           style="background: rgba(255, 255, 255, 0.04); border: 1px dashed var(--border-gold); padding: 1.25rem; border-radius: var(--radius-sm); margin-bottom: 1.75rem; text-align: left;">
           <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-            <span style="font-size: 0.82rem; color: var(--text-muted);">Booking Reference ID:</span>
+            <span style="font-size: 0.82rem; color: var(--text-muted);">Tracking ID:</span>
             <span id="success-booking-id"
               style="font-family: monospace; font-weight: 700; color: var(--accent-gold-bright); font-size: 1.05rem;">DRTC-XXXX</span>
           </div>
@@ -421,7 +421,7 @@
     </div>
 
     <div class="container footer-bottom">
-      <div>&copy; 2026 DRTC SERVICE. All Rights Reserved. Clean Tanks, Safe Tomorrow.</div>
+      <div><span id="secret-admin-trigger" style="cursor: default; user-select: none;">&copy;</span> 2026 DRTC SERVICE. All Rights Reserved. Clean Tanks, Safe Tomorrow.</div>
       <div style="display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap;">
         <a href="{% url 'privacy_policy' %}" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
         <span>•</span>
@@ -435,6 +435,26 @@
 
   <!-- Core JavaScript -->
   <script src="{% static 'js/main.js' %}?v=5.2"></script>
+  <script>
+    // Secret 3-Tap Admin Shortcut (Tapping (c) 3 times quickly opens admin portal)
+    (function() {
+      var tapCount = 0;
+      var tapTimer = null;
+      var trigger = document.getElementById('secret-admin-trigger');
+      if (trigger) {
+        trigger.addEventListener('click', function(e) {
+          tapCount++;
+          clearTimeout(tapTimer);
+          if (tapCount >= 3) {
+            tapCount = 0;
+            window.location.href = "{% url 'admin:index' %}";
+          } else {
+            tapTimer = setTimeout(function() { tapCount = 0; }, 1200);
+          }
+        });
+      }
+    })();
+  </script>
   {% block extra_js %}{% endblock %}
 </body>
 

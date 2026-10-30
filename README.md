@@ -77,8 +77,9 @@ Open **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)** in your web browser.
 
 ---
 
-## 🔐 Admin Credentials
+## 🔐 Admin Credentials & Operations Portal
 
-- **URL:** [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
+- **Secure Operations Portal URL:** [http://127.0.0.1:8000/drtc-secure-portal-786/](http://127.0.0.1:8000/drtc-secure-portal-786/) *(configured via DJANGO_ADMIN_URL in .env)*
+- **Decoy Honeypot Trap:** http://127.0.0.1:8000/admin/ *(deliberately returns 404 to conceal portal from scanners & brute-force probes)*
 - **Username:** `admin`
 - **Password:** `admin123`

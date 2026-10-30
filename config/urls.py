@@ -49,6 +49,7 @@ def drtc_admin_index(request, extra_context=None):
     return original_admin_index(request, extra_context=context)
 
 from django.http import Http404
+from django.shortcuts import redirect
 from django.urls import path, include, re_path
 from drtc_app.security import SecureAdminAuthenticationForm
 
@@ -56,15 +57,31 @@ from drtc_app.security import SecureAdminAuthenticationForm
 admin.site.login_form = SecureAdminAuthenticationForm
 admin.site.index = drtc_admin_index
 
+admin_secret_path = getattr(settings, 'DJANGO_ADMIN_URL', 'drtc-secure-portal-786/').strip('/') + '/'
+
 def decoy_admin_404(request, *args, **kwargs):
     """
     Decoy handler:
-    Anyone requesting '/admin' or '/admin/' receives a standard 404 Page Not Found.
-    This completely conceals the admin panel so unauthorized users cannot guess or brute-force passwords.
+    In local development (DEBUG=True), automatically redirects /admin/ to the secret operations portal
+    so you can seamlessly log in without remembering the secret token path.
+    In production (DEBUG=False), returns a strict 404 Page Not Found to block bots & scanners.
     """
+    if settings.DEBUG:
+        return redirect(f'/{admin_secret_path}')
     raise Http404("Page not found")
 
-admin_secret_path = getattr(settings, 'DJANGO_ADMIN_URL', 'drtc-management-hub-786/').strip('/') + '/'
+
+def admin_alias_redirect(request, rest=''):
+    """
+    Seamless alias redirect: ensures both drtc-secure-portal-786/ and drtc-management-hub-786/
+    work across local and production deployments regardless of environment variables.
+    """
+    qs = request.META.get('QUERY_STRING')
+    query = f'?{qs}' if qs else ''
+    clean_rest = (rest or '').lstrip('/')
+    target = f'/{admin_secret_path}{clean_rest}{query}'
+    return redirect(target)
+
 
 urlpatterns = [
     # Secret Admin Dashboard (known only to the owner)
@@ -72,7 +89,16 @@ urlpatterns = [
 
     # Decoy trap: /admin/ and /admin/* always return 404
     re_path(r'^admin(/.*)?$', decoy_admin_404),
+]
 
+# Register alias routes for dual compatibility
+known_aliases = ['drtc-secure-portal-786/', 'drtc-management-hub-786/']
+for alias in known_aliases:
+    if alias != admin_secret_path:
+        alias_prefix = alias.rstrip('/')
+        urlpatterns.append(re_path(rf'^{alias_prefix}(?:/(?P<rest>.*))?$', admin_alias_redirect))
+
+urlpatterns += [
     path('', include('drtc_app.urls')),
 ]
 

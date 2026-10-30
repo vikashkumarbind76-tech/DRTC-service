@@ -179,7 +179,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Secret Admin Portal URL (Never expose standard 'admin/')
 # Can be changed anytime via .env (e.g. DJANGO_ADMIN_URL="my-secret-vault-path/")
-DJANGO_ADMIN_URL = os.environ.get('DJANGO_ADMIN_URL', 'drtc-management-hub-786/').strip('/') + '/'
+DJANGO_ADMIN_URL = os.environ.get('DJANGO_ADMIN_URL', 'drtc-secure-portal-786/').strip('/') + '/'
+LOGIN_REDIRECT_URL = f"/{DJANGO_ADMIN_URL}"
+
 
 # Hardened Session & Cookie Security
 SESSION_COOKIE_HTTPONLY = True
