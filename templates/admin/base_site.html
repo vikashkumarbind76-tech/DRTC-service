@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/admin_custom.css' %}?v=2.2">
+  <link rel="stylesheet" href="{% static 'css/admin_custom.css' %}?v=3.0">
 {% endblock %}
 
 {% block branding %}
@@ -16,17 +16,17 @@
   <a href="{% url 'admin:index' %}" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
     <img src="{% static 'images/drtc_logo.png' %}" alt="DRTC SERVICE Logo"
          style="height: 44px; width: auto; max-width: 68px; object-fit: contain;
-                filter: drop-shadow(0 2px 8px rgba(0, 210, 255, 0.35));
+                filter: drop-shadow(0 2px 8px rgba(228, 49, 43, 0.45));
                 flex-shrink: 0;">
     <div>
       <div style="display: flex; align-items: center; gap: 6px;">
         <span style="font-family: 'Anton', 'Montserrat', sans-serif; font-size: 1.45rem;
                      letter-spacing: 0.04em; line-height: 1; text-transform: uppercase;
                      white-space: nowrap;">
-          <span style="color: #fbbf24; text-shadow: 0 0 12px rgba(245, 158, 11, 0.4);">DRTC</span>
+          <span style="color: #E4312B; text-shadow: 0 0 12px rgba(228, 49, 43, 0.5);">DRTC</span>
           <span style="color: #ffffff;"> SERVICE</span>
         </span>
-        <span class="drtc-header-badge" style="font-size: 0.72rem;">OPS HUB</span>
+        <span class="drtc-header-badge" style="font-size: 0.72rem; background: rgba(228, 49, 43, 0.15); color: #E4312B; border: 1px solid rgba(228, 49, 43, 0.4);">OPS HUB</span>
       </div>
       <span class="drtc-header-subtitle">Dinesh Rakesh Tank Cleaning &amp; Gamharia &amp; Jamshedpur</span>
     </div>
@@ -34,16 +34,15 @@
 </div>
 {% endblock %}
 
-
 {# Keep header clean: nav-global is empty so user-tools and branding align perfectly #}
 {% block nav-global %}{% endblock %}
 
 {# Place dedicated full-width operations ribbon cleanly below header #}
 {% block nav-breadcrumbs %}
   {% if user.is_authenticated and user.is_staff %}
-  <div class="drtc-nav-ribbon">
+  <div class="drtc-nav-ribbon" style="border-bottom: 1px solid #2E2E2E; background: #0e0e0e;">
     <div class="drtc-quick-links">
-      <a href="/" target="_blank" class="drtc-pill-link gold">
+      <a href="/" target="_blank" class="drtc-pill-link" style="border-color: rgba(228, 49, 43, 0.4); color: #E4312B;">
         <span>🌐</span> Live Website
       </a>
       <a href="{% url 'booking_track' %}" target="_blank" class="drtc-pill-link">
@@ -55,20 +54,17 @@
       <a href="{% url 'admin:drtc_app_servicepackage_changelist' %}" class="drtc-pill-link">
         <span>🏷️</span> Packages
       </a>
+      <a href="{% url 'admin:drtc_app_customerreview_changelist' %}" class="drtc-pill-link">
+        <span>⭐</span> Reviews
+      </a>
       <a href="{% url 'admin:drtc_app_contactinquiry_changelist' %}" class="drtc-pill-link">
         <span>💬</span> Inquiries
       </a>
     </div>
-
-    <div class="drtc-contact-links">
-      <a href="https://wa.me/917808611636" target="_blank" class="drtc-pill-link whatsapp">
-        <span>💬</span> Dinesh: 7808611636
-      </a>
-      <a href="tel:+916352561343" class="drtc-pill-link">
-        <span>📞</span> Rakesh: 6352561343
-      </a>
+    <div class="drtc-ribbon-status">
+      <span class="live-dot" style="background: #E4312B; box-shadow: 0 0 8px #E4312B;"></span>
+      <span>Live System Operational</span>
     </div>
   </div>
   {% endif %}
-  {{ block.super }}
 {% endblock %}

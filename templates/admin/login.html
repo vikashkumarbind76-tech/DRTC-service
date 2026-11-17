@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DRTC Operations Hub | Operations Login</title>
+  <title>DRTC Operations Hub | Secure Login</title>
   {% load static %}
 
   <!-- Favicon -->
@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after {
@@ -30,13 +31,12 @@
       align-items: center;
       justify-content: center;
       padding: 1.5rem 1rem;
-      background: #040711;
+      background: #050505;
       background-image: 
-        radial-gradient(circle at 50% 12%, rgba(6, 182, 212, 0.16) 0%, transparent 55%),
-        radial-gradient(circle at 85% 85%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 15% 90%, rgba(16, 185, 129, 0.08) 0%, transparent 45%);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: #f1f5f9;
+        radial-gradient(circle at 50% 15%, rgba(228, 49, 43, 0.15) 0%, transparent 60%),
+        radial-gradient(circle at 85% 85%, rgba(228, 49, 43, 0.08) 0%, transparent 50%);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #e5e2e1;
       position: relative;
       overflow-x: hidden;
     }
@@ -47,8 +47,8 @@
       position: fixed;
       inset: 0;
       background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
       background-size: 38px 38px;
       pointer-events: none;
       z-index: 0;
@@ -62,24 +62,18 @@
       margin: auto;
     }
 
-    /* Main Glassmorphic Card */
     .login-card {
-      background: #090e1c;
-      background: linear-gradient(180deg, rgba(13, 21, 39, 0.95) 0%, rgba(7, 11, 22, 0.98) 100%);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      border-radius: 20px;
-      padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+      background: #121212;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 24px;
+      padding: 2.5rem 2.2rem;
       box-shadow: 
-        0 25px 60px rgba(0, 0, 0, 0.85),
-        0 0 35px rgba(6, 182, 212, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+        0 25px 60px rgba(0, 0, 0, 0.9),
+        0 0 35px -5px rgba(228, 49, 43, 0.35);
       position: relative;
       overflow: hidden;
     }
 
-    /* Tri-color Top Accent Line */
     .login-card::before {
       content: '';
       position: absolute;
@@ -87,437 +81,184 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(90deg, #f59e0b 0%, #06b6d4 50%, #10b981 100%);
-      box-shadow: 0 0 12px rgba(6, 182, 212, 0.5);
+      background: #E4312B;
+      box-shadow: 0 0 16px rgba(228, 49, 43, 0.6);
     }
 
-    /* Header & Branding */
     .login-header {
       text-align: center;
       margin-bottom: 2rem;
     }
 
-    .logo-img-wrapper {
-      margin-bottom: 0.85rem;
-      display: inline-block;
-      transition: transform 0.3s ease;
-    }
-
-    .logo-img-wrapper:hover {
-      transform: scale(1.05);
-    }
-
-    .login-logo {
-      height: 64px;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 4px 14px rgba(6, 182, 212, 0.4));
-    }
-
-    .login-title {
+    .brand-title {
       font-family: 'Anton', sans-serif;
-      font-size: 1.85rem;
-      letter-spacing: 1.2px;
-      color: #ffffff;
-      margin-bottom: 0.4rem;
+      font-size: 2rem;
+      letter-spacing: 0.03em;
       text-transform: uppercase;
-      line-height: 1.1;
+      line-height: 1;
     }
 
-    .login-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(245, 158, 11, 0.12);
-      border: 1px solid rgba(245, 158, 11, 0.28);
+    .brand-red { color: #E4312B; }
+    .brand-white { color: #FFFFFF; }
+
+    .brand-badge {
+      display: inline-block;
+      margin-top: 0.6rem;
       padding: 0.25rem 0.75rem;
-      border-radius: 999px;
+      border-radius: 9999px;
       font-size: 0.72rem;
       font-weight: 700;
-      color: #fbbf24;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #10b981;
-      box-shadow: 0 0 8px #10b981;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-
-    .login-subtitle {
-      font-size: 0.76rem;
-      color: #64748b;
-      margin: 0;
-    }
-
-    /* Error Banners */
-    .error-banner {
-      background: rgba(244, 63, 94, 0.12);
-      border: 1px solid rgba(244, 63, 94, 0.35);
-      border-radius: 10px;
-      padding: 0.75rem 1rem;
-      color: #fecdd3;
-      font-size: 0.82rem;
-      line-height: 1.4;
-      margin-bottom: 1.3rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    .error-banner svg {
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    /* Form Layout */
-    .login-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
+      background: rgba(228, 49, 43, 0.15);
+      color: #E4312B;
+      border: 1px solid rgba(228, 49, 43, 0.3);
     }
 
     .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-      text-align: left;
+      margin-bottom: 1.25rem;
     }
 
     .form-label {
-      font-size: 0.76rem;
+      display: block;
+      font-size: 0.75rem;
       font-weight: 700;
-      color: #94a3b8;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-    }
-
-    .input-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-    }
-
-    .input-icon {
-      position: absolute;
-      left: 14px;
-      color: #64748b;
-      pointer-events: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.2s ease;
+      letter-spacing: 0.06em;
+      color: #999999;
+      margin-bottom: 0.45rem;
     }
 
     .form-control {
       width: 100%;
-      height: 48px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      padding: 0 14px 0 44px;
-      font-family: 'Inter', sans-serif;
+      background: #1F1F1F;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 0.85rem 1rem;
       font-size: 0.95rem;
-      color: #ffffff;
-      box-sizing: border-box;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .form-control::placeholder {
-      color: #475569;
+      color: #FFFFFF;
+      outline: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
     }
 
     .form-control:focus {
-      outline: none;
-      background: rgba(255, 255, 255, 0.06);
-      border-color: #f59e0b;
-      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.22), 0 0 15px rgba(245, 158, 11, 0.15);
+      border-color: #E4312B;
+      box-shadow: 0 0 0 3px rgba(228, 49, 43, 0.2);
     }
 
-    .input-wrapper:focus-within .input-icon {
-      color: #f59e0b;
-    }
-
-    /* Password Toggle Button */
-    .pwd-toggle-btn {
-      position: absolute;
-      right: 12px;
-      background: transparent;
-      border: none;
-      color: #64748b;
-      cursor: pointer;
-      padding: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.2s ease;
-    }
-
-    .pwd-toggle-btn:hover {
-      color: #f59e0b;
-    }
-
-    /* Submit Button */
-    .submit-btn {
+    .btn-submit {
       width: 100%;
-      height: 48px;
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      color: #070a13;
+      padding: 0.95rem;
       border: none;
-      border-radius: 10px;
-      font-family: 'Inter', sans-serif;
+      border-radius: 9999px;
+      background: #E4312B;
+      color: #FFFFFF;
       font-size: 0.95rem;
-      font-weight: 800;
-      letter-spacing: 0.4px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      box-shadow: 0 6px 20px rgba(245, 158, 11, 0.35);
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      margin-top: 0.35rem;
-    }
-
-    .submit-btn:hover {
-      background: #fbbf24;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.55);
-    }
-
-    .submit-btn:active {
-      transform: translateY(0);
-    }
-
-    /* Footer & Contacts */
-    .login-footer {
-      margin-top: 2rem;
-      padding-top: 1.4rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      text-align: center;
-    }
-
-    .support-title {
-      font-size: 0.72rem;
-      color: #64748b;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      margin-bottom: 0.85rem;
-    }
-
-    .support-contacts {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 1.2rem;
-    }
-
-    .contact-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 0.3rem 0.65rem;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      gap: 0.5rem;
+      box-shadow: 0 0 25px rgba(228, 49, 43, 0.45);
       transition: all 0.2s ease;
+      margin-top: 1.5rem;
     }
 
-    .contact-link.owner {
-      color: #fbbf24;
+    .btn-submit:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 35px rgba(228, 49, 43, 0.65);
     }
 
-    .contact-link.owner:hover {
-      background: rgba(245, 158, 11, 0.12);
-      border-color: rgba(245, 158, 11, 0.3);
+    .btn-submit:active {
+      transform: scale(0.98);
     }
 
-    .contact-link.operator {
-      color: #22d3ee;
-    }
-
-    .contact-link.operator:hover {
-      background: rgba(6, 182, 212, 0.12);
-      border-color: rgba(6, 182, 212, 0.3);
-    }
-
-    /* Back Link to Public Website */
-    .back-link {
-      display: inline-flex;
+    .error-alert {
+      background: rgba(228, 49, 43, 0.15);
+      border: 1px solid rgba(228, 49, 43, 0.4);
+      color: #ffb4ab;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+      display: flex;
       align-items: center;
-      gap: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #94a3b8;
+      gap: 0.5rem;
+    }
+
+    .footer-links {
+      margin-top: 1.75rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999999;
+    }
+
+    .footer-links a {
+      color: #E4312B;
       text-decoration: none;
-      transition: color 0.2s ease, transform 0.2s ease;
+      font-weight: 600;
     }
 
-    .back-link:hover {
-      color: #ffffff;
-      transform: translateX(-3px);
-    }
-
-    /* Mobile Adaptations */
-    @media (max-width: 480px) {
-      .login-card {
-        padding: 2rem 1.4rem;
-        border-radius: 16px;
-      }
-      .login-title {
-        font-size: 1.6rem;
-      }
-      .support-contacts {
-        flex-direction: column;
-        gap: 8px;
-      }
+    .footer-links a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-
   <div class="login-container">
     <div class="login-card">
-
-      <!-- Header Section -->
       <div class="login-header">
-        <a href="/" class="logo-img-wrapper" title="Return to DRTC Home">
-          <img src="{% static 'images/drtc_logo.png' %}" alt="DRTC SERVICE Logo" class="login-logo">
-        </a>
-        <h1 class="login-title">DRTC SERVICE</h1>
-        <div class="login-badge">
-          <span class="pulse-dot"></span>
-          <span>OPERATIONS COMMAND HUB</span>
+        <div style="display: flex; justify-content: center; margin-bottom: 0.75rem;">
+          <img src="{% static 'images/drtc_logo_tight.png' %}" alt="DRTC SERVICE" style="height: 64px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 12px rgba(228, 49, 43, 0.4));">
         </div>
-        <p class="login-subtitle">Gamharia &amp; Jamshedpur Tank Cleaning System</p>
+        <div class="brand-badge">OPERATIONS HUB SECURE LOGIN</div>
       </div>
 
-      <!-- Error Alerts -->
       {% if form.errors and not form.non_field_errors %}
-      <div class="error-banner">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-        <span>Please correct the errors in the fields below.</span>
+      <div class="error-alert">
+        <span class="material-symbols-outlined" style="font-size: 18px;">error</span>
+        <span>Please correct the errors below.</span>
       </div>
       {% endif %}
 
       {% if form.non_field_errors %}
       {% for error in form.non_field_errors %}
-      <div class="error-banner">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+      <div class="error-alert">
+        <span class="material-symbols-outlined" style="font-size: 18px;">error</span>
         <span>{{ error }}</span>
       </div>
       {% endfor %}
       {% endif %}
 
-      <!-- Login Form -->
-      <form action="{{ app_path }}" method="post" id="login-form" class="login-form">
+      <form action="{{ app_path }}" method="post" id="login-form">
         {% csrf_token %}
-
-        <!-- Username Field -->
         <div class="form-group">
           <label class="form-label" for="id_username">Operator Username</label>
-          <div class="input-wrapper">
-            <span class="input-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            </span>
-            <input 
-              type="text" 
-              name="username" 
-              id="id_username" 
-              class="form-control" 
-              value="{{ form.username.value|default:'' }}" 
-              autofocus 
-              autocapitalize="none" 
-              autocomplete="username" 
-              maxlength="150" 
-              placeholder="e.g. operator" 
-              required
-            >
-          </div>
+          <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" 
+                 maxlength="150" required id="id_username" class="form-control" placeholder="e.g. admin or operator">
         </div>
 
-        <!-- Password Field -->
         <div class="form-group">
-          <label class="form-label" for="id_password">Access Password</label>
-          <div class="input-wrapper">
-            <span class="input-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            </span>
-            <input 
-              type="password" 
-              name="password" 
-              id="id_password" 
-              class="form-control" 
-              autocomplete="current-password" 
-              placeholder="••••••••••••" 
-              required
-            >
-            <button type="button" class="pwd-toggle-btn" id="togglePasswordBtn" title="Toggle password visibility" aria-label="Toggle password visibility">
-              <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-            </button>
-          </div>
-          <input type="hidden" name="next" value="{{ next }}">
+          <label class="form-label" for="id_password">Security Password</label>
+          <input type="password" name="password" autocomplete="current-password" 
+                 required id="id_password" class="form-control" placeholder="••••••••••••">
         </div>
 
-        <!-- Submit Button -->
-        <button type="submit" class="submit-btn">
-          <span>Sign In to Operations Hub</span>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        <button type="submit" class="btn-submit">
+          <span class="material-symbols-outlined">lock_open</span>
+          <span>AUTHENTICATE &amp; ENTER HUB</span>
         </button>
       </form>
 
-      <!-- Footer & Contacts -->
-      <div class="login-footer">
-        <div class="support-title">Official Support &amp; Technical Dispatch</div>
-        <div class="support-contacts">
-          <a href="tel:+917808611636" class="contact-link owner">
-            <span>📞</span> Dinesh (Owner)
-          </a>
-          <a href="tel:+916352561343" class="contact-link operator">
-            <span>🔧</span> Rakesh (Operator)
-          </a>
-        </div>
-        <div class="back-link-wrapper">
-          <a href="/" class="back-link">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            <span>Return to Public Website</span>
-          </a>
-        </div>
+      <div class="footer-links">
+        <p>Restricted access for DRTC Operations &amp; Technicians.</p>
+        <p style="margin-top: 0.5rem;"><a href="{% url 'home' %}">← Return to Public Website</a></p>
       </div>
-
     </div>
   </div>
-
-  <script>
-    // Password visibility toggle
-    const pwdInput = document.getElementById('id_password');
-    const toggleBtn = document.getElementById('togglePasswordBtn');
-    const eyeIcon = document.getElementById('eyeIcon');
-
-    if (toggleBtn && pwdInput) {
-      toggleBtn.addEventListener('click', () => {
-        const isPassword = pwdInput.type === 'password';
-        pwdInput.type = isPassword ? 'text' : 'password';
-        eyeIcon.innerHTML = isPassword 
-          ? `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line>`
-          : `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle>`;
-      });
-    }
-  </script>
 </body>
 </html>

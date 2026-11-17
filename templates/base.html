@@ -1,455 +1,515 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}DRTC SERVICE | Dinesh Rakesh Tank Cleaning Service | Gamharia, Jamshedpur{% endblock %}
-  </title>
+  <title>{% block title %}DRTC SERVICE | Dinesh Rakesh Mechanized Water Tank Cleaning Gamharia &amp; Jamshedpur{% endblock %}</title>
 
   <meta name="description"
-    content="Official website of DRTC Tank Cleaning Service (Dinesh & Rakesh). Certified 6-stage mechanized water tank cleaning, sludge extraction & UV sterilization in Gamharia, Jhanda Chowk, Shantinagar & Jamshedpur. Starting at ₹250.">
+    content="Official website of DRTC Tank Cleaning Service (Dinesh &amp; Rakesh). Certified 6-stage mechanized water tank cleaning, sludge extraction &amp; UV sterilization in Gamharia, Jhanda Chowk, Shantinagar &amp; Jamshedpur. Starting at ₹250.">
   <meta name="keywords"
     content="DRTC Service, Tank Cleaning Gamharia, Dinesh Rakesh Tank Cleaning, water tank cleaning Jamshedpur, Sintex tank cleaning, underground sump cleaning Jhanda Chowk, water tank cleaner Shantinagar">
   <meta name="author" content="DRTC Service">
 
   <!-- OpenGraph / Social Meta -->
-  <meta property="og:title" content="DRTC SERVICE - Cleaner Tanks, Safer Tomorrow">
+  <meta property="og:title" content="DRTC SERVICE - High-Pressure Mechanized Water Tank Sterilization">
   <meta property="og:description"
-    content="Professional mechanized water tank cleaning starting at ₹250. Safe, hygienic, affordable. Gamharia & Jamshedpur.">
+    content="150-bar rotary descaling, sludge extraction &amp; certified UV sterilization across Gamharia &amp; Jamshedpur. Starting at ₹250. ₹0 Advance.">
   <meta property="og:image" content="{% static 'images/drtc_visiting_card.png' %}">
   <meta property="og:type" content="website">
 
   <!-- Google Fonts: Anton & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
+
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CDN with forms & container queries -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Tailored Design System Configuration (Exact Stitch Specs) -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-muted": "#1F1F1F",
+            "surface-dim": "#131313",
+            "on-surface": "#e5e2e1",
+            "on-surface-variant": "#e5bdb8",
+            "surface-container-low": "#1c1b1b",
+            "text-muted": "#999999",
+            "surface-container-highest": "#353534",
+            "primary-container": "#ff5448",
+            "border-subtle": "#2E2E2E",
+            "on-background": "#e5e2e1",
+            "background": "#131313",
+            "surface-container-high": "#2a2a2a",
+            "surface-container-lowest": "#0e0e0e",
+            "surface": "#121212",
+            "primary": "#ffb4aa",
+            "surface-container": "#201f1f",
+            "pure-white": "#FFFFFF"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "3rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2.5rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "1rem",
+            "margin-mobile": "1.25rem"
+          },
+          "fontFamily": {
+            "body-bold": ["Inter", "sans-serif"],
+            "label-sm": ["Inter", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"],
+            "headline-xl-mobile": ["Anton", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "display-hero-mobile": ["Anton", "sans-serif"],
+            "headline-lg": ["Anton", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "title-md": ["Inter", "sans-serif"],
+            "headline-xl": ["Anton", "sans-serif"],
+            "display-hero": ["Anton", "sans-serif"],
+            "headline-lg-mobile": ["Anton", "sans-serif"],
+            "headline-md": ["Anton", "sans-serif"]
+          },
+          "fontSize": {
+            "body-bold": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["40px", { "lineHeight": "44px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "display-hero-mobile": ["56px", { "lineHeight": "56px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+            "headline-lg": ["36px", { "lineHeight": "40px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "title-md": ["18px", { "lineHeight": "24px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-xl": ["64px", { "lineHeight": "68px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "display-hero": ["96px", { "lineHeight": "96px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+            "headline-lg-mobile": ["28px", { "lineHeight": "32px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "28px", "letterSpacing": "0.03em", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom architectural aesthetic details matching Stitch */
+    .ghost-stroke-text {
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.06);
+      color: transparent;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .ghost-stroke-text-red {
+      -webkit-text-stroke: 1.5px rgba(228, 49, 43, 0.15);
+      color: transparent;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .neon-red-glow {
+      box-shadow: 0 0 35px -5px rgba(228, 49, 43, 0.45);
+    }
+
+    .hover-lift {
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .hover-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px -8px rgba(228, 49, 43, 0.35);
+      border-color: rgba(228, 49, 43, 0.6) !important;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .animate-marquee {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: marquee 35s linear infinite;
+    }
+
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+
+    /* Mobile drawer transition */
+    #mobileDrawer.active {
+      transform: translateX(0);
+    }
+  </style>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
   <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon-32x32.png' %}">
   <link rel="apple-touch-icon" href="{% static 'images/drtc_icon.png' %}">
 
-  <!-- CSS Stylesheet with Cache-Busting Version -->
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=6.0">
+  <!-- CSS Stylesheet for Backward-Compatibility & Sub-Pages -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=8.2">
   {% block extra_css %}{% endblock %}
 </head>
 
-<body>
+<body
+  class="bg-[#050505] text-on-surface selection:bg-[#E4312B] selection:text-pure-white font-body-md antialiased overflow-x-hidden">
 
-  <!-- Ambient Ambient Lighting Effects -->
-  <div class="ambient-glow-container"
-    style="position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;">
-    <div class="ambient-glow ambient-cyan"></div>
-    <div class="ambient-glow ambient-gold"></div>
-  </div>
+  <!-- ========================================================================= -->
+  <!-- 1. TOP NAVBAR: Clean DRTC SERVICE Branding (Exact Stitch Spec)            -->
+  <!-- ========================================================================= -->
+  <header
+    class="fixed top-0 left-0 w-full z-50 bg-[#0e0e0e]/85 backdrop-blur-xl border-b border-[#2E2E2E] shadow-2xl shadow-[#0e0e0e]/50">
+    <div class="flex justify-between items-center w-full px-6 lg:px-12 h-20 max-w-7xl mx-auto">
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-6">
+        <a class="flex items-center gap-2 transition-transform duration-200 hover:scale-105 active:scale-95 py-1"
+          href="{% url 'home' %}" title="DRTC SERVICE">
+          <img src="{% static 'images/drtc_logo_tight.png' %}" alt="DRTC SERVICE"
+            class="h-12 md:h-14 w-auto object-contain drop-shadow-[0_2px_12px_rgba(228,49,43,0.3)]">
+          <span class="sr-only">DRTC SERVICE</span>
+        </a>
+      </div>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar" id="mainNavbar">
-    <div class="container nav-inner">
-      <!-- Two-Tone Wordmark Brand Identity with Official Logo -->
-      <a href="{% url 'home' %}" class="brand-wordmark" title="DRTC Service Home">
-        <img src="{% static 'images/drtc_logo.png' %}" alt="DRTC SERVICE Logo" class="brand-logo-img">
-        <div class="brand-text-block">
-          <div class="brand-title">
-            <span class="brand-drtc">DRTC</span>
-            <span class="brand-service">SERVICE</span>
-          </div>
-          <span class="brand-subtext">Dinesh Rakesh Tank Cleaning</span>
-        </div>
-      </a>
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden lg:flex items-center gap-8">
+        <a class="text-label-md font-label-md tracking-wider uppercase text-pure-white border-b-2 border-[#E4312B] pb-1 transition-all"
+          href="{% url 'home' %}#home">HOME</a>
+        <a class="text-label-md font-label-md tracking-wider uppercase text-text-muted hover:text-pure-white transition-colors"
+          href="{% url 'home' %}#benefits">SERVICES</a>
+        <a class="text-label-md font-label-md tracking-wider uppercase text-text-muted hover:text-pure-white transition-colors"
+          href="{% url 'home' %}#pricing">PACKAGES</a>
+        <a class="text-label-md font-label-md tracking-wider uppercase text-text-muted hover:text-pure-white transition-colors"
+          href="{% url 'home' %}#estimator">CALCULATOR</a>
+        <a class="text-label-md font-label-md tracking-wider uppercase text-text-muted hover:text-pure-white transition-colors"
+          href="{% url 'home' %}#contact">CONTACT</a>
+      </nav>
 
-      <!-- Desktop Nav Links -->
-      <ul class="nav-links">
-        <li><a href="{% url 'home' %}#home"
-            class="nav-link {% if request.resolver_match.url_name == 'home' %}active{% endif %}">Home</a></li>
-        <li><a href="{% url 'home' %}#pricing" class="nav-link">Pricing</a></li>
-        <li><a href="{% url 'home' %}#reviews" class="nav-link">Reviews</a></li>
-        <li><a href="{% url 'booking_track' %}"
-            class="nav-link {% if request.resolver_match.url_name == 'booking_track' %}active{% endif %}">Track</a></li>
-        <li><a href="{% url 'home' %}#contact" class="nav-link">Contact</a></li>
-      </ul>
-
-      <!-- Action CTAs -->
-      <div class="nav-actions">
-        <button class="btn btn-primary btn-sm open-booking-modal-btn" data-capacity="1000 L">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-            <line x1="16" y1="2" x2="16" y2="6"></line>
-            <line x1="8" y1="2" x2="8" y2="6"></line>
-            <line x1="3" y1="10" x2="21" y2="10"></line>
-          </svg>
-          <span>Book Service</span>
-        </button>
-        <button class="mobile-menu-toggle" aria-label="Toggle navigation menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
+      <!-- Trailing Action Button -->
+      <div class="flex items-center gap-4">
+        <!-- Primary Action: Book Inspection -->
+        <a class="px-6 py-2.5 rounded-full bg-[#E4312B] text-pure-white text-label-md font-label-md tracking-wider uppercase font-body-bold hover:scale-105 active:scale-95 transition-all neon-red-glow flex items-center gap-2"
+          href="{% url 'home' %}#booking">
+          <span class="material-symbols-outlined text-base">event_available</span>
+          <span>BOOK INSPECTION</span>
+        </a>
+        <!-- Mobile Menu Toggle -->
+        <button type="button" id="mobileMenuBtn"
+          class="lg:hidden p-2 rounded-xl bg-surface-muted text-pure-white border border-white/10"
+          aria-label="Open mobile menu">
+          <span class="material-symbols-outlined text-2xl">menu</span>
         </button>
       </div>
     </div>
-  </nav>
+  </header>
 
-  <!-- Page Content -->
+  <!-- Mobile Menu Drawer Overlay -->
+  <div id="mobileDrawer"
+    class="fixed inset-0 z-50 bg-[#050505]/95 backdrop-blur-2xl transition-transform duration-300 translate-x-full lg:hidden flex flex-col p-6">
+    <div class="flex justify-between items-center pb-6 border-b border-[#2E2E2E]">
+      <a href="{% url 'home' %}" class="flex items-center">
+        <img src="{% static 'images/drtc_logo_tight.png' %}" alt="DRTC SERVICE" class="h-10 w-auto object-contain">
+        <span class="sr-only">DRTC SERVICE</span>
+      </a>
+      <button type="button" id="closeMobileDrawer" class="p-2 text-pure-white rounded-full bg-surface-muted"
+        aria-label="Close menu">
+        <span class="material-symbols-outlined text-2xl">close</span>
+      </button>
+    </div>
+    <div class="flex flex-col gap-6 py-8 text-headline-md font-headline-md uppercase">
+      <a href="{% url 'home' %}#home" class="mobile-nav-link text-pure-white hover:text-[#E4312B]">HOME</a>
+      <a href="{% url 'home' %}#benefits" class="mobile-nav-link text-text-muted hover:text-pure-white">SERVICES</a>
+      <a href="{% url 'home' %}#pricing" class="mobile-nav-link text-text-muted hover:text-pure-white">PACKAGES &amp;
+        PRICING</a>
+      <a href="{% url 'home' %}#estimator" class="mobile-nav-link text-text-muted hover:text-pure-white">CALCULATOR</a>
+      <a href="{% url 'home' %}#contact" class="mobile-nav-link text-text-muted hover:text-pure-white">CONTACT</a>
+      <a href="{% url 'booking_track' %}" class="mobile-nav-link text-[#E4312B]">TRACK MY BOOKING</a>
+    </div>
+    <div class="mt-auto pt-6 border-t border-[#2E2E2E] flex flex-col gap-3">
+      <a href="tel:7808611636"
+        class="w-full py-3.5 rounded-full bg-surface-muted text-pure-white font-body-bold text-center border border-white/10 flex items-center justify-center gap-2">
+        <span class="material-symbols-outlined text-[#E4312B] text-lg">call</span>
+        CALL DINESH (7808611636)
+      </a>
+      <a href="{% url 'home' %}#booking"
+        class="mobile-nav-link w-full py-3.5 rounded-full bg-[#E4312B] text-pure-white font-body-bold text-center neon-red-glow">
+        BOOK INSPECTION @ ₹250+
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Viewport Content Block -->
   <main>
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Universal Booking Modal -->
-  <div class="modal-overlay" id="bookingModal">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3 class="modal-title">SCHEDULE TANK CLEANING</h3>
-        <button class="modal-close-btn" id="closeBookingModal" aria-label="Close modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="bookingForm" method="POST" action="{% url 'api_create_booking' %}">
-          {% csrf_token %}
-          <input type="hidden" id="modal-package-id" name="package_id" value="">
-
-          <div class="booking-modal-grid">
-            <!-- Left Column: Service & Customer Info -->
-            <div class="booking-modal-col">
-              <div
-                style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.28); padding: 0.85rem 1rem; border-radius: var(--radius-md); margin-bottom: 0.9rem; display: flex; align-items: center; justify-content: space-between;">
-                <div>
-                  <div
-                    style="font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;">
-                    Selected Tank Capacity</div>
-                  <div style="font-family: var(--font-display); font-size: 1.35rem; color: var(--accent-gold-bright);"
-                    id="modal-cap-display">
-                    <span id="modal-cap-label">1000 L</span>
-                    <span id="modal-price-display" style="font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: #ffffff; margin-left: 6px; font-weight: 700;">(₹400)</span>
-                    <input type="hidden" id="modal-package-cap" name="custom_capacity" value="1000 L">
-                  </div>
-                </div>
-                <div style="text-align: right;">
-                  <div style="font-size: 0.82rem; color: #10b981; font-weight: 700;">Safe Disinfection</div>
-                  <div style="font-size: 0.72rem; color: #fbbf24;">₹0 Advance Required</div>
-                </div>
-              </div>
-
-              <!-- Choose Litre / Capacity Option -->
-              <div class="form-group" style="margin-bottom: 0.9rem;">
-                <label class="form-label" for="modal-capacity-select" style="display: flex; justify-content: space-between; align-items: center;">
-                  <span>Choose Tank Capacity (Litre) *</span>
-                  <span style="font-size: 0.72rem; color: var(--accent-cyan); font-weight: 600;">25 Official Tiers</span>
-                </label>
-                <select id="modal-capacity-select" class="form-control" style="font-size: 0.92rem; font-weight: 600; cursor: pointer;">
-                  <optgroup label="Residential Tiers (Popular)">
-                    <option value="500 L" data-price="250">500 Liter (₹250)</option>
-                    <option value="1000 L" data-price="400" selected>1000 L (₹400) ★ Most Popular</option>
-                    <option value="2000 L" data-price="650">2000 L (₹650)</option>
-                    <option value="3000 L" data-price="900">3000 L (₹900)</option>
-                    <option value="5000 L" data-price="1100">5000 L (₹1,100)</option>
-                  </optgroup>
-                  <optgroup label="Commercial Tiers">
-                    <option value="8000 L" data-price="1680">8000 L (₹1,680)</option>
-                    <option value="10,000 L" data-price="2200">10,000 L (₹2,200)</option>
-                    <option value="15,000 L" data-price="3080">15,000 L (₹3,080)</option>
-                    <option value="20,000 L" data-price="3820">20,000 L (₹3,820)</option>
-                    <option value="25,000 L" data-price="4740">25,000 L (₹4,740)</option>
-                    <option value="30,000 L" data-price="5490">30,000 L (₹5,490)</option>
-                  </optgroup>
-                  <optgroup label="Industrial & Sump Tiers">
-                    <option value="40,000 L" data-price="6390">40,000 L (₹6,390)</option>
-                    <option value="45,000 L" data-price="7200">45,000 L (₹7,200)</option>
-                    <option value="50,000 L" data-price="7600">50,000 L (₹7,600)</option>
-                    <option value="60,000 L" data-price="8210">60,000 L (₹8,210)</option>
-                    <option value="65,000 L" data-price="9000">65,000 L (₹9,000)</option>
-                    <option value="70,000 L" data-price="9600">70,000 L (₹9,600)</option>
-                    <option value="80,000 L" data-price="11210">80,000 L (₹11,210)</option>
-                    <option value="85,000 L" data-price="13870">85,000 L (₹13,870)</option>
-                    <option value="90,000 L" data-price="15500">90,000 L (₹15,500)</option>
-                    <option value="1,00,000 L" data-price="18780">1,00,000 L (₹18,780)</option>
-                    <option value="1,05,000 L" data-price="20810">1,05,000 L (₹20,810)</option>
-                    <option value="1,20,000 L" data-price="25950">1,20,000 L (₹25,950)</option>
-                    <option value="1,25,000 L" data-price="29590">1,25,000 L (₹29,590)</option>
-                    <option value="1,50,000 L" data-price="36830">1,50,000 L (₹36,830)</option>
-                  </optgroup>
-                </select>
-
-                <!-- Quick Pick Capacity Pills -->
-                <div class="modal-capacity-pills" style="display: flex; gap: 0.35rem; margin-top: 0.45rem; flex-wrap: wrap;">
-                  <button type="button" class="capacity-pill modal-cap-pill" data-capacity="500 L" data-price="250" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">500 L</button>
-                  <button type="button" class="capacity-pill modal-cap-pill active" data-capacity="1000 L" data-price="400" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">1000 L</button>
-                  <button type="button" class="capacity-pill modal-cap-pill" data-capacity="2000 L" data-price="650" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">2000 L</button>
-                  <button type="button" class="capacity-pill modal-cap-pill" data-capacity="3000 L" data-price="900" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">3000 L</button>
-                  <button type="button" class="capacity-pill modal-cap-pill" data-capacity="5000 L" data-price="1100" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;">5000 L</button>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="cust-name">Full Name *</label>
-                <input type="text" id="cust-name" name="customer_name" class="form-control"
-                  placeholder="e.g. Ramesh Kumar" autocomplete="name" required>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="cust-phone">Mobile Phone (WhatsApp) *</label>
-                <input type="tel" id="cust-phone" name="customer_phone" class="form-control"
-                  placeholder="10-digit number" autocomplete="tel" required>
-              </div>
-
-              <input type="hidden" id="modal-tank-type" name="tank_type" value="OVERHEAD_PVC">
-            </div>
-
-            <!-- Right Column: Date, Address & Confirmation CTA -->
-            <div class="booking-modal-col">
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem;">
-                <div class="form-group">
-                  <label class="form-label" for="pref-date">Preferred Date *</label>
-                  <input type="date" id="pref-date" name="preferred_date" class="form-control"
-                    value="{{ today|date:'Y-m-d' }}" required>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="pref-slot">Preferred Slot</label>
-                  <select id="pref-slot" name="preferred_time_slot" class="form-control">
-                    <option value="08:00 AM - 11:00 AM">Morning (8 AM - 11 AM)</option>
-                    <option value="11:00 AM - 02:00 PM">Noon (11 AM - 2 PM)</option>
-                    <option value="02:00 PM - 05:00 PM">Afternoon (2 PM - 5 PM)</option>
-                    <option value="05:00 PM - 07:00 PM">Evening (5 PM - 7 PM)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="service-addr">Address / House No / Colony *</label>
-                <textarea id="service-addr" name="address" class="form-control" rows="2"
-                  placeholder="e.g. House No. 24, Near Kali Mandir Road" autocomplete="street-address" required
-                  style="resize: none;"></textarea>
-              </div>
-
-              <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 0.85rem;">
-                <div class="form-group">
-                  <label class="form-label" for="cust-landmark">Landmark</label>
-                  <input type="text" id="cust-landmark" name="landmark" class="form-control"
-                    placeholder="e.g. Near Jhanda Chowk" autocomplete="address-line2">
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="cust-area">Locality</label>
-                  <input type="text" id="cust-area" name="area_locality" class="form-control" value="Gamharia"
-                    autocomplete="address-level2">
-                </div>
-              </div>
-
-              <div class="form-group" style="margin-bottom: 0.85rem;">
-                <div
-                  style="display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); padding: 0.5rem 0.8rem; border-radius: var(--radius-sm);">
-                  <span style="color: var(--text-secondary);">Payment:</span>
-                  <strong style="color: #34d399;">Pay After Service (Cash / UPI)</strong>
-                  <input type="hidden" name="payment_method" value="PAY_ON_SERVICE">
-                </div>
-              </div>
-
-              <button type="submit" class="btn btn-primary"
-                style="width: 100%; padding: 0.85rem; font-size: 1.05rem; font-weight: 700;">
-                Confirm &amp; Schedule Appointment
-              </button>
-
-              <div style="text-align: center; margin-top: 0.5rem; font-size: 0.74rem; color: var(--text-muted);">
-                Zero advance required • Cancel or reschedule anytime
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Booking Success Modal -->
-  <div class="modal-overlay" id="bookingSuccessModal">
-    <div class="modal-dialog" style="max-width: 520px; text-align: center;">
-      <div class="modal-body" style="padding: 2.5rem 2rem;">
-        <div
-          style="width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 2px solid #10b981; display: inline-flex; align-items: center; justify-content: center; color: #10b981; margin-bottom: 1.25rem;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-        </div>
-
-        <h3 style="font-family: var(--font-display); font-size: 1.9rem; margin-bottom: 0.4rem;">BOOKING CONFIRMED!</h3>
-        <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 1.75rem;">
-          Thank you, <span id="success-customer-name" style="color: #ffffff; font-weight: 700;">Customer</span>! Your
-          appointment has been registered with DRTC Service.
-        </p>
-
-        <div
-          style="background: rgba(255, 255, 255, 0.04); border: 1px dashed var(--border-gold); padding: 1.25rem; border-radius: var(--radius-sm); margin-bottom: 1.75rem; text-align: left;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-            <span style="font-size: 0.82rem; color: var(--text-muted);">Tracking ID:</span>
-            <span id="success-booking-id"
-              style="font-family: monospace; font-weight: 700; color: var(--accent-gold-bright); font-size: 1.05rem;">DRTC-XXXX</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-            <span style="font-size: 0.82rem; color: var(--text-muted);">Total Estimated Amount:</span>
-            <span id="success-total-amount" style="font-weight: 700; color: #ffffff;">₹0</span>
-          </div>
-          <div style="display: flex; justify-content: space-between;">
-            <span style="font-size: 0.82rem; color: var(--text-muted);">Payment:</span>
-            <span style="font-size: 0.82rem; color: #34d399; font-weight: 600;">Pay After Cleaning (Cash / UPI)</span>
-          </div>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <a href="#" id="success-whatsapp-btn" target="_blank" class="btn btn-primary"
-            style="background: #25d366; color: #ffffff; border-color: #25d366; font-size: 1rem;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.541 1.956.818 2.801.819 3.178 0 5.767-2.587 5.767-5.766.002-3.181-2.584-5.766-5.772-5.766zm9.969 5.768c0 5.485-4.467 9.953-9.969 9.953-1.748 0-3.376-.452-4.79-1.242l-5.241 1.373 1.4-5.109c-.89-1.488-1.398-3.235-1.398-5.093 0-5.486 4.469-9.953 9.969-9.953 5.486 0 10.029 4.467 10.029 9.953z" />
-            </svg>
-            Send Confirmation to Dinesh on WhatsApp
+  <!-- ========================================================================= -->
+  <!-- 10. OFFICIAL 4-COLUMN FOOTER: DRTC SERVICE (Strict Design System Lock)     -->
+  <!-- ========================================================================= -->
+  <footer class="bg-[#0e0e0e] border-t border-[#2E2E2E] w-full pt-16 pb-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12">
+      <!-- 4-Column Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-[#2E2E2E]">
+        <!-- Col 1: Business Information -->
+        <div class="flex flex-col gap-4">
+          <a class="flex items-center transition-transform duration-200 hover:scale-105" href="{% url 'home' %}#home">
+            <img src="{% static 'images/drtc_logo_tight.png' %}" alt="DRTC SERVICE"
+              class="h-16 w-auto object-contain drop-shadow-[0_2px_12px_rgba(228,49,43,0.3)]">
+            <span class="sr-only">DRTC SERVICE</span>
           </a>
-          <button class="btn btn-outline" id="closeSuccessModal">Close & Continue Browsing</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Official Media Image Lightbox Modal -->
-  <div class="modal-overlay" id="imageLightboxModal">
-    <div class="lightbox-dialog">
-      <img src="" alt="DRTC Official Proof" class="lightbox-img" id="lightbox-preview-img">
-    </div>
-    <button class="modal-close-btn" id="closeLightboxModal"
-      style="position: absolute; top: 25px; right: 30px; font-size: 2.2rem; color: #ffffff;">&times;</button>
-  </div>
-
-  <!-- Sticky Mobile Quick Action Bar -->
-  <div class="mobile-bottom-bar">
-    <a href="tel:7808611636" class="btn btn-outline"
-      style="border-color: rgba(245,158,11,0.4); color: var(--accent-gold-bright);">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path
-          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-        </path>
-      </svg>
-      Call Now
-    </a>
-    <a href="https://wa.me/917808611636?text=Hello%20DRTC%20Service%2C%20I%20need%20tank%20cleaning%20service%20in%20Gamharia."
-      target="_blank" class="btn btn-primary" style="background:#25d366; color:#fff; border-color:#25d366;">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path
-          d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.541 1.956.818 2.801.819 3.178 0 5.767-2.587 5.767-5.766.002-3.181-2.584-5.766-5.772-5.766zm9.969 5.768c0 5.485-4.467 9.953-9.969 9.953-1.748 0-3.376-.452-4.79-1.242l-5.241 1.373 1.4-5.109c-.89-1.488-1.398-3.235-1.398-5.093 0-5.486 4.469-9.953 9.969-9.953 5.486 0 10.029 4.467 10.029 9.953z" />
-      </svg>
-      WhatsApp
-    </a>
-    <button class="btn btn-red open-booking-modal-btn" data-capacity="1000 L">
-      Book @ ₹250+
-    </button>
-  </div>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div>
-        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.85rem;">
-          <img src="{% static 'images/drtc_logo.png' %}" alt="DRTC Logo"
-            style="height: 48px; width: auto; object-fit: contain;">
-          <div class="brand-title">
-            <span class="brand-drtc">DRTC</span>
-            <span class="brand-service">SERVICE</span>
+          <div class="text-label-sm font-label-sm uppercase tracking-widest text-[#E4312B] font-bold">
+            DINESH RAKESH TANK CLEANING SERVICE
+          </div>
+          <p class="text-body-md font-body-md text-text-muted">
+            Gamharia &amp; Jamshedpur's certified mechanized water tank disinfection team. 150-bar rotary descaling,
+            vacuum de-sludging &amp; UV sterilization.
+          </p>
+          <div class="text-xs uppercase tracking-wider text-pure-white font-body-bold">
+            "CLEANER TANKS. SAFER TOMORROW."
+          </div>
+          <!-- Trust Badges -->
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span
+              class="px-2.5 py-1 rounded-full bg-surface-muted border border-white/10 text-pure-white text-[11px] font-label-sm uppercase flex items-center gap-1">
+              <span class="material-symbols-outlined text-[#E4312B] text-xs">shield</span> Non-Toxic
+            </span>
+            <span
+              class="px-2.5 py-1 rounded-full bg-surface-muted border border-white/10 text-pure-white text-[11px] font-label-sm uppercase flex items-center gap-1">
+              <span class="material-symbols-outlined text-[#E4312B] text-xs">sanitizer</span> UV Sterilized
+            </span>
+            <span
+              class="px-2.5 py-1 rounded-full bg-surface-muted border border-white/10 text-pure-white text-[11px] font-label-sm uppercase flex items-center gap-1">
+              <span class="material-symbols-outlined text-[#E4312B] text-xs">verified</span> Since 2026
+            </span>
           </div>
         </div>
-        <p style="font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.25rem;">
-          DINESH RAKESH TANK CLEANING SERVICE.<br>
-          <strong style="color: var(--accent-gold-bright);">CLEANER TANKS, SAFER TOMORROW.</strong><br>
-          Gamharia & Jamshedpur’s certified mechanized water tank disinfection team.
-        </p>
-        <div style="display: flex; gap: 0.75rem;">
-          <span
-            style="font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 0.3rem 0.65rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">Non-Toxic</span>
-          <span
-            style="font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 0.3rem 0.65rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">UV
-            Sterilized</span>
-          <span
-            style="font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 0.3rem 0.65rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">Since
-            2026</span>
+
+        <!-- Col 2: Official Capacity & Rates -->
+        <div class="flex flex-col gap-3">
+          <div
+            class="text-label-md font-label-md uppercase tracking-wider text-pure-white font-bold border-b border-white/10 pb-2">
+            OFFICIAL CAPACITY &amp; RATES
+          </div>
+          <div class="space-y-1.5 text-body-md font-body-md text-text-muted">
+            <div class="flex justify-between py-0.5 border-b border-white/5">
+              <span>500 L Tank</span>
+              <span class="text-pure-white font-bold">₹250</span>
+            </div>
+            <div class="flex justify-between py-0.5 border-b border-white/5 text-pure-white font-body-bold">
+              <span class="flex items-center gap-1">1,000 L <span
+                  class="text-[10px] px-1.5 py-0.2 bg-[#E4312B] text-white rounded">POPULAR</span></span>
+              <span class="text-[#E4312B]">₹400</span>
+            </div>
+            <div class="flex justify-between py-0.5 border-b border-white/5">
+              <span>2,000 L Tank</span>
+              <span class="text-pure-white font-bold">₹650</span>
+            </div>
+            <div class="flex justify-between py-0.5 border-b border-white/5">
+              <span>5,000 L Villa/Hotel</span>
+              <span class="text-pure-white font-bold">₹1,100</span>
+            </div>
+            <div class="flex justify-between py-0.5 border-b border-white/5">
+              <span>10,000 L Commercial</span>
+              <span class="text-pure-white font-bold">₹2,200</span>
+            </div>
+            <div class="flex justify-between py-0.5 border-b border-white/5">
+              <span>50,000 L Industrial</span>
+              <span class="text-pure-white font-bold">₹7,600</span>
+            </div>
+            <div class="flex justify-between py-0.5">
+              <span>1,50,000 L Mega Sump</span>
+              <span class="text-pure-white font-bold">₹36,830</span>
+            </div>
+          </div>
+          <a class="mt-2 text-label-sm font-label-sm uppercase tracking-wider text-[#E4312B] hover:underline flex items-center gap-1 font-body-bold"
+            href="{% url 'home' %}#estimator">
+            <span class="material-symbols-outlined text-sm">calculate</span>
+            OPEN MULTI-TANK &amp; SUMP CALCULATOR &rarr;
+          </a>
+        </div>
+
+        <!-- Col 3: Quick Navigation -->
+        <div class="flex flex-col gap-3">
+          <div
+            class="text-label-md font-label-md uppercase tracking-wider text-pure-white font-bold border-b border-white/10 pb-2">
+            QUICK NAVIGATION
+          </div>
+          <ul class="space-y-2 text-body-md font-body-md text-text-muted">
+            <li>
+              <a class="hover:text-pure-white transition-colors" href="{% url 'home' %}#home">Home</a>
+            </li>
+            <li>
+              <a class="hover:text-pure-white transition-colors" href="{% url 'home' %}#pricing">Capacity &amp; Pricing
+                Matrix (25 Tiers)</a>
+            </li>
+            <li>
+              <a class="hover:text-pure-white transition-colors" href="{% url 'home' %}#estimator">Multi-Tank &amp; Sump
+                Calculator</a>
+            </li>
+            <li>
+              <a class="hover:text-pure-white transition-colors" href="{% url 'home' %}#process">6-Stage Cleaning
+                Process</a>
+            </li>
+            <li>
+              <a class="hover:text-pure-white transition-colors" href="{% url 'home' %}#testimonials">Customer Feedback
+                &amp; Reviews</a>
+            </li>
+            <li>
+              <a class="hover:text-pure-white transition-colors" href="{% url 'booking_track' %}">Check Booking Status
+                (Live Track)</a>
+            </li>
+            <li>
+              <a class="hover:text-pure-white transition-colors" href="{% url 'privacy_policy' %}">Privacy Policy</a>
+            </li>
+            <li>
+              <a class="hover:text-pure-white transition-colors" href="{% url 'terms_and_conditions' %}">Terms &amp;
+                Conditions</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Direct Contacts -->
+        <div class="flex flex-col gap-3">
+          <div
+            class="text-label-md font-label-md uppercase tracking-wider text-pure-white font-bold border-b border-white/10 pb-2">
+            DIRECT CONTACTS
+          </div>
+          <div class="space-y-3 text-body-md font-body-md">
+            <div>
+              <div class="text-label-sm font-label-sm text-[#E4312B] uppercase font-bold">DINESH (OWNER)</div>
+              <a class="text-pure-white hover:text-[#E4312B] font-body-bold flex items-center gap-1.5"
+                href="tel:7808611636">
+                <span class="material-symbols-outlined text-sm text-[#E4312B]">call</span>
+                +91 7808611636
+              </a>
+            </div>
+            <div>
+              <div class="text-label-sm font-label-sm text-text-muted uppercase font-bold">RAKESH (OPERATOR)</div>
+              <a class="text-pure-white hover:text-[#E4312B] font-body-bold flex items-center gap-1.5"
+                href="tel:6352561343">
+                <span class="material-symbols-outlined text-sm text-[#E4312B]">call</span>
+                +91 6352561343
+              </a>
+            </div>
+            <div>
+              <div class="text-label-sm font-label-sm text-text-muted uppercase font-bold">BUSINESS ADDRESS</div>
+              <p class="text-text-muted text-sm leading-snug">
+                Shantinagar, Gamharia,<br>Near by Jhanda Chowk, 832108
+              </p>
+            </div>
+            <div>
+              <div class="text-label-sm font-label-sm text-text-muted uppercase font-bold">OFFICIAL EMAIL</div>
+              <a class="text-[#E4312B] hover:underline text-sm break-all" href="mailto:drtcservice@gmail.com">
+                drtcservice@gmail.com
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div>
-        <div class="footer-col-title">Official Capacity & Rates</div>
-        <ul class="footer-links">
-          <li><a href="{% url 'home' %}#pricing">500 Liter Tank - ₹250</a></li>
-          <li><a href="{% url 'home' %}#pricing">1000 L Tank - ₹400 (Popular)</a></li>
-          <li><a href="{% url 'home' %}#pricing">2000 L Tank - ₹650</a></li>
-          <li><a href="{% url 'home' %}#pricing">3000 L Tank - ₹900</a></li>
-          <li><a href="{% url 'home' %}#pricing">5000 L Tank - ₹1100</a></li>
-          <li><a href="{% url 'home' %}#calculator">Multi-Tank & Sump Calculator</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Quick Navigation</div>
-        <ul class="footer-links">
-          <li><a href="{% url 'home' %}#home">Home</a></li>
-          <li><a href="{% url 'home' %}#pricing">Capacity &amp; Pricing Matrix</a></li>
-          <li><a href="{% url 'home' %}#reviews">Customer Feedback</a></li>
-          <li><a href="{% url 'booking_track' %}">Check Booking Status</a></li>
-          <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
-          <li><a href="{% url 'terms_and_conditions' %}">Terms &amp; Conditions</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <div class="footer-col-title">Direct Contacts</div>
-        <ul class="footer-links" style="font-size: 0.88rem;">
-          <li style="color: #ffffff;">
-            <strong>Dinesh (Owner):</strong><br>
-            <a href="tel:7808611636" style="color: var(--accent-gold-bright);">+91 7808611636</a>
-          </li>
-          <li style="color: #ffffff; margin-top: 0.5rem;">
-            <strong>Rakesh (Operator):</strong><br>
-            <a href="tel:6352561343" style="color: var(--accent-gold-bright);">+91 6352561343</a>
-          </li>
-          <li style="margin-top: 0.5rem;">
-            <strong>Address:</strong><br>
-            Shantinagar, Gamharia,<br>Near by Jhanda Chowk, 832108
-          </li>
-          <li style="margin-top: 0.5rem;">
-            <strong>Email:</strong><br>
-            <a href="mailto:drtcservice@gmail.com">drtcservice@gmail.com</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="container footer-bottom">
-      <div><span id="secret-admin-trigger" style="cursor: default; user-select: none;">&copy;</span> 2026 DRTC SERVICE. All Rights Reserved. Clean Tanks, Safe Tomorrow.</div>
-      <div style="display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap;">
-        <a href="{% url 'privacy_policy' %}" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
-        <span>•</span>
-        <a href="{% url 'terms_and_conditions' %}" style="color: var(--text-muted); text-decoration: none;">Terms &amp;
-          Conditions</a>
-        <span>•</span>
-        <span>Gamharia, Jamshedpur</span>
+      <!-- Bottom Bar with Copyright & Secret Admin Trigger -->
+      <div
+        class="pt-8 flex flex-col md:flex-row justify-between items-center text-label-sm font-label-sm text-text-muted gap-4">
+        <div>
+          <span id="secret-admin-trigger" style="cursor: default; user-select: none;">&copy;</span> 2026 DRTC SERVICE -
+          DINESH RAKESH TANK CLEANING SERVICE. ALL RIGHTS RESERVED.
+        </div>
+        <div class="flex items-center gap-4 flex-wrap">
+          <span>GAMHARIA, JAMSHEDPUR 832108</span>
+          <span>•</span>
+          <a class="hover:text-pure-white transition-colors"
+            href="mailto:drtcservice@gmail.com">drtcservice@gmail.com</a>
+          <span>•</span>
+          <a class="text-[#E4312B] hover:underline font-bold" href="tel:7808611636">+91 7808611636</a>
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- Core JavaScript -->
-  <script src="{% static 'js/main.js' %}?v=5.2"></script>
+  <!-- ========================================================================= -->
+  <!-- STICKY MOBILE QUICK ACTION BAR (Dark Industrial Red)                      -->
+  <!-- ========================================================================= -->
+  <div
+    class="fixed bottom-0 left-0 w-full z-40 bg-[#0e0e0e]/95 backdrop-blur-lg border-t border-[#2E2E2E] px-4 py-3 flex items-center justify-between gap-3 sm:hidden"
+    id="mobileBottomBar">
+    <a href="tel:7808611636"
+      class="flex-1 py-2.5 rounded-full bg-surface-muted text-pure-white font-body-bold text-xs uppercase flex items-center justify-center gap-1.5 border border-white/10">
+      <span class="material-symbols-outlined text-[#E4312B] text-base">call</span>
+      <span>Call</span>
+    </a>
+    <a href="https://wa.me/917808611636?text=Hello%20DRTC%20Service%2C%20I%20need%20mechanized%20tank%20cleaning%20in%20Gamharia."
+      target="_blank"
+      class="flex-1 py-2.5 rounded-full bg-surface-muted text-pure-white font-body-bold text-xs uppercase flex items-center justify-center gap-1.5 border border-white/10">
+      <span class="material-symbols-outlined text-[#25D366] text-base">chat</span>
+      <span>WhatsApp</span>
+    </a>
+    <a href="{% url 'home' %}#booking"
+      class="flex-1 py-2.5 rounded-full bg-[#E4312B] text-pure-white font-body-bold text-xs uppercase flex items-center justify-center gap-1 neon-red-glow">
+      <span>Book @ ₹250+</span>
+    </a>
+  </div>
+
+  <!-- Core JavaScript & Global Behaviors -->
+  <script src="{% static 'js/main.js' %}?v=6.0"></script>
   <script>
-    // Secret 3-Tap Admin Shortcut (Tapping (c) 3 times quickly opens admin portal)
-    (function() {
+      // Mobile Drawer Toggle
+      (function () {
+        const openBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('closeMobileDrawer');
+        const drawer = document.getElementById('mobileDrawer');
+        const navLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if (openBtn && drawer) {
+          openBtn.addEventListener('click', () => drawer.classList.add('active'));
+        }
+        if (closeBtn && drawer) {
+          closeBtn.addEventListener('click', () => drawer.classList.remove('active'));
+        }
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            if (drawer) drawer.classList.remove('active');
+          });
+        });
+      })();
+
+    // Secret 3-Tap Admin Shortcut
+    (function () {
       var tapCount = 0;
       var tapTimer = null;
       var trigger = document.getElementById('secret-admin-trigger');
       if (trigger) {
-        trigger.addEventListener('click', function(e) {
+        trigger.addEventListener('click', function (e) {
           tapCount++;
           clearTimeout(tapTimer);
           if (tapCount >= 3) {
             tapCount = 0;
             window.location.href = "{% url 'admin:index' %}";
           } else {
-            tapTimer = setTimeout(function() { tapCount = 0; }, 1200);
+            tapTimer = setTimeout(function () { tapCount = 0; }, 1200);
           }
         });
       }

@@ -404,7 +404,7 @@ def api_calculate_quote(request):
     elif capacity <= 90000:
         base_rate = 15500; duration = 660
     elif capacity <= 100000:
-        base_rate = 18780; duration = 720
+        base_rate = 17870; duration = 720
     elif capacity <= 105000:
         base_rate = 20810; duration = 750
     elif capacity <= 120000:

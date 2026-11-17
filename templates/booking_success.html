@@ -1,155 +1,83 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Booking Confirmed - {{ booking.booking_id }} | DRTC Service{% endblock %}
+{% block title %}Booking Request Registered - {{ booking.booking_id }} | DRTC Service{% endblock %}
 
 {% block content %}
-<section class="section" style="padding-top: 110px; min-height: 85vh; display: flex; align-items: center;">
-  <div class="container" style="max-width: 860px; width: 100%;">
+<section class="min-h-screen pt-32 pb-24 px-6 lg:px-12 flex items-center justify-center bg-gradient-to-b from-[#050505] via-[#090909] to-[#050505] relative overflow-hidden">
+  <!-- Ghost Watermark -->
+  <div class="absolute inset-0 pointer-events-none select-none flex flex-col justify-center items-center overflow-hidden opacity-20 z-0">
+    <span class="ghost-stroke-text font-display-hero text-[120px] md:text-[200px] tracking-tight leading-none whitespace-nowrap">
+      DISPATCH CONFIRMED
+    </span>
+  </div>
 
-    <div
-      style="background: var(--bg-card); border: 1px solid var(--border-gold); border-radius: var(--radius-lg); padding: 2.2rem 2.5rem; text-align: center; box-shadow: var(--shadow-lg), var(--shadow-gold);">
-
-      <div
-        style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap;">
-        <div
-          style="width: 52px; height: 52px; border-radius: 50%; background: rgba(16, 185, 129, 0.15); border: 2.5px solid #10b981; display: inline-flex; align-items: center; justify-content: center; color: #10b981;">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-        </div>
-        <div style="text-align: left;">
-          <span class="section-tag"
-            style="background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(16, 185, 129, 0.3); margin-bottom: 2px;">
-            APPOINTMENT REGISTERED
-          </span>
-          <h1 style="font-family: var(--font-display); font-size: 2rem; line-height: 1.1; margin: 0; color: #ffffff;">
-            BOOKING CONFIRMED!
-          </h1>
-        </div>
+  <div class="relative z-10 max-w-2xl w-full mx-auto">
+    <div class="bg-[#121212] border-2 border-[#E4312B] rounded-3xl p-8 lg:p-12 text-center shadow-2xl neon-red-glow">
+      <!-- Success Icon -->
+      <div class="w-20 h-20 rounded-full bg-[#E4312B]/20 border-2 border-[#E4312B] text-[#E4312B] flex items-center justify-center mx-auto mb-6">
+        <span class="material-symbols-outlined text-4xl">verified</span>
       </div>
 
-      <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem;">
-        Thank you, <strong style="color: #ffffff;">{{ booking.customer_name }}</strong>. Your tank cleaning slot has
-        been booked with DRTC Service.
+      <h1 class="text-headline-xl font-headline-xl uppercase text-pure-white tracking-tight">
+        DISPATCH REQUEST REGISTERED!
+      </h1>
+      <p class="text-body-md font-body-md text-text-muted mt-2 max-w-md mx-auto">
+        Your mechanized water tank sterilization appointment has been successfully scheduled with DRTC Service Operations.
       </p>
 
-      <!-- Booking Card Details - Horizontal 2-Column Grid -->
-      <div
-        style="background: rgba(5, 7, 12, 0.7); border: 1px solid var(--border-highlight); border-radius: var(--radius-md); padding: 1.4rem 1.6rem; text-align: left; margin-bottom: 1.5rem;">
+      <!-- Reference Tracking Box -->
+      <div class="my-6 p-4 rounded-2xl bg-surface-muted inline-flex flex-col items-center border border-white/10">
+        <span class="text-label-sm font-label-sm text-text-muted uppercase tracking-widest">OFFICIAL TRACKING PROTOCOL</span>
+        <span class="text-headline-lg font-headline-lg text-[#E4312B] font-mono tracking-wider mt-1">{{ booking.booking_id }}</span>
+      </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
-          <!-- Left Specs Column -->
-          <div>
-            <div
-              style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.65rem; margin-bottom: 0.65rem;">
-              <span style="font-size: 0.82rem; color: var(--text-secondary);">Tracking ID:</span>
-              <span
-                style="font-family: monospace; font-size: 1.15rem; font-weight: 800; color: var(--accent-gold-bright);">{{ booking.booking_id }}</span>
-            </div>
+      <!-- Action Buttons Row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+        <a href="{% url 'home' %}" class="py-3.5 rounded-full bg-surface-muted hover:bg-white/10 text-pure-white font-body-bold text-body-bold border border-white/20 transition-all flex items-center justify-center gap-2 uppercase">
+          <span class="material-symbols-outlined text-lg">home</span>
+          <span>BACK TO HOME</span>
+        </a>
 
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.55rem;">
-              <span style="font-size: 0.82rem; color: var(--text-secondary);">Scheduled Date:</span>
-              <span style="font-size: 0.88rem; font-weight: 700; color: #ffffff;">{{ booking.preferred_date|date:"D, d M Y" }}</span>
-            </div>
+        <a href="{% url 'booking_track' %}?q={{ booking.booking_id }}" class="py-3.5 rounded-full bg-[#E4312B] text-pure-white font-body-bold text-body-bold hover:scale-105 active:scale-95 transition-all neon-red-glow flex items-center justify-center gap-2 uppercase">
+          <span class="material-symbols-outlined text-lg">radar</span>
+          <span>LIVE TRACK DISPATCH</span>
+        </a>
+      </div>
 
-            <div style="display: flex; justify-content: space-between; margin-bottom: 0.55rem;">
-              <span style="font-size: 0.82rem; color: var(--text-secondary);">Preferred Slot:</span>
-              <span style="font-size: 0.88rem; font-weight: 600; color: var(--accent-cyan);">{{ booking.preferred_time_slot }}</span>
-            </div>
-
-            <div style="display: flex; justify-content: space-between;">
-              <span style="font-size: 0.82rem; color: var(--text-secondary);">Tank Capacity:</span>
-              <span style="font-size: 0.88rem; font-weight: 600; color: #ffffff;">{{ booking.display_capacity }}</span>
-            </div>
-          </div>
-
-          <!-- Right Specs Column -->
-          <div>
-            <div style="margin-bottom: 0.65rem;">
-              <span
-                style="font-size: 0.82rem; color: var(--text-secondary); display: block; margin-bottom: 2px;">Service
-                Address:</span>
-              <span style="font-size: 0.86rem; color: #ffffff; display: block; line-height: 1.4;">{{ booking.address }}{% if booking.landmark %}, Near {{ booking.landmark }}{% endif %}{% if booking.area_locality %}, {{ booking.area_locality }}{% endif %}</span>
-            </div>
-
-            <div
-              style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px dashed var(--border-gold); padding-top: 0.65rem; margin-top: 0.65rem;">
-              <span style="font-size: 0.92rem; font-weight: 700; color: #ffffff;">Total Payable:</span>
-              <span style="font-family: var(--font-display); font-size: 1.5rem; color: var(--accent-gold-bright);">₹{{ booking.total_amount|floatformat:0 }}</span>
-            </div>
-
-            <div style="font-size: 0.76rem; color: #34d399; margin-top: 0.35rem; text-align: right;">
-              ✓ Pay After Service (Cash / UPI on-site)
-            </div>
-          </div>
+      <!-- Summary Specs Breakdown -->
+      <div class="p-6 rounded-2xl bg-[#090909] border border-white/10 text-left space-y-3 text-body-md font-body-md">
+        <div class="flex justify-between border-b border-white/5 pb-2">
+          <span class="text-text-muted">Customer Name:</span>
+          <strong class="text-pure-white font-body-bold">{{ booking.customer_name }} ({{ booking.customer_phone }})</strong>
         </div>
-
+        <div class="flex justify-between border-b border-white/5 pb-2">
+          <span class="text-text-muted">Selected Capacity:</span>
+          <strong class="text-[#E4312B] font-body-bold">{{ booking.display_capacity }}</strong>
+        </div>
+        <div class="flex justify-between border-b border-white/5 pb-2">
+          <span class="text-text-muted">Estimated Package Rate:</span>
+          <strong class="text-pure-white font-headline-md text-lg">₹{{ booking.total_amount|floatformat:0 }}</strong>
+        </div>
+        <div class="flex justify-between border-b border-white/5 pb-2">
+          <span class="text-text-muted">Payment Protocol:</span>
+          <span class="text-[#E4312B] font-body-bold">Pay After Inspection (₹0 Advance)</span>
+        </div>
+        <div class="flex justify-between pt-1">
+          <span class="text-text-muted">Service Destination:</span>
+          <span class="text-right max-w-[65%] text-pure-white">{{ booking.address }}</span>
+        </div>
       </div>
 
-      <!-- Real-Time Booking Status Indicator -->
-      <div style="display: flex; align-items: center; justify-content: center; gap: 0.65rem; margin-bottom: 1.25rem;">
-        <span class="live-indicator-pill">
-          <span class="live-dot"></span>
-          <span>LIVE STATUS: <strong id="liveReceiptStatus" style="color: #ffffff;">{{ booking.get_status_display }}</strong></span>
-        </span>
-      </div>
-
-      <!-- Action Buttons -->
-      <div style="display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 0.75rem;">
-        <a href="{{ whatsapp_url }}" target="_blank" class="btn btn-primary"
-          style="background: #25d366; color: #ffffff; border-color: #25d366; padding: 0.8rem 1rem;">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.993.541 1.956.818 2.801.819 3.178 0 5.767-2.587 5.767-5.766.002-3.181-2.584-5.766-5.772-5.766zm9.969 5.768c0 5.485-4.467 9.953-9.969 9.953-1.748 0-3.376-.452-4.79-1.242l-5.241 1.373 1.4-5.109c-.89-1.488-1.398-3.235-1.398-5.093 0-5.486 4.469-9.953 9.969-9.953 5.486 0 10.029 4.467 10.029 9.953z" />
-          </svg>
-          WhatsApp Dinesh
-        </a>
-        <a href="tel:7808611636" class="btn btn-outline" style="padding: 0.8rem 1rem;">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path
-              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
-            </path>
-          </svg>
-          Call Owner
-        </a>
-        <a href="{% url 'home' %}" class="btn btn-cyan" style="padding: 0.8rem 1rem;">
-          Return Home
+      {% if whatsapp_url %}
+      <div class="mt-8">
+        <a href="{{ whatsapp_url }}" target="_blank" class="w-full py-4 rounded-full bg-[#25D366] text-pure-white font-body-bold text-body-bold hover:opacity-90 transition-all flex items-center justify-center gap-2 uppercase shadow-xl">
+          <span class="material-symbols-outlined text-xl">chat</span>
+          <span>Send Booking Confirmation to Dinesh on WhatsApp</span>
         </a>
       </div>
-
+      {% endif %}
     </div>
   </div>
 </section>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-  // Real-time status update for this booking
-  (function () {
-    const bookingId = "{{ booking.booking_id }}";
-    const statusEl = document.getElementById('liveReceiptStatus');
-    let currentStatus = "{{ booking.status }}";
-
-    function pollBookingStatus() {
-      fetch(`/api/booking/status/${bookingId}/`, {
-        headers: { 'X-Requested-With': 'XMLHttpRequest' }
-      })
-        .then(res => res.json())
-        .then(data => {
-          if (data.found && data.status !== currentStatus) {
-            currentStatus = data.status;
-            if (statusEl) {
-              statusEl.textContent = data.status_display;
-              statusEl.classList.add('stat-updated');
-              setTimeout(() => statusEl.classList.remove('stat-updated'), 1500);
-            }
-          }
-        })
-        .catch(() => { });
-    }
-
-    setInterval(pollBookingStatus, 4000);
-  })();
-</script>
 {% endblock %}

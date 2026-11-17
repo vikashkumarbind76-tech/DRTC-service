@@ -4,124 +4,144 @@
 {% block title %}Track Service Booking Status | DRTC Service{% endblock %}
 
 {% block content %}
-<section class="section" style="padding-top: 130px; min-height: 85vh;">
-  <div class="container" style="max-width: 720px;">
+<section class="min-h-screen pt-32 pb-24 px-6 lg:px-12 flex items-center justify-center bg-gradient-to-b from-[#050505] via-[#090909] to-[#050505] relative overflow-hidden">
+  <!-- Ghost Watermark Background -->
+  <div class="absolute inset-0 pointer-events-none select-none flex flex-col justify-center items-center overflow-hidden opacity-20 z-0">
+    <span class="ghost-stroke-text font-display-hero text-[120px] md:text-[200px] tracking-tight leading-none whitespace-nowrap">
+      TRACK DISPATCH
+    </span>
+  </div>
 
-    <div class="section-header" style="margin-bottom: 2.5rem;">
-      <span class="section-tag">LIVE SERVICE TRACKER</span>
-      <h1 class="section-title">TRACK YOUR TANK CLEANING</h1>
-      <p class="section-subtitle">
-        Enter your Tracking ID (e.g. <code>DRTC-9821</code>) or your registered 10-digit phone number.
+  <div class="relative z-10 max-w-3xl w-full mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <div class="inline-flex items-center gap-2 text-label-md font-label-md text-[#E4312B] uppercase tracking-widest mb-2">
+        <span class="material-symbols-outlined text-base">radar</span>
+        REAL-TIME DISPATCH RADAR
+      </div>
+      <h1 class="text-headline-xl font-headline-xl uppercase text-pure-white tracking-tight">
+        TRACK YOUR TANK STERILIZATION
+      </h1>
+      <p class="text-body-md font-body-md text-text-muted mt-2 max-w-lg mx-auto">
+        Enter your Tracking ID (e.g. <span class="text-[#E4312B] font-mono font-bold bg-[#E4312B]/10 px-2 py-0.5 rounded border border-[#E4312B]/20">DRTC-XXXX</span>) or your registered 10-digit mobile number.
       </p>
     </div>
 
-    <!-- Search Form -->
-    <div
-      style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.75rem; margin-bottom: 2rem;">
-      <form method="GET" action="{% url 'booking_track' %}" style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-        <input type="text" name="q" value="{{ query }}" class="form-control"
-          style="flex: 1; min-width: 240px; font-size: 1rem;" placeholder="e.g. DRTC-9821 or 9835123456" required>
-        <button type="submit" class="btn btn-primary" style="padding: 0.75rem 1.75rem;">
-          Track Status
+    <!-- Search Card Form -->
+    <div class="bg-[#121212] border border-white/10 rounded-3xl p-6 lg:p-8 shadow-2xl mb-8">
+      <form method="GET" action="{% url 'booking_track' %}" class="flex flex-col sm:flex-row gap-3">
+        <div class="relative flex-1">
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-muted text-xl">search</span>
+          <input type="text" name="q" value="{{ query }}" class="w-full bg-surface-muted border border-white/10 rounded-full pl-12 pr-4 py-3.5 text-pure-white text-body-md font-body-md placeholder-text-muted focus:border-[#E4312B] focus:ring-0 transition-all" 
+                 placeholder="e.g. DRTC-9821 or 9876543210" required>
+        </div>
+        <button type="submit" class="px-8 py-3.5 rounded-full bg-[#E4312B] text-pure-white font-body-bold text-body-bold tracking-wider hover:scale-105 active:scale-95 transition-all neon-red-glow flex items-center justify-center gap-2 uppercase">
+          <span class="material-symbols-outlined text-lg">track_changes</span>
+          <span>TRACK STATUS</span>
         </button>
       </form>
     </div>
 
     {% if booking %}
-    <!-- Booking Found Result -->
-    <div
-      style="background: var(--bg-card); border: 1.5px solid var(--border-gold); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow-md);">
-
-      <div
-        style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 1.25rem; margin-bottom: 1.25rem;">
+    <!-- Booking Found Result Card -->
+    <div class="bg-[#121212] border-2 border-[#E4312B]/60 rounded-3xl p-8 lg:p-10 shadow-2xl neon-red-glow relative">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-white/10 pb-6 mb-8 gap-4">
         <div>
-          <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted);">Tracking ID</span>
-          <div style="font-family: monospace; font-size: 1.4rem; font-weight: 800; color: var(--accent-gold-bright);">{{ booking.booking_id }}</div>
+          <span class="text-label-sm font-label-sm text-text-muted uppercase tracking-wider block">OFFICIAL TRACKING PROTOCOL</span>
+          <div class="text-headline-lg font-headline-lg text-[#E4312B] font-mono tracking-wider mt-1">{{ booking.booking_id }}</div>
         </div>
 
         <div id="trackStatusContainer">
           {% if booking.status == 'CONFIRMED' %}
-          <span id="trackStatusBadge"
-            style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
-            ● Confirmed &amp; Scheduled
+          <span id="trackStatusBadge" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-body-bold text-label-md uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            CONFIRMED &amp; SCHEDULED
           </span>
           {% elif booking.status == 'COMPLETED' %}
-          <span id="trackStatusBadge"
-            style="background: rgba(14, 165, 233, 0.15); color: var(--accent-cyan); border: 1px solid rgba(14, 165, 233, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
-            ● Service Completed
+          <span id="trackStatusBadge" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#E4312B]/15 border border-[#E4312B]/40 text-[#E4312B] font-body-bold text-label-md uppercase tracking-wider">
+            <span class="material-symbols-outlined text-sm">verified</span>
+            SERVICE COMPLETED
           </span>
           {% else %}
-          <span id="trackStatusBadge"
-            style="background: rgba(245, 158, 11, 0.15); color: var(--accent-gold-bright); border: 1px solid rgba(245, 158, 11, 0.3); padding: 0.4rem 0.9rem; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">
-            ● {{ booking.get_status_display }}
+          <span id="trackStatusBadge" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-pure-white font-body-bold text-label-md uppercase tracking-wider">
+            <span class="w-2 h-2 rounded-full bg-[#E4312B] animate-pulse"></span>
+            {{ booking.get_status_display|upper }}
           </span>
           {% endif %}
         </div>
       </div>
 
-      <div class="booking-result-grid"
-        style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.5rem;">
-        <div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Customer Name</div>
-          <div style="font-size: 1.05rem; font-weight: 700; color: #ffffff;">{{ booking.customer_name|default:"Valued Customer" }}</div>
+      <!-- Specs Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div class="p-4 rounded-2xl bg-surface-muted border border-white/5">
+          <span class="text-label-sm font-label-sm text-text-muted uppercase block">CUSTOMER NAME</span>
+          <span class="text-body-bold font-body-bold text-pure-white text-lg block mt-1">{{ booking.customer_name|default:"Valued Customer" }}</span>
         </div>
 
-        <div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Phone Number</div>
-          <div style="font-size: 1.05rem; font-weight: 600; color: #ffffff;">{{ booking.customer_phone|default:"Not provided" }}</div>
+        <div class="p-4 rounded-2xl bg-surface-muted border border-white/5">
+          <span class="text-label-sm font-label-sm text-text-muted uppercase block">CONTACT PHONE</span>
+          <span class="text-body-bold font-body-bold text-pure-white text-lg block mt-1">{{ booking.customer_phone|default:"Not provided" }}</span>
         </div>
 
-        <div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Scheduled Service Date</div>
-          <div style="font-size: 1.05rem; font-weight: 700; color: var(--accent-gold-bright);">{{ booking.preferred_date|date:"l, d M Y"|default:"To be scheduled" }}</div>
+        <div class="p-4 rounded-2xl bg-surface-muted border border-white/5">
+          <span class="text-label-sm font-label-sm text-text-muted uppercase block">SCHEDULED DATE</span>
+          <span class="text-body-bold font-body-bold text-[#E4312B] text-lg block mt-1">{{ booking.preferred_date|date:"D, d M Y"|default:"To be scheduled" }}</span>
         </div>
 
-        <div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Assigned Slot</div>
-          <div style="font-size: 1.05rem; font-weight: 600; color: var(--accent-cyan);">{{ booking.preferred_time_slot|default:"Flexible Slot" }}</div>
+        <div class="p-4 rounded-2xl bg-surface-muted border border-white/5">
+          <span class="text-label-sm font-label-sm text-text-muted uppercase block">ASSIGNED TIME SLOT</span>
+          <span class="text-body-md font-body-md text-pure-white block mt-1">{{ booking.preferred_time_slot|default:"Flexible Slot" }}</span>
         </div>
 
-        <div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Tank Capacity</div>
-          <div style="font-size: 1rem; color: #ffffff;">{{ booking.display_capacity|default:"1,000 L" }}</div>
+        <div class="p-4 rounded-2xl bg-surface-muted border border-white/5">
+          <span class="text-label-sm font-label-sm text-text-muted uppercase block">TANK CAPACITY</span>
+          <span class="text-headline-md font-headline-md text-pure-white block mt-1">{{ booking.display_capacity|default:"1,000 L" }}</span>
         </div>
 
-        <div>
-          <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Lead Operator</div>
-          <div style="font-size: 1rem; color: #ffffff;">{{ booking.assigned_technician|default:"Rakesh (Lead Operator)" }}</div>
+        <div class="p-4 rounded-2xl bg-surface-muted border border-white/5">
+          <span class="text-label-sm font-label-sm text-text-muted uppercase block">LEAD TECHNICIAN</span>
+          <span class="text-body-md font-body-md text-pure-white block mt-1">{{ booking.assigned_technician|default:"Rakesh (Lead Operator)" }}</span>
         </div>
       </div>
 
-      <div
-        style="background: rgba(5, 7, 12, 0.6); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-subtle); margin-bottom: 1.5rem;">
-        <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 2px;">
-          Service Address</div>
-        <div style="font-size: 0.9rem; color: #ffffff;">{{ booking.address }}{% if booking.landmark %}, Near {{ booking.landmark }}{% endif %}{% if booking.area_locality %}, {{ booking.area_locality }}{% endif %}</div>
+      <!-- Address Box -->
+      <div class="p-5 rounded-2xl bg-surface-muted border border-white/5 mb-8">
+        <span class="text-label-sm font-label-sm text-text-muted uppercase tracking-wider block mb-1">SERVICE LOCATION / DISPATCH DESTINATION</span>
+        <div class="text-body-md font-body-md text-pure-white">
+          {{ booking.address }}{% if booking.landmark %}, Near {{ booking.landmark }}{% endif %}{% if booking.area_locality %}, {{ booking.area_locality }}{% endif %}
+        </div>
       </div>
 
-      <div style="display: flex; gap: 0.75rem;">
-        <a href="tel:7808611636" class="btn btn-outline" style="flex: 1;">Call Dinesh (Owner)</a>
-        <a href="tel:6352561343" class="btn btn-cyan" style="flex: 1;">Call Rakesh (Operator)</a>
+      <!-- Contact Operators Action Row -->
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="tel:7808611636" class="flex-1 py-3.5 rounded-full bg-surface-muted hover:bg-white/10 border border-white/20 text-pure-white font-body-bold text-center transition-all flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[#E4312B] text-lg">call</span>
+          <span>Call Dinesh (Owner: 7808611636)</span>
+        </a>
+        <a href="tel:6352561343" class="flex-1 py-3.5 rounded-full bg-[#E4312B] text-pure-white font-body-bold text-center hover:scale-105 transition-all flex items-center justify-center gap-2 neon-red-glow">
+          <span class="material-symbols-outlined text-lg">engineering</span>
+          <span>Call Rakesh (Lead: 6352561343)</span>
+        </a>
       </div>
     </div>
     {% elif not_found %}
     <!-- Not Found State -->
-    <div
-      style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 2.5rem 2rem; text-align: center; box-shadow: var(--shadow-md);">
-      <div style="margin-bottom: 0.75rem; color: var(--accent-gold); display: flex; justify-content: center;">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
+    <div class="bg-[#121212] border border-white/10 rounded-3xl p-10 text-center shadow-2xl">
+      <div class="w-16 h-16 rounded-full bg-[#E4312B]/10 border border-[#E4312B]/30 text-[#E4312B] flex items-center justify-center mx-auto mb-4">
+        <span class="material-symbols-outlined text-3xl">search_off</span>
       </div>
-      <h3 style="font-size: 1.25rem; font-weight: 700; color: #ffffff; margin-bottom: 0.5rem;">No Booking Found</h3>
-      <p style="color: var(--text-secondary); font-size: 0.9rem; max-width: 480px; margin: 0 auto 1.5rem auto;">
-        We could not find any active booking matching "<strong>{{ query }}</strong>". Please double check your Tracking ID or call Dinesh directly.
+      <h3 class="text-headline-md font-headline-md text-pure-white uppercase">NO ACTIVE BOOKING FOUND</h3>
+      <p class="text-body-md font-body-md text-text-muted mt-2 max-w-md mx-auto">
+        We could not find any active sterilization booking matching "<span class="text-pure-white font-bold">{{ query }}</span>". Please double-check your Tracking ID or contact dispatch directly.
       </p>
-      <a href="tel:7808611636" class="btn btn-primary">Call 7808611636 for Assistance</a>
+      <div class="mt-8 flex justify-center">
+        <a href="tel:7808611636" class="px-8 py-3.5 rounded-full bg-[#E4312B] text-pure-white font-body-bold text-body-bold hover:scale-105 transition-all flex items-center gap-2 neon-red-glow uppercase">
+          <span class="material-symbols-outlined text-lg">call</span>
+          <span>CALL DISPATCH HOTLINE (7808611636)</span>
+        </a>
+      </div>
     </div>
     {% endif %}
-
   </div>
 </section>
 {% endblock %}
@@ -135,7 +155,7 @@
     let currentStatus = "{{ booking.status }}";
 
     function pollStatus() {
-      fetch(`/api/booking/status/${bookingId}/`, {
+      fetch(`/api/bookings/${bookingId}/status/`, {
         headers: { 'X-Requested-With': 'XMLHttpRequest' }
       })
         .then(res => res.json())
@@ -143,16 +163,14 @@
           if (data.found && data.status !== currentStatus) {
             currentStatus = data.status;
             if (statusEl) {
-              statusEl.textContent = `● ${data.status_display}`;
-              statusEl.classList.add('stat-updated');
-              setTimeout(() => statusEl.classList.remove('stat-updated'), 1500);
+              statusEl.innerHTML = `<span class="w-2 h-2 rounded-full bg-[#E4312B] animate-ping"></span> ${data.status_display.toUpperCase()}`;
             }
           }
         })
         .catch(() => { });
     }
 
-    setInterval(pollStatus, 4000);
+    setInterval(pollStatus, 5000);
   })();
 </script>
 {% endif %}

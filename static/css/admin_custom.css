@@ -6,68 +6,68 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
 
 :root {
-  /* DRTC Color Palette */
-  --drtc-bg: #070a13;
-  --drtc-surface: #0d1322;
-  --drtc-card: #111827;
-  --drtc-card-hover: #162033;
-  --drtc-border: rgba(255, 255, 255, 0.08);
-  --drtc-border-subtle: rgba(255, 255, 255, 0.04);
-  --drtc-border-gold: rgba(245, 158, 11, 0.35);
+  /* DRTC Dark Industrial Red Palette */
+  --drtc-bg: #050505;
+  --drtc-surface: #0e0e0e;
+  --drtc-card: #121212;
+  --drtc-card-hover: #1c1b1b;
+  --drtc-border: rgba(255, 255, 255, 0.10);
+  --drtc-border-subtle: #2E2E2E;
+  --drtc-border-gold: rgba(228, 49, 43, 0.35);
 
-  --drtc-gold: #f59e0b;
-  --drtc-gold-light: #fbbf24;
-  --drtc-gold-glow: rgba(245, 158, 11, 0.25);
+  --drtc-gold: #E4312B;
+  --drtc-gold-light: #ff5448;
+  --drtc-gold-glow: rgba(228, 49, 43, 0.35);
 
-  --drtc-cyan: #06b6d4;
-  --drtc-cyan-light: #22d3ee;
-  --drtc-cyan-glow: rgba(6, 182, 212, 0.2);
+  --drtc-cyan: #E4312B;
+  --drtc-cyan-light: #ff784e;
+  --drtc-cyan-glow: rgba(228, 49, 43, 0.25);
 
   --drtc-emerald: #10b981;
-  --drtc-rose: #f43f5e;
-  --drtc-indigo: #6366f1;
+  --drtc-rose: #E4312B;
+  --drtc-indigo: #818cf8;
   --drtc-amber: #f59e0b;
-  --drtc-purple: #a855f7;
+  --drtc-purple: #c084fc;
 
-  --drtc-text-main: #f1f5f9;
-  --drtc-text-muted: #94a3b8;
-  --drtc-text-dim: #64748b;
+  --drtc-text-main: #e5e2e1;
+  --drtc-text-muted: #999999;
+  --drtc-text-dim: #666666;
 
-  --drtc-radius-sm: 6px;
-  --drtc-radius-md: 10px;
-  --drtc-radius-lg: 14px;
-  --drtc-radius-xl: 18px;
+  --drtc-radius-sm: 8px;
+  --drtc-radius-md: 12px;
+  --drtc-radius-lg: 16px;
+  --drtc-radius-xl: 24px;
 
-  --drtc-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
-  --drtc-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
-  --drtc-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
-  --drtc-shadow-gold: 0 0 25px rgba(245, 158, 11, 0.15);
+  --drtc-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.5);
+  --drtc-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.7);
+  --drtc-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.85);
+  --drtc-shadow-gold: 0 0 25px rgba(228, 49, 43, 0.35);
 
   /* Overwrite Django Admin Native Variables */
-  --primary: #f59e0b;
-  --secondary: #0d1322;
-  --accent: #06b6d4;
-  --primary-fg: #070a13;
-  --body-fg: #f1f5f9;
-  --body-bg: #070a13;
-  --body-quiet-color: #94a3b8;
+  --primary: #E4312B;
+  --secondary: #0e0e0e;
+  --accent: #E4312B;
+  --primary-fg: #ffffff;
+  --body-fg: #e5e2e1;
+  --body-bg: #050505;
+  --body-quiet-color: #999999;
   --body-loud-color: #ffffff;
-  --header-color: #f1f5f9;
-  --header-bg: #0a0f1d;
-  --header-link-color: #f1f5f9;
-  --breadcrumbs-bg: #0d1322;
-  --breadcrumbs-link-fg: #06b6d4;
-  --breadcrumbs-fg: #94a3b8;
-  --link-fg: #38bdf8;
-  --link-hover-color: #7dd3fc;
-  --link-selected-fg: #f59e0b;
-  --hairline-color: rgba(255, 255, 255, 0.08);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --darkened-bg: #0a0f1d;
-  --selected-bg: rgba(245, 158, 11, 0.12);
-  --selected-row: rgba(6, 182, 212, 0.08);
-  --button-fg: #070a13;
-  --button-bg: #f59e0b;
+  --header-color: #ffffff;
+  --header-bg: #0e0e0e;
+  --header-link-color: #ffffff;
+  --breadcrumbs-bg: #0e0e0e;
+  --breadcrumbs-link-fg: #E4312B;
+  --breadcrumbs-fg: #999999;
+  --link-fg: #E4312B;
+  --link-hover-color: #ff5448;
+  --link-selected-fg: #E4312B;
+  --hairline-color: #2E2E2E;
+  --border-color: #2E2E2E;
+  --darkened-bg: #090909;
+  --selected-bg: rgba(228, 49, 43, 0.15);
+  --selected-row: rgba(228, 49, 43, 0.10);
+  --button-fg: #ffffff;
+  --button-bg: #E4312B;
   --button-hover-bg: #d97706;
   --default-button-bg: #06b6d4;
   --default-button-hover-bg: #0891b2;
